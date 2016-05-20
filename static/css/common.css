@@ -6,3 +6,8 @@
     vertical-align:baseline;
 }
 /* END CSS RESET */
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+}
+
