@@ -13,7 +13,7 @@
 
 .menu__items li {
     display: inline;
-    margin-right: 5px;
+    margin-right: 1em;
 }
 
 .menu__items li:last-child {
