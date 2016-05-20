@@ -1,0 +1,17 @@
+.present {
+    background-image: url('../img/team_cover.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 35em;
+    display: table;
+    text-align: center;
+    width: 92%;
+}
+
+.present__title {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 3em;
+    color: #FFF;
+    text-transform: uppercase;
+}
