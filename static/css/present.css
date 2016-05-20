@@ -1,11 +1,14 @@
 .present {
     background-image: url('../img/team_cover.jpg');
-    background-size: 100%;
+    background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
     height: 35em;
     display: table;
     text-align: center;
     width: 92%;
+    margin-bottom: 2em;
 }
 
 .present__title {
