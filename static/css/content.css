@@ -1,0 +1,12 @@
+.main-content__row {
+    width: 100%;
+    text-align: center;
+    margin-top: 2.5em;
+    overflow: auto;
+}
+
+.main-content_col {
+    width: 33%;
+    position: relative;
+    float: left;
+}
