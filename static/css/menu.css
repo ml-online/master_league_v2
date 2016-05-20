@@ -4,6 +4,9 @@
     min-height: 50px;
     line-height: 50px;
     font-size: 14px;
+    position: fixed;
+    width: 92%;
+    z-index: 1000;
 }
 
 .menu__items {
