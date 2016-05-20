@@ -4,8 +4,13 @@
     padding:0;
     list-style:none;
     vertical-align:baseline;
+    -webkit-font-smoothing: antialiased;
 }
 /* END CSS RESET */
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
 
 h1 {
     font-family: 'Open Sans', sans-serif;
