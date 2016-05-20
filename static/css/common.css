@@ -15,3 +15,10 @@ body {
 section {
     padding: 0px 4%;
 }
+
+h1 {
+    font-size: 3em;
+    text-transform: uppercase;
+    color: #333;
+    text-align: center;
+}
