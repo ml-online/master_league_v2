@@ -1,0 +1,21 @@
+.menu {
+    background-color: #000;
+    color: #FFF;
+    min-height: 50px;
+    line-height: 50px;
+    font-size: 14px;
+}
+
+.menu__items {
+    position: relative;
+    float: right;
+}
+
+.menu__items li {
+    display: inline;
+    margin-right: 5px;
+}
+
+.menu__items li:last-child {
+    margin-right: 0;
+}
