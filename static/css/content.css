@@ -5,7 +5,7 @@
     overflow: auto;
 }
 
-.main-content_col {
+.main-content__col {
     width: 33%;
     position: relative;
     float: left;
