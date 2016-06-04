@@ -33,8 +33,8 @@
 	  	{
 	  		//abrir sessão
 	  		session_start("login_ml");
-	  		$_SESSION['psn'] = $_POST['psn'];
-	  		$_SESSION['senha'] = $_POST['senha'];
+	  		$_SESSION['psn'] = $psn;
+	  		$_SESSION['senha'] = $senha;
 	  		echo "Login realizado com sucesso.";
 	  		echo "<script>loginsuccessful()</script>";
 	  	}

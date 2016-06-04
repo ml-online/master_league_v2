@@ -5,8 +5,9 @@
 <?php
   if(!isset($_SESSION["psn"]) || !isset($_SESSION["senha"]))
   {
-    header("Location: login.php");
-    exit; //encerra as funções da página
+	//print_r($_SESSION);
+	header("Location: login.php");
+	exit; //encerra as funções da página
   }
   else
   {
