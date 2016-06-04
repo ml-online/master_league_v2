@@ -1,3 +1,7 @@
+.row {
+    margin-bottom: 2em;
+}
+
 .main-content__row {
     width: 100%;
     text-align: center;
@@ -9,4 +13,10 @@
     width: 33%;
     position: relative;
     float: left;
+}
+
+.main-content__col img:hover {
+    transform: rotateY(360deg);
+    transition: 1s;
+    cursor: pointer;
 }
