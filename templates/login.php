@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8"/>
-  <link rel="stylesheet" href="_css/estilo.css"/>
+  <link rel="stylesheet" href="../static/css/estilo.css"/>
   <title>Login Master League</title>
 </head>
 <body>

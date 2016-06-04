@@ -23,7 +23,7 @@
         <meta name="author" content="CR Galaticos">
         <meta name="description" content="Organization of CR Galaticos Master League">
 
-        <link rel="stylesheet" type="text/css" href="static/css/base.css">
+        <link rel="stylesheet" type="text/css" href="../static/css/base.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     </head>
 
