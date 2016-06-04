@@ -35,11 +35,15 @@
         ?>
 		
 		<script type="text/javascript">
+			$(document).ready(function(){
+				
+			});
+		
 			function fazerProposta()
 			{
 
 				//alert("click");
-				$("#formTransf").toggle("slow", "swing");
+				$("#divTrans").toggle("slow", "swing");
 
 			}
 			
@@ -108,7 +112,8 @@
 				{
 					echo "<center>
 							<button class='botao' onclick='fazerProposta();'>Fazer Proposta</button></br></br>
-							<form id='formTransf' name='transfer' method='post' action='submitTransfer.php' style='display:none;'>
+							<div id='divTrans' style='display:none;'>
+							<form id='formTransf' name='transfer' method='post' action='submitTransfer.php'>
 								<table>
 									<tr>
 										<td>Tipo: </td>
@@ -145,8 +150,9 @@
 										<td><input id='tdValor' type='text'></td>
 									</tr>
 								</table>
-								<button>Enviar</button>
 							</form>
+							<button class='botao'>Enviar</button>
+							</div>
 						  </center>";
 				}
 
