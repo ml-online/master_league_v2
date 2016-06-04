@@ -35,16 +35,56 @@
         ?>
 		
 		<script type="text/javascript">
-			$(document).ready(function(){
+			function moeda(z){
+				v = z.value;
+				v=v.replace(/\D/g,"") // permite digitar apenas numero
+				v=v.replace(/(\d{1})(\d{14})$/,"$1.$2") // coloca ponto antes dos ultimos digitos
+				v=v.replace(/(\d{1})(\d{11})$/,"$1.$2") // coloca ponto antes dos ultimos 11 digitos
+				v=v.replace(/(\d{1})(\d{8})$/,"$1.$2") // coloca ponto antes dos ultimos 8 digitos
+				v=v.replace(/(\d{1})(\d{5})$/,"$1.$2") // coloca ponto antes dos ultimos 5 digitos
+				v=v.replace(/(\d{1})(\d{1,2})$/,"$1,$2") // coloca virgula antes dos ultimos 2 digitos
+				z.value = v;
+			}
+		
+			function enviarProposta()
+			{
+				var tipoEscolhido = document.getElementById("slTipoProposta").value;
 				
-			});
+				if(tipoEscolhido == "Troca")
+				{
+					
+				}
+				else
+				{
+					var formConfirmacao = document.getElementById("formConfirmacao");
+					
+					var valorTransf = document.getElementById("tdValor").value.toString();
+					valorTransf = valorTransf.replace(/\./g, "");
+					valorTransf = valorTransf.replace(/\,/, ".");
+					
+					$("#iptValorTransf").val(valorTransf);
+					
+					formConfirmacao.submit();
+					//mysqli_query($con, "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataSolicitacao, valorTransf, dataResposta, status, jogadorID) 
+					//VALUES ('$nome', '$psn', '$email', '$senha')") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+				}
+			}
+			
+			function validaValorMoeda(e)
+			{
+				var tecla=(window.event)?event.keyCode:e.which;
+				
+				if(tecla>47 && tecla<58) return true;
+				
+				else{
+					if (tecla==8 || tecla==0 || tecla==190 || tecla==190) return true;
+					else  return false;
+				}
+			}
 		
 			function fazerProposta()
 			{
-
-				//alert("click");
 				$("#divTrans").toggle("slow", "swing");
-
 			}
 			
 			function trocaTipoProposta()
@@ -147,13 +187,21 @@
 									</tr>
 									<tr>
 										<td>Valor: </td>
-										<td><input id='tdValor' type='text'></td>
+										<td>G$ <input id='tdValor' type='text' onkeyup='moeda(this)'></td>
 									</tr>
 								</table>
 							</form>
-							<button class='botao'>Enviar</button>
+							<button class='botao' onclick='enviarProposta();'>Enviar</button>
 							</div>
 						  </center>";
+					
+					//variáveis a serem passadas para a próxima tela de confirmação
+					echo "<form id='formConfirmacao' name='confirmacao' method='post' action='submitTransfer.php'>"
+					echo "<input id='iptEquipeSaida' name='equipeSaida' type='hidden' value='" . $equipeJogador . "'>";
+					echo "<input id='iptJogadorID' name='jogadorID' type='hidden' value='" . $jogadorID . "'>";
+					echo "<input id='iptEquipeEntrada' name='equipeEntrada' type='hidden' value='" . $equipeUsuarioLogado . "'>";
+					echo "<input id='iptValorTransf' name='valorTransf' type='hidden' value=''>";
+					echo "</form>"
 				}
 
 			?>

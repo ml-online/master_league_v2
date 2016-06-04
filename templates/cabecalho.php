@@ -12,7 +12,7 @@
 					$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 					$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
 					$orcamento = (string)$row["Orcamento"];
-					echo 'G$' . str_replace('.', ',', $orcamento);
+					echo "G$" . str_replace('.', ',', $orcamento);
 					//setlocale(LC_MONETARY,"en_US");
 					//echo money_format("The price is %i", $orcamento);
 

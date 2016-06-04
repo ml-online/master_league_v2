@@ -13,6 +13,7 @@
   {
     //echo "Você está logado.";
 	$psn = $_SESSION["psn"];
+	//echo "Request_URI" . $_SERVER["REQUEST_URI"];
 	//echo $psn;
   }
 ?>
