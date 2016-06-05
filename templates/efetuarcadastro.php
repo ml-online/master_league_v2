@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>Efetuar Cadastro</title>
-	<link rel="stylesheet" href="_css/estilo.css"/>
+	<link rel="stylesheet" href="../static/css/estilo.css"/>
 	<script type="text/javascript">
 		function confirmarCadastro(){
 			alert("Usuário cadastrado com sucesso!");

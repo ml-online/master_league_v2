@@ -5,3 +5,19 @@
 	box-shadow: 2px 2px 1px #aaaaaa;
     border-radius: 10px;
 }
+
+.botaoAceitar{
+	background-color: #12A312;
+	color: white;
+	padding: 5px;
+	box-shadow: 2px 2px 1px #aaaaaa;
+    border-radius: 10px;
+}
+
+.botaoRecusar{
+	background-color: #C81111;
+	color: white;
+	padding: 5px;
+	box-shadow: 2px 2px 1px #aaaaaa;
+    border-radius: 10px;
+}

@@ -48,40 +48,32 @@
 		
 			function enviarProposta()
 			{
+				var formConfirmacao = document.getElementById("formConfirmacao");
 				var tipoEscolhido = document.getElementById("slTipoProposta").value;
+				
+				$("#iptTipoTransf").val(tipoEscolhido);
+				
+				var valorTransf = document.getElementById("tdValor").value.toString();
+				valorTransf = valorTransf.replace(/\./g, "");
+				valorTransf = valorTransf.replace(/\,/, ".");
+				
+				$("#iptValorTransf").val(valorTransf);
 				
 				if(tipoEscolhido == "Troca")
 				{
-					
-				}
-				else
-				{
-					var formConfirmacao = document.getElementById("formConfirmacao");
-					
-					var valorTransf = document.getElementById("tdValor").value.toString();
-					valorTransf = valorTransf.replace(/\./g, "");
-					valorTransf = valorTransf.replace(/\,/, ".");
-					
-					$("#iptValorTransf").val(valorTransf);
-					
+					var jogadorTroca = $("#jogadorTrocaSelecionado").val();
+					jogadorTroca = $("option[name='" + jogadorTroca + "']").attr("id");
+					jogadorTroca = jogadorTroca.replace("jogador_", "");
+					//alert(jogadorTroca);
+					$("#iptJogadorTroca").val(jogadorTroca);
 					formConfirmacao.submit();
-					//mysqli_query($con, "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataSolicitacao, valorTransf, dataResposta, status, jogadorID) 
-					//VALUES ('$nome', '$psn', '$email', '$senha')") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+				}
+				else //Transferência
+				{
+					formConfirmacao.submit();
 				}
 			}
-			
-			function validaValorMoeda(e)
-			{
-				var tecla=(window.event)?event.keyCode:e.which;
-				
-				if(tecla>47 && tecla<58) return true;
-				
-				else{
-					if (tecla==8 || tecla==0 || tecla==190 || tecla==190) return true;
-					else  return false;
-				}
-			}
-		
+
 			function fazerProposta()
 			{
 				$("#divTrans").toggle("slow", "swing");
@@ -167,7 +159,7 @@
 									<tr id='trJogadorTroca' style='display:none'>
 										<td>Jogador: </td>
 										<td>
-											<select>
+											<select id='jogadorTrocaSelecionado'>
 												";
 					
 					$sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`
@@ -179,7 +171,7 @@
 					// Listando os jogadores buscados da tabela
 					while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
 					{
-						echo "<option id='jogador_" . $row["JogadorID"] . "' value='" . $row["NomeJogador"] . "'>" . $row["NomeJogador"] . "</option>";
+						echo "<option id='jogador_" . $row["JogadorID"] . "' name='" . $row["NomeJogador"] . "'>" . $row["NomeJogador"] . "</option>";
 					}
 					
 					echo "					</select>
@@ -196,12 +188,14 @@
 						  </center>";
 					
 					//variáveis a serem passadas para a próxima tela de confirmação
-					echo "<form id='formConfirmacao' name='confirmacao' method='post' action='submitTransfer.php'>"
+					echo "<form id='formConfirmacao' name='confirmacao' method='post' action='propostatransferencia.php'>";
 					echo "<input id='iptEquipeSaida' name='equipeSaida' type='hidden' value='" . $equipeJogador . "'>";
 					echo "<input id='iptJogadorID' name='jogadorID' type='hidden' value='" . $jogadorID . "'>";
 					echo "<input id='iptEquipeEntrada' name='equipeEntrada' type='hidden' value='" . $equipeUsuarioLogado . "'>";
 					echo "<input id='iptValorTransf' name='valorTransf' type='hidden' value=''>";
-					echo "</form>"
+					echo "<input id='iptJogadorTroca' name='jogadorTroca' type='hidden' value=''>";
+					echo "<input id='iptTipoTransf' name='tipoTransf' type='hidden' value=''>";
+					echo "</form>";
 				}
 
 			?>

@@ -21,7 +21,7 @@
         <li><a href="home.php">Home</a></li>
         <li>Meu time</li>
 		<li>Busca</li>
-        <li>Transferências</li>
+        <li><a href="transferencia.php">Transferências</a></li>
         <li><a href="campeonato.php">Campeonato</a></li>
 		<li>Sala de troféus</li>
         <li><a href="logout.php">Sair</a></li>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 02-Jun-2016 às 23:19
+-- Generation Time: 05-Jun-2016 às 19:51
 -- Versão do servidor: 5.7.11
 -- PHP Version: 5.6.19
 
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `equipe`
 --
 
+DROP TABLE IF EXISTS equipe;
 CREATE TABLE `equipe` (
   `EquipeID` int(11) NOT NULL,
   `NomeEquipe` varchar(250) NOT NULL,
@@ -46,7 +47,7 @@ INSERT INTO `equipe` (`EquipeID`, `NomeEquipe`, `Escudo`, `UsuarioID`) VALUES
 --
 -- Estrutura da tabela `jogador`
 --
-
+DROP TABLE IF EXISTS jogador;
 CREATE TABLE `jogador` (
   `JogadorID` int(11) NOT NULL,
   `NomeJogador` varchar(250) NOT NULL,
@@ -105,14 +106,14 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (40, 'Piszczek', 'LD', 'BorDortmund', NULL, 80, NULL, NULL),
 (41, 'Coke', 'LD', 'Sevilla', NULL, 80, NULL, NULL),
 (42, 'Sagna', 'LD', 'ManCity', NULL, 80, NULL, NULL),
-(43, 'Thiago Silva', 'ZAG', 'PSG', NULL, 88, NULL, 'http://media-titanium.cursecdn.com/attachments/68/192/tsilva-16.JPG'),
+(43, 'Thiago Silva', 'ZAG', 'PSG', NULL, 88, 1, 'http://media-titanium.cursecdn.com/attachments/68/192/tsilva-16.JPG'),
 (44, 'Boateng', 'ZAG', 'BayernMunich', NULL, 87, 1, 'http://media-titanium.cursecdn.com/attachments/68/145/boateng-16.JPG'),
 (45, 'Sergio Ramos', 'ZAG', 'RealMadrid', NULL, 87, 1, 'http://media-titanium.cursecdn.com/attachments/68/150/ramos-16.JPG'),
 (46, 'Godin', 'ZAG', 'AtlMadrid', NULL, 86, NULL, NULL),
 (47, 'Hummels', 'ZAG', 'BorDortmund', NULL, 86, NULL, NULL),
 (48, 'Chiellini', 'ZAG', 'Juventus', NULL, 86, NULL, NULL),
 (49, 'Miranda', 'ZAG', 'InterMilan', NULL, 85, NULL, NULL),
-(50, 'Pique', 'ZAG', 'Barcelona', NULL, 85, NULL, NULL),
+(50, 'Pique', 'ZAG', 'Barcelona', NULL, 85, 1, NULL),
 (51, 'Kompany', 'ZAG', 'ManCity', NULL, 85, NULL, NULL),
 (52, 'Barzagli', 'ZAG', 'Juventus', NULL, 85, NULL, NULL),
 (53, 'Otamendi', 'ZAG', 'ManCity', NULL, 84, NULL, NULL),
@@ -247,15 +248,15 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (182, 'Kagawa', 'MEIA', 'BorDortmund', NULL, 82, NULL, NULL),
 (183, 'Oscar', 'MEIA', 'Chelsea', NULL, 82, NULL, NULL),
 (184, 'Nasri', 'MEIA', 'ManCity', NULL, 82, NULL, NULL),
-(185, 'Borja Valero', 'MEIA', 'Fiorentina', NULL, 82, NULL, NULL),
+(185, 'Borja Valero', 'MEIA', 'Fiorentina', NULL, 82, 1, NULL),
 (186, 'BenArfa', 'MEIA', 'OGCNice', NULL, 82, NULL, NULL),
 (187, 'Sneijder', 'MEIA', 'Galatasaray', NULL, 82, NULL, NULL),
 (188, 'Danny', 'MEIA', 'Zenit', NULL, 82, NULL, NULL),
-(189, 'Mahrez', 'MEIA', 'Leicester', NULL, 81, NULL, NULL),
+(189, 'Mahrez', 'MEIA', 'Leicester', NULL, 81, 1, NULL),
 (190, 'Sterling', 'MEIA', 'ManCity', NULL, 81, NULL, NULL),
 (191, 'Vitolo', 'MEIA', 'Sevilla', NULL, 81, NULL, NULL),
 (192, 'Hermann', 'MEIA', 'BorMochengladbach', NULL, 81, NULL, NULL),
-(193, 'Cuadrado', 'MEIA', 'Juventus', NULL, 81, NULL, NULL),
+(193, 'Cuadrado', 'MEIA', 'Juventus', NULL, 81, 1, NULL),
 (194, 'Perisic', 'MEIA', 'InterMilan', NULL, 81, NULL, NULL),
 (195, 'Banega', 'MEIA', 'Sevilla', NULL, 81, NULL, NULL),
 (196, 'Mertens', 'MEIA', 'Napoli', NULL, 81, NULL, NULL),
@@ -288,17 +289,17 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (223, 'Suarez', 'ATA', 'Barcelona', NULL, 90, NULL, 'http://media-titanium.cursecdn.com/attachments/68/185/suarez-16.JPG'),
 (224, 'Ibrahimovic', 'ATA', 'PSG', NULL, 89, NULL, 'http://media-titanium.cursecdn.com/attachments/68/189/zlatan-16.JPG'),
 (225, 'Lewandowski', 'ATA', 'BayernMunich', NULL, 88, 2, 'http://media-titanium.cursecdn.com/attachments/68/56/robert-16.JPG'),
-(226, 'Aguero', 'ATA', 'ManCity', NULL, 88, NULL, 'http://media-titanium.cursecdn.com/attachments/68/151/agueri-16.JPG'),
+(226, 'Aguero', 'ATA', 'ManCity', NULL, 88, 1, 'http://media-titanium.cursecdn.com/attachments/68/151/agueri-16.JPG'),
 (227, 'Higuain', 'ATA', 'Napoli', NULL, 86, NULL, NULL),
 (228, 'Benzema', 'ATA', 'RealMadrid', NULL, 86, 1, NULL),
 (229, 'DiegoCosta', 'ATA', 'Chelsea', NULL, 85, NULL, NULL),
 (230, 'Cavani', 'ATA', 'PSG', NULL, 85, NULL, NULL),
 (231, 'Tevez', 'ATA', 'BocaJuniors', NULL, 85, 1, NULL),
 (232, 'Rooney', 'ATA', 'ManUtd', NULL, 85, NULL, NULL),
-(233, 'Griezzmann', 'ATA', 'AtlMadrid', NULL, 84, NULL, NULL),
-(234, 'Aubameyang', 'ATA', 'BorDortmund', NULL, 84, NULL, NULL),
+(233, 'Griezzmann', 'ATA', 'AtlMadrid', NULL, 84, 1, NULL),
+(234, 'Aubameyang', 'ATA', 'BorDortmund', NULL, 84, 1, NULL),
 (235, 'Lacazette', 'ATA', 'Lyon', NULL, 83, NULL, NULL),
-(236, 'Jonas', 'ATA', 'Benfica', NULL, 83, NULL, NULL),
+(236, 'Jonas', 'ATA', 'Benfica', NULL, 83, 1, NULL),
 (237, 'Sturridge', 'ATA', 'Liverpool', NULL, 83, NULL, NULL),
 (238, 'Bacca', 'ATA', 'Milan', NULL, 82, NULL, NULL),
 (239, 'Kane', 'ATA', 'Tottenham', NULL, 82, NULL, NULL),
@@ -321,7 +322,7 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 --
 -- Estrutura da tabela `transferencia`
 --
-
+DROP TABLE IF EXISTS transferencia;
 CREATE TABLE `transferencia` (
   `ID` int(11) NOT NULL,
   `EquipeSaida` int(11) DEFAULT NULL,
@@ -330,15 +331,26 @@ CREATE TABLE `transferencia` (
   `DataFim` datetime DEFAULT NULL,
   `Valor` decimal(12,2) DEFAULT NULL,
   `Status` varchar(10) DEFAULT NULL,
-  `JogadorID` int(11) NOT NULL
+  `JogadorID` int(11) NOT NULL,
+  `JogadorTrocaID` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `transferencia`
+--
+
+INSERT INTO `transferencia` (`ID`, `EquipeSaida`, `EquipeEntrada`, `DataInicio`, `DataFim`, `Valor`, `Status`, `JogadorID`, `JogadorTrocaID`) VALUES
+(1, 2, 1, '2016-06-05 13:27:53', NULL, '20000.00', 'Aguardando', 205, NULL),
+(6, 1, 2, '2016-06-05 16:22:34', NULL, '1000.00', 'Aguardando', 155, 161),
+(5, 1, 2, '2016-06-05 16:22:00', NULL, '20000.00', 'Aguardando', 226, NULL),
+(4, 2, 1, '2016-06-05 14:29:45', NULL, '200.00', 'Aguardando', 225, 228);
 
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `usuario`
 --
-
+DROP TABLE IF EXISTS usuario;
 CREATE TABLE `usuario` (
   `ID` int(11) NOT NULL,
   `Nome` varchar(250) NOT NULL,
@@ -402,7 +414,7 @@ ALTER TABLE `jogador`
 -- AUTO_INCREMENT for table `transferencia`
 --
 ALTER TABLE `transferencia`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
