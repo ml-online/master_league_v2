@@ -50,6 +50,7 @@
 			{
 				var formConfirmacao = document.getElementById("formConfirmacao");
 				var tipoEscolhido = document.getElementById("slTipoProposta").value;
+				var orcamento = document.getElementById("iptOrcamento").value;
 				
 				$("#iptTipoTransf").val(tipoEscolhido);
 				
@@ -59,19 +60,28 @@
 				
 				$("#iptValorTransf").val(valorTransf);
 				
-				if(tipoEscolhido == "Troca")
+				if(valorTransf >= orcamento)
 				{
-					var jogadorTroca = $("#jogadorTrocaSelecionado").val();
-					jogadorTroca = $("option[name='" + jogadorTroca + "']").attr("id");
-					jogadorTroca = jogadorTroca.replace("jogador_", "");
-					//alert(jogadorTroca);
-					$("#iptJogadorTroca").val(jogadorTroca);
-					formConfirmacao.submit();
+					if(tipoEscolhido == "Troca")
+					{
+						var jogadorTroca = $("#jogadorTrocaSelecionado").val();
+						jogadorTroca = $("option[name='" + jogadorTroca + "']").attr("id");
+						jogadorTroca = jogadorTroca.replace("jogador_", "");
+						//alert(jogadorTroca);
+						$("#iptJogadorTroca").val(jogadorTroca);
+						formConfirmacao.submit();
+					}
+					else //Transferência
+					{
+						formConfirmacao.submit();
+					}
 				}
-				else //Transferência
+				else
 				{
-					formConfirmacao.submit();
+					alert("Você não tem orçamento suficiente para fazer esta proposta.");
 				}
+				
+				
 			}
 
 			function fazerProposta()
@@ -196,6 +206,17 @@
 					echo "<input id='iptJogadorTroca' name='jogadorTroca' type='hidden' value=''>";
 					echo "<input id='iptTipoTransf' name='tipoTransf' type='hidden' value=''>";
 					echo "</form>";
+					
+					$sql = "SELECT Orcamento
+							  FROM usuario
+							 WHERE PSN = '$psn'";
+								
+					$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+					$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
+					
+					$orcamento = $row["Orcamento"];
+					
+					echo "<input id='iptOrcamento' type='hidden' value='" . $orcamento . "'>";
 				}
 
 			?>

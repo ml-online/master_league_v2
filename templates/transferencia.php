@@ -34,11 +34,47 @@
         	include("cabecalho.php");
         ?>
         <script type="text/javascript">
-        function carregarPaginaEquipe(EquipeID){
-          var form = document.getElementById("formID");
-          $("#equipeSelec").val(EquipeID);
-          form.submit();
-        }
+			function carregarPaginaEquipe(EquipeID){
+			  var form = document.getElementById("formID");
+			  $("#equipeSelec").val(EquipeID);
+			  form.submit();
+			}
+			
+			function aceitarTransf(idTransf)
+			{
+				var form = document.getElementById("formRespTransf");
+				
+				if(confirm("Tem certeza que gostaria de aceitar esta solicitação?"))
+				{
+					$("#iptTipoResp").val("Aceito");
+					$("#iptTransfID").val(idTransf);
+					form.submit();
+				}
+			}
+			
+			function rejeitarTransf(idTransf)
+			{
+				var form = document.getElementById("formRespTransf");
+				
+				if(confirm("Tem certeza que gostaria de rejeitar esta solicitação?"))
+				{
+					$("#iptTipoResp").val("Rejeitado");
+					$("#iptTransfID").val(idTransf);
+					form.submit();
+				}
+			}
+			
+			function cancelarTransf(idTransf)
+			{
+				var form = document.getElementById("formRespTransf");
+				
+				if(confirm("Tem certeza que gostaria de cancelar esta solicitação e retirar a proposta?"))
+				{
+					$("#iptTipoResp").val("Cancelado");
+					$("#iptTransfID").val(idTransf);
+					form.submit();
+				}
+			}
       	</script>
 
         <section class="present">
@@ -47,6 +83,11 @@
 
         <form id="formID" name="signup" method="post" action="equipe.php" style="display: none;">
           <input id="equipeSelec" name="equipeIDSelec" type="hidden"></input>
+        </form>
+		
+		<form id="formRespTransf" name="aceite" method="post" action="respostaTransf.php" style="display: none;">
+          <input id="iptTipoResp" name="tipoResp" type="hidden"></input>
+		  <input id="iptTransfID" name="transfID" type="hidden"></input>
         </form>
 
         <section class="main-content">			
@@ -100,8 +141,8 @@
 					echo "<td>" . $row["NomeJogador"] . "</td>";
 					echo "<td>G$ " . $row["Valor"] . "</td>";
 					echo "<td>" . $row["JogadorTrocaNome"] . "</td>";
-					echo "<td><button class='botaoAceitar'>Aceitar</button></td>";
-					echo "<td><button class='botaoRecusar'>Rejeitar</button></td>";
+					echo "<td><button id='btnAceitar_'" . $row["JogadorID"] . " onclick='aceitarTransf(" . $row["ID"] . ")' class='botaoAceitar'>Aceitar</button></td>";
+					echo "<td><button id='btnRejeitar_'" . $row["JogadorID"] . " onclick='rejeitarTransf(" . $row["ID"] . ")' class='botaoRecusar'>Rejeitar</button></td>";
 					echo "</tr>";
 				}
 				echo "</table>";
@@ -152,18 +193,18 @@
 					echo "<td>G$ " . $row["Valor"] . "</td>";
 					echo "<td>" . $row["JogadorTrocaNome"] . "</td>";
 					echo "<td>" . $row["Status"] . "</td>";
-					echo "<td><button class='botaoRecusar'>Retirar proposta</button></td>";
+					echo "<td><button class='botaoRecusar' onclick='cancelarTransf(" . $row["ID"] . ")'>Retirar proposta</button></td>";
 					echo "</tr>";
 				}
 				echo "</table>";
 				echo "</br>";
 				
 				/*----------------------------------------------------------
-				-------------------Outros status----------------------------
+				-------------------Finalizados------------------------------
 				----------------------------------------------------------*/
 				
 				echo "<table>";
-				echo "<caption>Outros</caption>";
+				echo "<caption>Finalizados</caption>";
 				echo "<thead>";
 				echo "	<tr>";
 				echo "		<th>Equipe</th>";

@@ -88,7 +88,7 @@
       }
 
       echo "<center><h1>$nomeEquipe</h1></center></br>
-            <center><img src='$escudoEquipe' alt='Flamengo.png'></center>
+            <center><img src='$escudoEquipe' alt='Sem Escudo' style='max-width:300px;'></center>
             <center><h2>Presidente: $nomeDono</h3></center>
             <center><h2>Orçamento: G$ $orcamento</h2></center></br></br>";
 			
