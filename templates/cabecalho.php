@@ -32,7 +32,7 @@
 			?>
         </li>
         <li><a href="home.php">Home</a></li>
-		<li>Busca</li>
+		<li><a href="busca.php">Busca</a></li>
         <li><a href="transferencia.php">Transferências</a></li>
         <li>
 			<div class="dropdown">

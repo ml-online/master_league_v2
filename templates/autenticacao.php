@@ -35,6 +35,18 @@
 	  		session_start("login_ml");
 	  		$_SESSION['psn'] = $psn;
 	  		$_SESSION['senha'] = $senha;
+			
+			if (!isset($_SESSION['CREATED'])) 
+			{
+				$_SESSION['CREATED'] = time();
+			} 
+			else if (time() - $_SESSION['CREATED'] > 1800) 
+			{
+				// session started more than 30 minutes ago
+				session_regenerate_id(true);    // change session ID for the current session and invalidate old session ID
+				$_SESSION['CREATED'] = time();  // update creation time
+			}
+			
 	  		echo "Login realizado com sucesso.";
 	  		echo "<script>loginsuccessful()</script>";
 	  	}
