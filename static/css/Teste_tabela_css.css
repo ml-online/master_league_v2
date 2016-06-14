@@ -5,27 +5,26 @@
 */
 
 
-table { background:#D3E4E5;
+table { background:#FAFAFA;
  border:1px solid gray;
  border-collapse:collapse;
  color:#fff;
  font:normal 12px verdana, arial, helvetica, sans-serif;
 }
-caption { border:1px solid #5C443A;
- color:#5C443A;
+caption { border:1px solid #322f30;
+ color:#322f30;
  font-weight:bold;
- letter-spacing:20px;
  padding:6px 4px 8px 0px;
  text-align:center;
  text-transform:uppercase;
 }
-td, th { color:#363636;
+td, th { color:#322f30;
  padding:.4em;
 }
 tr { border:1px dotted gray;
 }
-thead th, tfoot th { background:#5C443A;
- color:#FFFFFF;
+thead th, tfoot th { background:#322f30;
+ color:#ffffff;
  padding:3px 10px 3px 10px;
  text-align:left;
  text-transform:uppercase;
@@ -42,15 +41,15 @@ tbody th a { color:#363636;
  font-weight:normal;
  text-decoration:none;
 }
-tbody th a:hover { color:#363636;
+tbody th a:hover { color:#b6323a;
 }
-tbody td+td+td+td a { background-image:url('http://www.admixweb.com/downloads/csstablegallery/bullet_blue.png');
+tbody td+td+td+td a { 
  background-position:left center;
  background-repeat:no-repeat;
- color:#03476F;
+ color:#b6323a;
  padding-left:15px;
 }
-tbody td+td+td+td a:visited { background-image:url('http://www.admixweb.com/downloads/csstablegallery/bullet_white.png');
+tbody td+td+td+td a:visited { 
  background-position:left center;
  background-repeat:no-repeat;
 }
@@ -63,7 +62,7 @@ tfoot td { background:#5C443A;
 }
 .odd { background:#fff;
 }
-tbody tr:hover { background:#99BCBF;
- border:1px solid #03476F;
- color:#000000;
+tbody tr:hover { background:#e25e75;
+ border:1px solid #b6323a;
+ color:#b6323a;
 }

@@ -120,11 +120,10 @@
         <section class="present">
             <h1 class="present__title">CR Galaticos - Master League</h1>
         </section>
-
         <section class="main-content">			
 			<?php
 				//buscando o jogador escolhido na tela anterior para carregamento
-				$jogadorID = $_POST["JogadorCarregado"];
+				$jogadorID = $_GET["id"];
 				//echo $jogadorID;
 
 				$sql = "SELECT j.JogadorID,j.NomeJogador,j.Posicao,j.EquipeOriginal,j.Preco,j.Overall,j.EquipeID,e.NomeEquipe,e.Escudo,e.UsuarioID,j.Imagem
@@ -152,8 +151,7 @@
 				}
 
 				echo "<center><h1>$NomeJogador</h1></center><br/>
-					  <center><img src='$ImagemJogador' alt=''></center></br>
-					  <center><h3>Overall: $overall</h3></center></br>
+					  <center><div class='imgJogador'><img src='$ImagemJogador' alt=''></center></div></br>
 					  <center><h3>Posição: $posicaoJogador</h3></center></br>
 					  <center><h3>Equipe: <img src='$Escudo' alt='' style='width:20px;'> $NomeEquipe</h3></center></br>";
 				
@@ -233,7 +231,9 @@
 				}
 
 			?>
-			<p style="height:100px;"></p>
         </section>
+      <?php
+      	include("footer.php");
+      ?>
     </body>
 </html>

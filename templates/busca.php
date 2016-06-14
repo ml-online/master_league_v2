@@ -96,5 +96,8 @@
 			Busca: <input id="iptBusca" autofocus type="text" name="q" placeholder="Buscar conteúdo..." style="width:100%;max-width:600px;outline:0">
 			<p style="height:100px;"></p>
 		</section>
+	  <?php
+      	include("footer.php");
+      ?>
 	</body>
 </html>

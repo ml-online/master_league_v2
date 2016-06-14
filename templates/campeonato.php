@@ -97,7 +97,7 @@
 				$indice = 1;
 
 				echo "<center>";
-				echo "<table>";
+				echo "<table style='width:50%;'>";
 				echo "<caption>Classificação</caption>";
 				echo "<thead>";
 				echo "	<tr>";
@@ -111,7 +111,7 @@
 				{
 					echo "<tr>";
 					echo "<td>$indice</td>";
-					echo "<td><a href='#' onclick='carregarPaginaEquipe(" . $row["equipeID"] . ");'>" . $row["NomeEquipe"] . "</a></td>";
+					echo "<td><a href='equipe.php?id=" . $row["equipeID"] . "'>" . $row["NomeEquipe"] . "</a></td>";
 					echo "<td>" . $row["Nome"] . "</td>";
 					echo "</tr>";
 					$indice++;
@@ -119,7 +119,9 @@
 				echo "</table>";
 				echo "</center>";
 			?>
-		<p style="height:100px;"></p>
         </section>
+      <?php
+      	include("footer.php");
+      ?>
     </body>
 </html>

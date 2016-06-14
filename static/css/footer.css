@@ -1,0 +1,27 @@
+.grid {
+    clear: both;
+    margin: 0 auto;
+    background-color: #333;
+}
+
+#footer a {
+    color: #f6f6f6;
+    text-decoration: none
+}
+
+#footer .footer-nav {
+    margin: .75em 0 1.5em
+}
+
+#footer .footer-nav li {
+    list-style: none;
+    display: inline
+}
+
+#footer .footer-nav a {
+    padding: 0 .5em
+}
+
+p{
+	color: #f6f6f6;
+}

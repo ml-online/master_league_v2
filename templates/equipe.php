@@ -76,7 +76,7 @@
 			//echo "UsuarioID = " . $usuarioID;
 			$_SESSION['session_usuario_id'] = $usuarioID;
 
-			$equipeCarregar = $_POST["equipeIDSelec"];
+			$equipeCarregar = $_GET["id"];
 			
 			//Buscando o equipeID
 			$sql = "SELECT equipe.equipeID, equipe.nomeEquipe, equipe.Escudo, usuario.Nome
@@ -100,8 +100,7 @@
 
       echo "<center><h1>$nomeEquipe</h1></center></br>
             <center><img src='$escudoEquipe' alt='Sem Escudo' style='max-width:300px;'></center>
-            <center><h2>Presidente: $nomeDono</h3></center>
-            <center><h2>Orçamento: G$ $orcamento</h2></center></br></br>";
+            <center><h2>Presidente: $nomeDono</h3></center></br>";
 			
 
       echo "<center><h2>Jogadores</h1></center>";
@@ -114,82 +113,138 @@
 			//$_SESSION['session_equipe_id'] = $equipeID;
 			
 			//Buscando os jogadores da equipe
-			$sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`
+			$sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`, `Imagem`
 					  FROM `jogador` 
 					 WHERE EquipeID = '$equipeID'
 					   AND Posicao = 'GOL'";
 					 
 			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			
+			$j = 1;
 			// Listando os jogadores buscados da tabela
-			echo "<center><h2>Goleiros</h2></center><br/>";
+			echo "<div class='tituloPosicao'><center><h2>Goleiros</h2></center></div><br/>";
+			echo "<div class='row'>";
+			echo "<div class='main-content__row'>";
 			while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
 			{
-				echo "<center><a href='#' onclick='carregarPaginaJogador(" . $row["JogadorID"] . ");'>" . $row["NomeJogador"] . "(" . $row["Overall"] . ")" . "</a></center>";
-				echo "<br/>";
+				if($j % 5 == 0)
+				{
+					echo "</div>";
+					echo "<div class='main-content__row'>";
+				}
+				echo "<div class='main-content__col'>";
+				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img src='" . $row["Imagem"] . "'/></a>";
+				echo "<h3>Jogador:<span>" . $row["NomeJogador"] . "</span></h3>
+                    <h3>Clube:<span>" . $row["EquipeOriginal"] . "</span></h3>";
+				echo "</div>";
+				$j++;
+				//echo "<br/>";
 			}
+			echo "</div><br/>";
 			
 			/* -----------------------------------------------------------
 				Buscando a lista dos defensores
 			------------------------------------------------------------*/
 			
-			$sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`
+			$sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`, `Imagem`
 					  FROM `jogador` 
 					 WHERE EquipeID = '$equipeID'
 					   AND Posicao IN ('LD', 'LE', 'ZAG')";
 					 
 			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			
+			$j = 1;
 			// Listando os jogadores buscados da tabela
-			echo "<center><h2>Defensores</h2></center><br/>";
+			echo "<div class='tituloPosicao'><center><h2>Defensores</h2></center></div><br/>";
+			echo "<div class='row'>";
+			echo "<div class='main-content__row'>";
 			while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
 			{
-				echo "<center><a href='#' onclick='carregarPaginaJogador(" . $row["JogadorID"] . ");'>" . $row["NomeJogador"] . "(" . $row["Overall"] . ")" . "</a></center>";
-				echo "<br/>";
+				if($j % 5 == 0)
+				{
+					echo "</div>";
+					echo "<div class='main-content__row'>";
+				}
+				echo "<div class='main-content__col'>";
+				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img src='" . $row["Imagem"] . "'/></a>";
+				echo "<h3>Jogador:<span>" . $row["NomeJogador"] . "</span></h3>
+                    <h3>Clube:<span>" . $row["EquipeOriginal"] . "</span></h3>";
+				echo "</div>";
+				$j++;
+				//echo "<br/>";
 			}
+			echo "</div><br/>";
 			
 			/* -----------------------------------------------------------
 				Buscando a lista dos meias
 			------------------------------------------------------------*/
 			
-			$sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`
+			$sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`, `Imagem`
 					  FROM `jogador` 
 					 WHERE EquipeID = '$equipeID'
 					   AND Posicao IN ('MC', 'ME', 'MEI', 'VOL', 'MD', 'MEIA')";
 					 
 			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			
+			$j = 1;
 			// Listando os jogadores buscados da tabela
-			echo "<center><h2>Meias</h2></center><br/>";
+			echo "<div class='tituloPosicao'><center><h2>Meias</h2></center></div><br/>";
+			echo "<div class='row'>";
+			echo "<div class='main-content__row'>";
 			while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
 			{
-				echo "<center><a href='#' onclick='carregarPaginaJogador(" . $row["JogadorID"] . ");'>" . $row["NomeJogador"] . "(" . $row["Overall"] . ")" . "</a></center>";
-				echo "<br/>";
+				if($j % 5 == 0)
+				{
+					echo "</div>";
+					echo "<div class='main-content__row'>";
+				}
+				echo "<div class='main-content__col'>";
+				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img src='" . $row["Imagem"] . "'/></a>";
+				echo "<h3>Jogador:<span>" . $row["NomeJogador"] . "</span></h3>
+                    <h3>Clube:<span>" . $row["EquipeOriginal"] . "</span></h3>";
+				echo "</div>";
+				$j++;
+				//echo "<br/>";
 			}
+			echo "</div><br/>";
 			
 			/* -----------------------------------------------------------
 				Buscando a lista dos atacantes
 			------------------------------------------------------------*/
 			
-			$sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`
+			$sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`, `Imagem`
 					  FROM `jogador` 
 					 WHERE EquipeID = '$equipeID'
 					   AND Posicao IN ('ATA', 'PD', 'PE', 'SA', 'PNT')";
 					 
 			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			
+			$j = 1;
 			// Listando os jogadores buscados da tabela
-			echo "<center><h2>Atacantes</h2></center><br/>";
+			echo "<div class='tituloPosicao'><center><h2>Atacantes</h2></center></div><br/>";
+			echo "<div class='row'>";
+			echo "<div class='main-content__row'>";
 			while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
 			{
-				echo "<center><a href='#' onclick='carregarPaginaJogador(" . $row["JogadorID"] . ");'>" . $row["NomeJogador"] . "(" . $row["Overall"] . ")" . "</a></center>";
-				echo "<br/>";
+				if($j % 5 == 0)
+				{
+					echo "</div>";
+					echo "<div class='main-content__row'>";
+				}
+				echo "<div class='main-content__col'>";
+				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img src='" . $row["Imagem"] . "'/></a>";
+				echo "<h3>Jogador:<span>" . $row["NomeJogador"] . "</span></h3>
+                    <h3>Clube:<span>" . $row["EquipeOriginal"] . "</span></h3>";
+				echo "</div>";
+				$j++;
+				//echo "<br/>";
 			}
+			echo "</div><br/>";
 		?>
       </section>
 
-      <section class="footer">
-          <center><h4>Aqui o rodapé</h4></center>
-      </section>
+      <?php
+      	include("footer.php");
+      ?>
     </body>
 </html>
