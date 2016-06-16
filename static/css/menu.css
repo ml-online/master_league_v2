@@ -9,6 +9,10 @@
     z-index: 1000;
 }
 
+.menu a{
+    color: #FFF;
+}
+
 .menu__items {
     position: relative;
     float: right;

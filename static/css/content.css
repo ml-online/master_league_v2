@@ -1,5 +1,5 @@
 .row {
-    margin-bottom: 2em;
+    
 }
 
 .main-content{
@@ -86,4 +86,5 @@
     background-color: #333;
     width: 100%;
     color: #FFF;
+    border-radius: 10pc;
 }

@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title>Autenticando...</title>
-	<link rel="stylesheet" href="_css/estilo.css"/>
+	<link rel="stylesheet" href="../static/css/estilo.css"/>
 	<script type="text/javascript">
 		function loginsuccessful(){
 			setTimeout("window.location='home.php'", 10);
@@ -22,14 +22,17 @@
 		$psn = $_POST["psn"];
 		$senha = $_POST["senha"];
 
-		$sql = "SELECT * 
+		$sql = "SELECT `ID`, `Nome`, `PSN`, `Email`, `Senha`, `Orcamento`, `Ativo`, `Admin`
 		          FROM usuario 
 				 WHERE psn = '$psn' 
 				   AND senha = '$senha'";
 		$sql = mysqli_query($con,$sql);
+		$row = mysqli_fetch_array($sql, MYSQLI_ASSOC);
 		$rowcount = mysqli_num_rows($sql);
 
-	  	if($rowcount == 1)
+		//echo 'Ativo: ' . $row["Ativo"];
+
+	  	if($rowcount == 1 && $row["Ativo"] == 1)
 	  	{
 	  		//abrir sessão
 	  		session_start("login_ml");
@@ -49,6 +52,13 @@
 			
 	  		echo "Login realizado com sucesso.";
 	  		echo "<script>loginsuccessful()</script>";
+	  	}
+	  	else if ($rowcount == 1 && $row["Ativo"] == 0)
+	  	{
+	  		echo "<div>
+					<center>Usuário ainda não aprovado. Aguarde ou entre em contato com um administrador.</center><br/>
+					<center><a href='login.php'>Voltar para a tela de login</a></center>
+				  </div>";
 	  	}
 	  	else if ($rowcount > 1)
 	  	{
