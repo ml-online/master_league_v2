@@ -25,7 +25,7 @@
 
 .main-content__col img:hover {
     transform: rotateY(360deg);
-    transition: 1s;
+    transition: 0.75s;
     cursor: pointer;
 }
 

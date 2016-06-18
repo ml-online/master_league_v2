@@ -45,39 +45,70 @@
 		$valorTransf = $_POST["valorTransf"];
 		$jogadorTroca = $_POST["jogadorTroca"];
 		$tipoTransf = $_POST["tipoTransf"];
+		$freeAgent = $_POST["freeAgent"];
+		$preco = $_POST["preco"];
 		
-		if($tipoTransf == "Troca")
+		if($freeAgent == 1)
 		{
-			$query = "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID, jogadorTrocaID) 
-					  VALUES ($equipeSaida, $equipeEntrada, now(), $valorTransf, NULL, 'Aguardando', $jogadorID, $jogadorTroca)";
+			mysqli_query($con, "UPDATE usuario 
+								   SET Orcamento = Orcamento - $preco
+								 WHERE ID = (SELECT UsuarioID
+											   FROM Equipe
+											  WHERE EquipeID = '$equipeEntrada')") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+											  
+			mysqli_query($con, "UPDATE jogador 
+								   SET EquipeID = '$equipeEntrada'
+								 WHERE JogadorID = '$jogadorID'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+			
+			mysqli_query($con, "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID, jogadorTrocaID) 
+					  VALUES (NULL, $equipeEntrada, now(), $valorTransf, now(), 'Concluido', $jogadorID, NULL)") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+					  
+					  
+			echo '<section class="present">
+						<h1 class="present__title">CR Galaticos - Master League</h1>
+					 </section>
+
+					 <section class="main-content">
+						<h2>Solicitação de Transferência realizada com sucesso.</h2>
+					 </section>';
+					  
 		}
 		else
 		{
-			$query = "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID) 
-					  VALUES ($equipeSaida, $equipeEntrada, now(), $valorTransf, NULL, 'Aguardando', $jogadorID)";
+			if($tipoTransf == "Troca")
+			{
+				$query = "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID, jogadorTrocaID) 
+						  VALUES ($equipeSaida, $equipeEntrada, now(), $valorTransf, NULL, 'Aguardando', $jogadorID, $jogadorTroca)";
+			}
+			else
+			{
+				$query = "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID) 
+						  VALUES ($equipeSaida, $equipeEntrada, now(), $valorTransf, NULL, 'Aguardando', $jogadorID)";
+			}
+			$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+			
+			if($sql)//sucesso
+			{
+				echo '<section class="present">
+						<h1 class="present__title">CR Galaticos - Master League</h1>
+					 </section>
+
+					 <section class="main-content">
+						<h2>Solicitação de Transferência realizada com sucesso.</h2>
+					 </section>';
+			}
+			else
+			{
+				echo '<section class="present">
+						<h1 class="present__title">CR Galaticos - Master League</h1>
+					 </section>
+
+					 <section class="main-content">
+						<h2>Erro ao processar solicitação.</h2>
+					 </section>';
+			}
 		}
-		$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 		
-		if($sql)//sucesso
-		{
-			echo '<section class="present">
-					<h1 class="present__title">CR Galaticos - Master League</h1>
-				 </section>
-
-				 <section class="main-content">
-					<h2>Solicitação de Transferência realizada com sucesso.</h2>
-				 </section>';
-		}
-		else
-		{
-			echo '<section class="present">
-					<h1 class="present__title">CR Galaticos - Master League</h1>
-			     </section>
-
-				 <section class="main-content">
-					<h2>Erro ao processar solicitação.</h2>
-				 </section>';
-		}
 		mysqli_close($con);
 		
 	?>

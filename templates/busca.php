@@ -41,48 +41,32 @@
 		
 		<script src="auto-complete.js"></script>
 		<script>
-			var demo1 = new autoComplete(
+			function busca()
 			{
-				selector: '#iptBusca',
-				minChars: 1,
-				source: function(term, suggest){
-					term = term.toLowerCase();
-					var choices = [
-					<?php
-						//Buscando os jogadores da equipe
-						$sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`
-								  FROM `jogador`";
-								 
-						$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-						
-						// Listando os jogadores buscados da tabela
-						while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
-						{
-							echo "'" . $row["NomeJogador"] . "',";
-						}
-						
-						echo "'Teste'";
-					?>
-					];
-					var suggestions = [];
-					for (i=0;i<choices.length;i++)
-						if (~choices[i].toLowerCase().indexOf(term)) suggestions.push(choices[i]);
-					suggest(suggestions);
+				var chaveBusca = $("#iptBusca").val();
+				if(chaveBusca == "" || chaveBusca == undefined)
+				{
+					alert("Preencha uma chave a ser buscada");
 				}
-			});
-
-			if (~window.location.href.indexOf('http')) 
-			{
-				(function() {var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;po.src = 'https://apis.google.com/js/plusone.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();
-				(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=114593902037957";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
-				!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-				document.getElementById('github_social').innerHTML = '\
-					<iframe style="float:left;margin-right:15px" src="//ghbtns.com/github-btn.html?user=Pixabay&repo=JavaScript-autoComplete&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>\
-					<iframe style="float:left;margin-right:15px" src="//ghbtns.com/github-btn.html?user=Pixabay&repo=JavaScript-autoComplete&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>\
-				';
+				else
+				{
+					var tipoBusca = document.getElementById("slTipoBusca").value;
+					if(tipoBusca == "Jogador")
+					{
+						window.location.href = "busca.php?chave=" + chaveBusca + "&tipo=1";
+					}
+					else if(tipoBusca == "Clube")
+					{	
+						window.location.href = "busca.php?chave=" + chaveBusca + "&tipo=2";
+					}
+					else
+					{
+						alert ("Corrigir os parâmetros de busca");
+					}
+				}
+				
 			}
 		</script>
-		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js" async defer></script>
     </head>
 	
 	<body>
@@ -93,8 +77,54 @@
             <h1 class="present__title">CR Galaticos - Master League</h1>
         </section>
 		<section class="main-content">
-			Busca: <input id="iptBusca" autofocus type="text" name="q" placeholder="Buscar conteúdo..." style="width:100%;max-width:600px;outline:0">
-			<p style="height:100px;"></p>
+			<center>
+				<div style="padding-top:20px;">
+					Busca: <input id="iptBusca" autofocus type="text" name="q" placeholder="Buscar conteudo..." class="campoTexto" style="width:100%;max-width:600px;outline:0;"/>
+					<select style="border-radius:10px; width:200px;" id='slTipoBusca' >
+						<option value='Jogador'>Jogador</option>
+						<option value='Clube'>Clube</option>
+					</select>
+				</div>
+				<div>
+					<a onclick="busca()" ><img src="../static/img/lupa.png" style="max-width:40px; padding-left:34%"/></a>
+				</div>
+				
+				<?php
+					if(isset($_GET["chave"]) && isset($_GET["tipo"]))
+					{
+						$chaveBusca = $_GET["chave"];
+						$tipoBusca = $_GET["tipo"];
+						
+						if($tipoBusca == 1) //Jogador
+						{
+							$sql = "SELECT `JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, `Preco`, `Overall`, `EquipeID`, `Imagem` 
+									  FROM jogador
+									 WHERE NomeJogador LIKE '%" . $chaveBusca . "%'
+									 LIMIT 15";
+									 
+							$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+							
+							echo "<div class='tituloPosicao'><center><h2>Resultados da Busca</h2></center></div><br/>";
+							while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+							{
+								echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'>" . $row["NomeJogador"] . "</a>";
+							}
+						}
+						else if ($tipoBusca == 2) //Clube
+						{
+							$sql = "SELECT `EquipeID`, `NomeEquipe`, `Escudo`, `UsuarioID` 
+									  FROM equipe
+									 WHERE NomeEquipe LIKE '%" . $chaveBusca . "%'
+									 LIMIT 15";
+									 
+							$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+						}
+					}
+					
+				?>
+				
+			</center>
+			
 		</section>
 	  <?php
       	include("footer.php");

@@ -115,6 +115,26 @@
 					$("#trJogadorTroca").hide();
 				}
 			}
+			
+			function contratarFreeAgent()
+			{
+				var orcamento = document.getElementById("iptOrcamento").value;
+				var preco = document.getElementById("iptPreco").value;
+				var formConfirmacao = document.getElementById("formConfirmacao");
+				
+				if(orcamento < preco)
+				{
+					alert("Você não possui orçamento suficiente para contratar este jogador");
+				}
+				else
+				{
+					if(confirm("Gostaria de finalizar a contratação deste Free Agent?"))
+					{
+						$("#iptFreeAgent").val(1);
+						formConfirmacao.submit();
+					}
+				}
+			}
 		</script>
 
         <section class="present">
@@ -128,7 +148,7 @@
 
 				$sql = "SELECT j.JogadorID,j.NomeJogador,j.Posicao,j.EquipeOriginal,j.Preco,j.Overall,j.EquipeID,e.NomeEquipe,e.Escudo,e.UsuarioID,j.Imagem
 						  FROM jogador j
-						  JOIN equipe e
+				     LEFT JOIN equipe e
 						    ON e.EquipeID = j.EquipeID
 					     WHERE j.jogadorID = '$jogadorID'";
 								
@@ -150,85 +170,91 @@
 					$ImagemJogador = "";
 				}
 
+
 				echo "<center><h1>$NomeJogador</h1></center><br/>
 					  <center><div class='imgJogador'><img src='$ImagemJogador' alt=''></center></div></br>
-					  <center><h3>Posição: $posicaoJogador</h3></center></br>
-					  <center><h3>Equipe: <img src='$Escudo' alt='' style='width:20px;'> $NomeEquipe</h3></center></br>";
+					  <center><h3>Posição: $posicaoJogador</h3></center></br>";
 				
-				
-				//echo "Logado: $equipeUsuarioLogado </br>";
-				//echo "Na pagina do jogador do usuario: " . $equipeJogador . " <br/>";
-				
-				//print_r($_SESSION);
-				
-				if($equipeUsuarioLogado != $equipeJogador)
+				if($equipeJogador == null)
 				{
-					echo "<center>
-							<button class='botao' onclick='fazerProposta();'>Fazer Proposta</button></br></br>
-							<div id='divTrans' style='display:none;'>
-							<form id='formTransf' name='transfer' method='post' action='submitTransfer.php'>
-								<table>
-									<tr>
-										<td>Tipo: </td>
-										<td>
-											<select id='slTipoProposta' onchange='trocaTipoProposta();'>
-												<option value='Transferência'>Transferência</option>
-												<option value='Troca'>Troca</option>
-											</select>
-										</td>
-									</tr>
-									<tr id='trJogadorTroca' style='display:none'>
-										<td>Jogador: </td>
-										<td>
-											<select id='jogadorTrocaSelecionado'>
-												";
-					
-					$sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`
-						      FROM `jogador` 
-						     WHERE EquipeID = '$equipeUsuarioLogado'";
-						 
-					$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-					
-					// Listando os jogadores buscados da tabela
-					while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
-					{
-						echo "<option id='jogador_" . $row["JogadorID"] . "' name='" . $row["NomeJogador"] . "'>" . $row["NomeJogador"] . "</option>";
-					}
-					
-					echo "					</select>
-										</td>
-									</tr>
-									<tr>
-										<td>Valor: </td>
-										<td>G$ <input id='tdValor' type='text' onkeyup='moeda(this)'></td>
-									</tr>
-								</table>
-							</form>
-							<button class='botao' onclick='enviarProposta();'>Enviar</button>
-							</div>
-						  </center>";
-					
-					//variáveis a serem passadas para a próxima tela de confirmação
-					echo "<form id='formConfirmacao' name='confirmacao' method='post' action='propostatransferencia.php'>";
-					echo "<input id='iptEquipeSaida' name='equipeSaida' type='hidden' value='" . $equipeJogador . "'>";
-					echo "<input id='iptJogadorID' name='jogadorID' type='hidden' value='" . $jogadorID . "'>";
-					echo "<input id='iptEquipeEntrada' name='equipeEntrada' type='hidden' value='" . $equipeUsuarioLogado . "'>";
-					echo "<input id='iptValorTransf' name='valorTransf' type='hidden' value=''>";
-					echo "<input id='iptJogadorTroca' name='jogadorTroca' type='hidden' value=''>";
-					echo "<input id='iptTipoTransf' name='tipoTransf' type='hidden' value=''>";
-					echo "</form>";
-					
-					$sql = "SELECT Orcamento
-							  FROM usuario
-							 WHERE PSN = '$psn'";
-								
-					$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-					$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
-					
-					$orcamento = $row["Orcamento"];
-					
-					echo "<input id='iptOrcamento' type='hidden' value='" . $orcamento . "'>";
+					echo "<center><h3>SEM CLUBE - FREE AGENT</h3></br>";
+					echo "<center><h3>Preço: G$ $preco</h3></br>";
+					echo "<button class='botao' onclick='contratarFreeAgent();'>Contratar</button></center></br></br>";
 				}
+				else
+				{
+					echo "<center><h3>Equipe: <img src='$Escudo' alt='' style='width:20px;'> $NomeEquipe</h3></center></br>";
+					
+					if($equipeUsuarioLogado != $equipeJogador)
+					{
+						echo "<center>
+								<button class='botao' onclick='fazerProposta();'>Fazer Proposta</button></br></br>
+								<div id='divTrans' style='display:none;'>
+								<form id='formTransf' name='transfer' method='post' action='submitTransfer.php'>
+									<table>
+										<tr>
+											<td>Tipo: </td>
+											<td>
+												<select id='slTipoProposta' onchange='trocaTipoProposta();'>
+													<option value='Transferência'>Transferência</option>
+													<option value='Troca'>Troca</option>
+												</select>
+											</td>
+										</tr>
+										<tr id='trJogadorTroca' style='display:none'>
+											<td>Jogador: </td>
+											<td>
+												<select id='jogadorTrocaSelecionado'>
+													";
+						
+						$sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`
+								  FROM `jogador` 
+								 WHERE EquipeID = '$equipeUsuarioLogado'";
+							 
+						$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+						
+						// Listando os jogadores buscados da tabela
+						while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+						{
+							echo "<option id='jogador_" . $row["JogadorID"] . "' name='" . $row["NomeJogador"] . "'>" . $row["NomeJogador"] . "</option>";
+						}
+						
+						echo "					</select>
+											</td>
+										</tr>
+										<tr>
+											<td>Valor: </td>
+											<td>G$ <input id='tdValor' type='text' onkeyup='moeda(this)'></td>
+										</tr>
+									</table>
+								</form>
+								<button class='botao' onclick='enviarProposta();'>Enviar</button>
+								</div>
+							  </center>";
+					}
+				}
+				//variáveis a serem passadas para a próxima tela de confirmação
+				echo "<form id='formConfirmacao' name='confirmacao' method='post' action='propostatransferencia.php'>";
+				echo "<input id='iptEquipeSaida' name='equipeSaida' type='hidden' value='" . $equipeJogador . "'>";
+				echo "<input id='iptJogadorID' name='jogadorID' type='hidden' value='" . $jogadorID . "'>";
+				echo "<input id='iptEquipeEntrada' name='equipeEntrada' type='hidden' value='" . $equipeUsuarioLogado . "'>";
+				echo "<input id='iptValorTransf' name='valorTransf' type='hidden'>";
+				echo "<input id='iptJogadorTroca' name='jogadorTroca' type='hidden'>";
+				echo "<input id='iptTipoTransf' name='tipoTransf' type='hidden'>";
+				echo "<input id='iptFreeAgent' name='freeAgent' type='hidden'>";
+				echo "<input id='iptPreco' name='preco' type='hidden' value='" . $preco . "'>";
+				echo "</form>";
+				
+				$sql = "SELECT Orcamento
+						  FROM usuario
+						 WHERE PSN = '$psn'";
+							
+				$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+				$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
+				
+				$orcamento = $row["Orcamento"];
+				
+				echo "<input id='iptOrcamento' type='hidden' value='" . $orcamento . "'>";
 
 			?>
         </section>
