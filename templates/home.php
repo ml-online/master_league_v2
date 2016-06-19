@@ -80,10 +80,10 @@
 			
 			//Buscando o equipeID
 			$sql = "SELECT equipe.equipeID, equipe.nomeEquipe, equipe.Escudo, usuario.Nome
-					      FROM equipe
-                JOIN usuario 
-                  ON equipe.usuarioID = usuario.ID
-				       WHERE equipe.usuarioID = '$usuarioID'";
+					 FROM equipe
+					 JOIN usuario 
+					   ON equipe.usuarioID = usuario.ID
+				    WHERE equipe.usuarioID = '$usuarioID'";
 							
 			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
@@ -132,7 +132,7 @@
 					echo "<div class='main-content__row'>";
 				}
 				echo "<div class='main-content__col'>";
-				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img src='" . $row["Imagem"] . "'/></a>";
+				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img class='imgJogador' src='" . $row["Imagem"] . "'/></a>";
 				echo "<h3>Jogador:<span>" . $row["NomeJogador"] . "</span></h3>
                     <h3>Clube:<span>" . $row["EquipeOriginal"] . "</span></h3>";
 				echo "</div>";
@@ -165,7 +165,7 @@
 					echo "<div class='main-content__row'>";
 				}
 				echo "<div class='main-content__col'>";
-				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img src='" . $row["Imagem"] . "'/></a>";
+				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img class='imgJogador' src='" . $row["Imagem"] . "'/></a>";
 				echo "<h3>Jogador:<span>" . $row["NomeJogador"] . "</span></h3>
                     <h3>Clube:<span>" . $row["EquipeOriginal"] . "</span></h3>";
 				echo "</div>";
@@ -198,7 +198,7 @@
 					echo "<div class='main-content__row'>";
 				}
 				echo "<div class='main-content__col'>";
-				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img src='" . $row["Imagem"] . "'/></a>";
+				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img class='imgJogador' src='" . $row["Imagem"] . "'/></a>";
 				echo "<h3>Jogador:<span>" . $row["NomeJogador"] . "</span></h3>
                     <h3>Clube:<span>" . $row["EquipeOriginal"] . "</span></h3>";
 				echo "</div>";
@@ -231,7 +231,7 @@
 					echo "<div class='main-content__row'>";
 				}
 				echo "<div class='main-content__col'>";
-				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img src='" . $row["Imagem"] . "'/></a>";
+				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img class='imgJogador' src='" . $row["Imagem"] . "'/></a>";
 				echo "<h3>Jogador:<span>" . $row["NomeJogador"] . "</span></h3>
                     <h3>Clube:<span>" . $row["EquipeOriginal"] . "</span></h3>";
 				echo "</div>";

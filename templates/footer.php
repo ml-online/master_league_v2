@@ -6,7 +6,7 @@
 			<img style="max-height:70px; padding-top: 10px;" src="../static/img/cr-escudo.png">
 			<img style="max-height:60px; padding-top: 10px;" src="../static/img/ml-logo.png">
 		</div>
-		<p>© <a href="http://www.creativenights.com/">CR Galaticos</a> 2016. Queremos jogar, apenas jogar.</p>
+		<p>© <a href="home.php">CR Galaticos</a> 2016. Queremos jogar, apenas jogar.</p>
 	</center>
 	</div>
 </div>

@@ -59,7 +59,9 @@
           <input id="equipeSelec" name="equipeIDSelec" type="hidden"></input>
         </form>
 
-        <section class="main-content">			
+        <section class="main-content">		
+			<br/>
+			<div class='tituloPosicao'><center><h2>Times inscritos</h2></center></div><br/>
 			<?php
 				include("conexao.php");
 				$psn = $_SESSION["psn"];
@@ -90,18 +92,16 @@
 				$sql = "SELECT u.ID, u.Nome, u.PSN, u.Orcamento, e.NomeEquipe, e.Escudo, e.equipeID
 						  FROM usuario u
 						  JOIN equipe e
-						    ON e.UsuarioID = u.ID";
+						    ON e.UsuarioID = u.ID
+						 WHERE u.ativo = 1";
 								
 				$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 
-				$indice = 1;
-
 				echo "<center>";
 				echo "<table style='width:50%;'>";
-				echo "<caption>Classificação</caption>";
 				echo "<thead>";
 				echo "	<tr>";
-				echo "		<th>Posição</th>";
+				echo "		<th>ID</th>";
 				echo "		<th>Time</th>";
 				echo "		<th>Presidente</th>";
 				echo "	</tr>";
@@ -110,11 +110,10 @@
 				while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
 				{
 					echo "<tr>";
-					echo "<td>$indice</td>";
+					echo "<td>" . $row["equipeID"] . "</td>";
 					echo "<td><a href='equipe.php?id=" . $row["equipeID"] . "'>" . $row["NomeEquipe"] . "</a></td>";
 					echo "<td>" . $row["Nome"] . "</td>";
 					echo "</tr>";
-					$indice++;
 				}
 				echo "</table>";
 				echo "</center>";

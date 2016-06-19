@@ -84,7 +84,6 @@
 				</div>
 			</div>
 		</li>
-		<li>Sala de troféus</li>
         <li><a href="logout.php">Sair</a></li>
     </ul>
 	

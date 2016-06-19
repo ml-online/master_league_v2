@@ -133,7 +133,7 @@
 					echo "<div class='main-content__row'>";
 				}
 				echo "<div class='main-content__col'>";
-				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img src='" . $row["Imagem"] . "'/></a>";
+				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img class='imgJogador' src='" . $row["Imagem"] . "'/></a>";
 				echo "<h3>Jogador:<span>" . $row["NomeJogador"] . "</span></h3>
                     <h3>Clube:<span>" . $row["EquipeOriginal"] . "</span></h3>";
 				echo "</div>";
@@ -166,7 +166,7 @@
 					echo "<div class='main-content__row'>";
 				}
 				echo "<div class='main-content__col'>";
-				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img src='" . $row["Imagem"] . "'/></a>";
+				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img class='imgJogador' src='" . $row["Imagem"] . "'/></a>";
 				echo "<h3>Jogador:<span>" . $row["NomeJogador"] . "</span></h3>
                     <h3>Clube:<span>" . $row["EquipeOriginal"] . "</span></h3>";
 				echo "</div>";
@@ -199,7 +199,7 @@
 					echo "<div class='main-content__row'>";
 				}
 				echo "<div class='main-content__col'>";
-				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img src='" . $row["Imagem"] . "'/></a>";
+				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img class='imgJogador' src='" . $row["Imagem"] . "'/></a>";
 				echo "<h3>Jogador:<span>" . $row["NomeJogador"] . "</span></h3>
                     <h3>Clube:<span>" . $row["EquipeOriginal"] . "</span></h3>";
 				echo "</div>";
@@ -232,7 +232,7 @@
 					echo "<div class='main-content__row'>";
 				}
 				echo "<div class='main-content__col'>";
-				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img src='" . $row["Imagem"] . "'/></a>";
+				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img class='imgJogador' src='" . $row["Imagem"] . "'/></a>";
 				echo "<h3>Jogador:<span>" . $row["NomeJogador"] . "</span></h3>
                     <h3>Clube:<span>" . $row["EquipeOriginal"] . "</span></h3>";
 				echo "</div>";

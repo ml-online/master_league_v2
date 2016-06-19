@@ -30,29 +30,14 @@ thead th, tfoot th { background:#5C443A;
  text-align:left;
  text-transform:uppercase;
 }
-tbody td a { color:#363636;
- text-decoration:none;
-}
-tbody td a:visited { color:gray;
- text-decoration:line-through;
-}
+
 tbody td a:hover { text-decoration:underline;
 }
-tbody th a { color:#363636;
- font-weight:normal;
- text-decoration:none;
-}
-tbody th a:hover { color:#363636;
-}
+
 tbody td+td+td+td a { background-image:url('http://www.admixweb.com/downloads/csstablegallery/bullet_blue.png');
  background-position:left center;
  background-repeat:no-repeat;
- color:#03476F;
  padding-left:15px;
-}
-tbody td+td+td+td a:visited { background-image:url('http://www.admixweb.com/downloads/csstablegallery/bullet_white.png');
- background-position:left center;
- background-repeat:no-repeat;
 }
 tbody th, tbody td { text-align:left;
  vertical-align:top;
@@ -62,8 +47,4 @@ tfoot td { background:#5C443A;
  padding-top:3px;
 }
 .odd { background:#fff;
-}
-tbody tr:hover { background:#99BCBF;
- border:1px solid #03476F;
- color:#000000;
 }

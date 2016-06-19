@@ -86,9 +86,9 @@
 					</select>
 				</div>
 				<div>
-					<a onclick="busca()" ><img src="../static/img/lupa.png" style="max-width:40px; padding-left:34%"/></a>
+					<a onclick="busca()" ><img class="putLink" src="../static/img/lupa.png" style="max-width:40px;"/></a>
 				</div>
-				
+				<br/>
 				<?php
 					if(isset($_GET["chave"]) && isset($_GET["tipo"]))
 					{
@@ -97,27 +97,103 @@
 						
 						if($tipoBusca == 1) //Jogador
 						{
-							$sql = "SELECT `JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, `Preco`, `Overall`, `EquipeID`, `Imagem` 
-									  FROM jogador
+							$sql = "SELECT j.`JogadorID`, j.`NomeJogador`, j.`Posicao`, j.`EquipeOriginal`, j.`Preco`, j.`Overall`, j.`EquipeID`, j.`Imagem`, e.NomeEquipe
+									  FROM jogador j
+								 LEFT JOIN equipe e 
+										ON e.EquipeID = j.EquipeID
 									 WHERE NomeJogador LIKE '%" . $chaveBusca . "%'
 									 LIMIT 15";
 									 
 							$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+							$rowcount = mysqli_num_rows($query);
 							
 							echo "<div class='tituloPosicao'><center><h2>Resultados da Busca</h2></center></div><br/>";
-							while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+							
+							if($rowcount > 0)
 							{
-								echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'>" . $row["NomeJogador"] . "</a>";
+								echo "<table>";
+								echo "<thead>";
+								echo "	<tr>";
+								echo "		<th>ID</th>";
+								echo "		<th>Jogador</th>";
+								echo "		<th>Clube</th>";
+								echo "		<th>Overall</th>";
+								echo "		<th>Clube Original</th>";
+								echo "	</tr>";
+								echo "</thead>";
+								
+								while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+								{
+									echo "<tr>";
+									echo "<td style='text-align:right;'>" . $row["JogadorID"] . "</td>";
+									echo "<td style='text-align:right;'><a href='jogador.php?id=" . $row["JogadorID"] . "'>" . $row["NomeJogador"] . "</a></td>";
+									echo "<td style='text-align:right;'><a href='equipe.php?id=" . $row["EquipeID"] . "'>" . $row["NomeEquipe"] . "</a></td>";
+									echo "<td style='text-align:right;'>" . $row["Overall"] . "</td>";
+									echo "<td style='text-align:right;'>" . $row["EquipeOriginal"] . "</td>";
+									echo "</tr>";
+									//echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'>" . $row["NomeJogador"] . "</a><br/>";
+								}
+								
+								echo "</table>";
+								
+								if($rowcount == 15)
+								{
+									echo "<br/>Sua busca retornou muitos resultados, utilize uma chave mais específica para melhorar o resultado.";
+								}
+								
 							}
+							else
+							{
+								echo "Nenhum resultado encontrado.";
+							}
+							
 						}
 						else if ($tipoBusca == 2) //Clube
 						{
-							$sql = "SELECT `EquipeID`, `NomeEquipe`, `Escudo`, `UsuarioID` 
-									  FROM equipe
+							$sql = "SELECT e.`EquipeID`, e.`NomeEquipe`, e.`Escudo`, e.`UsuarioID`, u.Nome 
+									  FROM equipe e
+									  JOIN usuario u
+									    ON u.ID = e.UsuarioID
 									 WHERE NomeEquipe LIKE '%" . $chaveBusca . "%'
+									   AND u.Ativo = 1
 									 LIMIT 15";
 									 
 							$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+							
+							$rowcount = mysqli_num_rows($query);
+							
+							echo "<div class='tituloPosicao'><center><h2>Resultados da Busca</h2></center></div><br/>";
+							
+							if($rowcount > 0)
+							{
+								echo "<table>";
+								echo "<thead>";
+								echo "	<tr>";
+								echo "		<th>ID</th>";
+								echo "		<th>Equipe</th>";
+								echo "		<th>Presidente</th>";
+								echo "	</tr>";
+								echo "</thead>";
+								
+								while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+								{
+									echo "<tr>";
+									echo "<td style='text-align:right;'>" . $row["EquipeID"] . "</td>";
+									echo "<td style='text-align:right;'><a href='equipe.php?id=" . $row["EquipeID"] . "'>" . $row["NomeEquipe"] . "</a></td>";
+									echo "<td style='text-align:right;'>" . $row["Nome"] . "</td>";
+									echo "</tr>";
+								}
+								if($rowcount == 15)
+								{
+									echo "<br/>Sua busca retornou muitos resultados, utilize uma chave mais específica para melhorar o resultado.";
+								}
+								echo "</table>";
+							}
+							else
+							{
+								echo "Nenhum resultado encontrado.";
+							}
+							
 						}
 					}
 					

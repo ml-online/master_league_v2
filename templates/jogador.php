@@ -61,13 +61,15 @@
 			{
 				var formConfirmacao = document.getElementById("formConfirmacao");
 				var tipoEscolhido = document.getElementById("slTipoProposta").value;
-				var orcamento = document.getElementById("iptOrcamento").value;
+				var orcamento = parseFloat(document.getElementById("iptOrcamento").value);
 				
 				$("#iptTipoTransf").val(tipoEscolhido);
 				
 				var valorTransf = document.getElementById("tdValor").value.toString();
 				valorTransf = valorTransf.replace(/\./g, "");
 				valorTransf = valorTransf.replace(/\,/, ".");
+				
+				valorTransf = parseFloat(valorTransf);
 				
 				$("#iptValorTransf").val(valorTransf);
 				
@@ -118,13 +120,14 @@
 			
 			function contratarFreeAgent()
 			{
-				var orcamento = document.getElementById("iptOrcamento").value;
-				var preco = document.getElementById("iptPreco").value;
+				var orcamento = parseFloat(document.getElementById("iptOrcamento").value);
+				var preco = parseFloat(document.getElementById("iptPreco").value);
 				var formConfirmacao = document.getElementById("formConfirmacao");
 				
 				if(orcamento < preco)
 				{
 					alert("Você não possui orçamento suficiente para contratar este jogador");
+					alert("Orc: " + orcamento + " Preço: " + preco);
 				}
 				else
 				{
@@ -172,7 +175,7 @@
 
 
 				echo "<center><h1>$NomeJogador</h1></center><br/>
-					  <center><div class='imgJogador'><img src='$ImagemJogador' alt=''></center></div></br>
+					  <center><div class='imgJogador'><img class='imgJogador' src='$ImagemJogador' alt=''></center></div></br>
 					  <center><h3>Posição: $posicaoJogador</h3></center></br>";
 				
 				if($equipeJogador == null)

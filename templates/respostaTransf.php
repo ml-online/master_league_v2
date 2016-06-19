@@ -64,6 +64,8 @@
 		
 		if($tipoResp == "Aceito")
 		{
+			mysqli_autocommit($con,false);
+			
 			mysqli_query($con, "UPDATE usuario 
 								   SET Orcamento = Orcamento - '$valor'
 								 WHERE ID = (SELECT UsuarioID
@@ -90,6 +92,9 @@
 			mysqli_query($con, "UPDATE transferencia
 								   SET Status = 'Concluido', DataFim = now()
 								 WHERE ID = '$transfID'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+								 
+			mysqli_commit($con);	
+			mysqli_autocommit($con,TRUE);
 		}
 		else if ($tipoResp == 'Rejeitado')
 		{
@@ -109,5 +114,8 @@
 		mysqli_close($con);
 		
 	?>
+	<?php
+      	include("footer.php");
+    ?>
 </body>
 </html>

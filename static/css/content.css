@@ -29,10 +29,18 @@
     cursor: pointer;
 }
 
+.putLink{
+	cursor: pointer;
+}
+
 .imgJogador img:hover {
     transform: rotateY(360deg);
     transition: 1s;
     cursor: pointer;
+}
+
+.imgJogador{
+	max-width: 185px;
 }
 
 /* Dropdown Button */

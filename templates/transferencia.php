@@ -100,8 +100,11 @@
           <input id="iptTipoResp" name="tipoResp" type="hidden"></input>
 		  <input id="iptTransfID" name="transfID" type="hidden"></input>
         </form>
-
-        <section class="main-content">			
+	
+        <section class="main-content">	
+			<br/>
+			<div class='tituloPosicao'><center><h2>Transferências</h2></center></div><br/>
+			<center>
 			<?php
 				include("conexao.php");
 				$psn = $_SESSION["psn"];
@@ -111,21 +114,6 @@
 				/*----------------------------------------------------------
 				-------------------Propostas recebidas----------------------
 				----------------------------------------------------------*/
-				echo "<center>";
-				echo "<table>";
-				echo "<caption>Propostas recebidas</caption>";
-				echo "<thead>";
-				echo "	<tr>";
-				echo "		<th>Equipe</th>";
-				echo "		<th>Presidente</th>";
-				echo "		<th>Jogador</th>";
-				echo "		<th>Valor Proposta</th>";
-				echo "		<th>Jogador Incluso</th>";
-				echo "		<th>Aceitar</th>";
-				echo "		<th>Recusar</th>";
-				echo "	</tr>";
-				echo "</thead>";
-
 				$sql = "SELECT t.ID, t.EquipeSaida, t.EquipeEntrada, t.DataInicio, t.Valor, t.Status, t.JogadorID, j.NomeJogador, 
 						ifnull(t.JogadorTrocaID, '') as JogadorTrocaID, ifnull(j2.NomeJogador, '') as JogadorTrocaNome, u.Nome AS NomeUsuarioSolicitante, e2.NomeEquipe as NomeEquipeEntrada
 						  FROM transferencia t 
@@ -143,40 +131,44 @@
 						   AND t.Status = 'Aguardando'";
 								
 				$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-
-				while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+				$rowcount = mysqli_num_rows($query);
+				
+				if($rowcount > 0)
 				{
-					echo "<tr>";
-					echo "<td>" . $row["NomeEquipeEntrada"] . "</td>";
-					echo "<td>" . $row["NomeUsuarioSolicitante"] . "</td>";
-					echo "<td>" . $row["NomeJogador"] . "</td>";
-					echo "<td>G$ " . $row["Valor"] . "</td>";
-					echo "<td>" . $row["JogadorTrocaNome"] . "</td>";
-					echo "<td><button id='btnAceitar_'" . $row["JogadorID"] . " onclick='aceitarTransf(" . $row["ID"] . ")' class='botaoAceitar'>Aceitar</button></td>";
-					echo "<td><button id='btnRejeitar_'" . $row["JogadorID"] . " onclick='rejeitarTransf(" . $row["ID"] . ")' class='botaoRecusar'>Rejeitar</button></td>";
-					echo "</tr>";
+					echo "<table>";
+					echo "<caption>Propostas recebidas</caption>";
+					echo "<thead>";
+					echo "	<tr>";
+					echo "		<th>Equipe</th>";
+					echo "		<th>Presidente</th>";
+					echo "		<th>Jogador</th>";
+					echo "		<th>Valor Proposta</th>";
+					echo "		<th>Jogador Incluso</th>";
+					echo "		<th>Aceitar</th>";
+					echo "		<th>Recusar</th>";
+					echo "	</tr>";
+					echo "</thead>";
+
+					while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+					{
+						echo "<tr>";
+						echo "<td>" . $row["NomeEquipeEntrada"] . "</td>";
+						echo "<td>" . $row["NomeUsuarioSolicitante"] . "</td>";
+						echo "<td>" . $row["NomeJogador"] . "</td>";
+						echo "<td>G$ " . $row["Valor"] . "</td>";
+						echo "<td>" . $row["JogadorTrocaNome"] . "</td>";
+						echo "<td><button id='btnAceitar_'" . $row["JogadorID"] . " onclick='aceitarTransf(" . $row["ID"] . ")' class='botaoAceitar'>Aceitar</button></td>";
+						echo "<td><button id='btnRejeitar_'" . $row["JogadorID"] . " onclick='rejeitarTransf(" . $row["ID"] . ")' class='botaoRecusar'>Rejeitar</button></td>";
+						echo "</tr>";
+					}
+					echo "</table>";
 				}
-				echo "</table>";
+				
 				echo "</br>";
 				
 				/*----------------------------------------------------------
 				-------------------Aguardando resposta---------------------
 				----------------------------------------------------------*/
-				
-				echo "<table>";
-				echo "<caption>Aguardando Resposta</caption>";
-				echo "<thead>";
-				echo "	<tr>";
-				echo "		<th>Equipe</th>";
-				echo "		<th>Presidente</th>";
-				echo "		<th>Jogador</th>";
-				echo "		<th>Valor Proposta</th>";
-				echo "		<th>Jogador Incluso</th>";
-				echo "		<th>Status</th>";
-				echo "		<th>Retirar Proposta</th>";
-				echo "	</tr>";
-				echo "</thead>";
-
 				$sql = "SELECT t.ID, t.EquipeSaida, t.EquipeEntrada, t.DataInicio, t.Valor, t.Status, t.JogadorID, j.NomeJogador, 
 						ifnull(t.JogadorTrocaID, '') as JogadorTrocaID, ifnull(j2.NomeJogador, '') as JogadorTrocaNome, u.Nome AS NomeUsuarioSolicitante, e2.NomeEquipe as NomeEquipeEntrada
 						  FROM transferencia t 
@@ -194,43 +186,48 @@
 						   AND t.Status = 'Aguardando'";
 								
 				$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-
-				while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+				$rowcount = mysqli_num_rows($query);
+				
+				if($rowcount > 0)
 				{
-					echo "<tr>";
-					echo "<td>" . $row["NomeEquipeEntrada"] . "</td>";
-					echo "<td>" . $row["NomeUsuarioSolicitante"] . "</td>";
-					echo "<td>" . $row["NomeJogador"] . "</td>";
-					echo "<td>G$ " . $row["Valor"] . "</td>";
-					echo "<td>" . $row["JogadorTrocaNome"] . "</td>";
-					echo "<td>" . $row["Status"] . "</td>";
-					echo "<td><button class='botaoRecusar' onclick='cancelarTransf(" . $row["ID"] . ")'>Retirar proposta</button></td>";
-					echo "</tr>";
+					echo "<table>";
+					echo "<caption>Aguardando Resposta</caption>";
+					echo "<thead>";
+					echo "	<tr>";
+					echo "		<th>Equipe</th>";
+					echo "		<th>Presidente</th>";
+					echo "		<th>Jogador</th>";
+					echo "		<th>Valor Proposta</th>";
+					echo "		<th>Jogador Incluso</th>";
+					echo "		<th>Status</th>";
+					echo "		<th>Retirar Proposta</th>";
+					echo "	</tr>";
+					echo "</thead>";
+
+					while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+					{
+						echo "<tr>";
+						echo "<td>" . $row["NomeEquipeEntrada"] . "</td>";
+						echo "<td>" . $row["NomeUsuarioSolicitante"] . "</td>";
+						echo "<td>" . $row["NomeJogador"] . "</td>";
+						echo "<td>G$ " . $row["Valor"] . "</td>";
+						echo "<td>" . $row["JogadorTrocaNome"] . "</td>";
+						echo "<td>" . $row["Status"] . "</td>";
+						echo "<td><button class='botaoRecusar' onclick='cancelarTransf(" . $row["ID"] . ")'>Retirar proposta</button></td>";
+						echo "</tr>";
+					}
+					echo "</table>";
+					echo "</br>";
 				}
-				echo "</table>";
-				echo "</br>";
 				
 				/*----------------------------------------------------------
 				-------------------Finalizados------------------------------
 				----------------------------------------------------------*/
-				
-				echo "<table>";
-				echo "<caption>Finalizados</caption>";
-				echo "<thead>";
-				echo "	<tr>";
-				echo "		<th>Equipe</th>";
-				echo "		<th>Presidente</th>";
-				echo "		<th>Jogador</th>";
-				echo "		<th>Valor Proposta</th>";
-				echo "		<th>Jogador Incluso</th>";
-				echo "		<th>Status</th>";
-				echo "	</tr>";
-				echo "</thead>";
-
 				$sql = "SELECT t.ID, t.EquipeSaida, t.EquipeEntrada, t.DataInicio, t.Valor, t.Status, t.JogadorID, j.NomeJogador, 
-						ifnull(t.JogadorTrocaID, '') as JogadorTrocaID, ifnull(j2.NomeJogador, '') as JogadorTrocaNome, u.Nome AS NomeUsuarioSolicitante, e2.NomeEquipe as NomeEquipeEntrada
+						ifnull(t.JogadorTrocaID, '') as JogadorTrocaID, ifnull(j2.NomeJogador, '') as JogadorTrocaNome, u.Nome AS NomeUsuarioSolicitante, 
+						e2.NomeEquipe as NomeEquipeEntrada, ifnull(e.NomeEquipe, 'FREE AGENT') as NomeEquipeSaida, t.DataFim AS DataFim
 						  FROM transferencia t 
-						  JOIN equipe e 
+					 LEFT JOIN equipe e 
 						    ON e.EquipeID = t.EquipeSaida 
                           JOIN equipe e2
                             ON e2.EquipeID = T.EquipeEntrada
@@ -240,27 +237,51 @@
 						    ON j2.JogadorID = t.JogadorTrocaID 
 						  JOIN usuario u 
 						    ON u.ID = e2.UsuarioID 
-						 WHERE t.EquipeEntrada = $equipeID
-						   AND t.Status NOT IN ('Aguardando')";
+						 WHERE ((t.EquipeEntrada = $equipeID) OR (t.EquipeSaida = $equipeID))
+						   AND t.Status NOT IN ('Aguardando')
+						 ORDER BY t.DataFim desc
+						 LIMIT 15";
 								
 				$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-
-				while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+				$rowcount = mysqli_num_rows($query);
+				
+				if($rowcount > 0)
 				{
-					echo "<tr>";
-					echo "<td>" . $row["NomeEquipeEntrada"] . "</td>";
-					echo "<td>" . $row["NomeUsuarioSolicitante"] . "</td>";
-					echo "<td>" . $row["NomeJogador"] . "</td>";
-					echo "<td>G$ " . $row["Valor"] . "</td>";
-					echo "<td>" . $row["JogadorTrocaNome"] . "</td>";
-					echo "<td>" . $row["Status"] . "</td>";
-					echo "</tr>";
+					echo "<table>";
+					echo "<caption>Finalizados</caption>";
+					echo "<thead>";
+					echo "	<tr>";
+					echo "		<th>Equipe Entrada</th>";
+					echo "		<th>Equipe Saída</th>";
+					echo "		<th>Jogador</th>";
+					echo "		<th>Valor Proposta</th>";
+					echo "		<th>Jogador Incluso</th>";
+					echo "		<th>Status</th>";
+					echo "		<th>Data Conclusão</th>";
+					echo "	</tr>";
+					echo "</thead>";
+
+					while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+					{
+						echo "<tr>";
+						echo "<td>" . $row["NomeEquipeEntrada"] . "</td>";
+						echo "<td>" . $row["NomeEquipeSaida"] . "</td>";
+						echo "<td>" . $row["NomeJogador"] . "</td>";
+						echo "<td>G$ " . $row["Valor"] . "</td>";
+						echo "<td>" . $row["JogadorTrocaNome"] . "</td>";
+						echo "<td>" . $row["Status"] . "</td>";
+						echo "<td>" . $row["DataFim"] . "</td>";
+						echo "</tr>";
+					}
+					echo "</table>";
 				}
-				echo "</table>";
 				
 				echo "</center>";
 			?>
 		<p style="height:100px;"></p>
         </section>
+		<?php
+			include("footer.php");
+		?>
     </body>
 </html>

@@ -32,6 +32,13 @@
 <head>
 	<title>Processando proposta...</title>
 	<link rel="stylesheet" type="text/css" href="../static/css/base.css">
+	<script>
+		function finaliza()
+		{
+			alert("Proposta realizada com sucesso.");
+			setTimeout("window.location='transferencia.php'", 0);
+		}
+	</script>
 </head>
 
 <body>
@@ -50,19 +57,31 @@
 		
 		if($freeAgent == 1)
 		{
-			mysqli_query($con, "UPDATE usuario 
-								   SET Orcamento = Orcamento - $preco
-								 WHERE ID = (SELECT UsuarioID
-											   FROM Equipe
-											  WHERE EquipeID = '$equipeEntrada')") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-											  
-			mysqli_query($con, "UPDATE jogador 
-								   SET EquipeID = '$equipeEntrada'
-								 WHERE JogadorID = '$jogadorID'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+			// Set autocommit to off
+			mysqli_autocommit($con,FALSE);
 			
-			mysqli_query($con, "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID, jogadorTrocaID) 
-					  VALUES (NULL, $equipeEntrada, now(), $valorTransf, now(), 'Concluido', $jogadorID, NULL)") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-					  
+			$query = "UPDATE usuario 
+						 SET Orcamento = Orcamento - $preco
+					   WHERE ID = (SELECT UsuarioID
+											   FROM Equipe
+											  WHERE EquipeID = '$equipeEntrada')";
+											  
+			$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+					
+			$query = "UPDATE jogador 
+								   SET EquipeID = '$equipeEntrada'
+								 WHERE JogadorID = '$jogadorID'";
+								 
+			$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+			
+			$query = "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID, jogadorTrocaID) 
+					  VALUES (NULL, $equipeEntrada, now(), $preco, now(), 'Concluido', $jogadorID, NULL)";
+			
+			$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+			
+			// Commit transaction
+			mysqli_commit($con);	
+			mysqli_autocommit($con,TRUE);
 					  
 			echo '<section class="present">
 						<h1 class="present__title">CR Galaticos - Master League</h1>
@@ -70,11 +89,14 @@
 
 					 <section class="main-content">
 						<h2>Solicitação de Transferência realizada com sucesso.</h2>
+						<script>finaliza();</script>
 					 </section>';
 					  
 		}
 		else
 		{
+			mysqli_autocommit($con,FALSE);
+			
 			if($tipoTransf == "Troca")
 			{
 				$query = "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID, jogadorTrocaID) 
@@ -86,6 +108,9 @@
 						  VALUES ($equipeSaida, $equipeEntrada, now(), $valorTransf, NULL, 'Aguardando', $jogadorID)";
 			}
 			$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+						
+			mysqli_commit($con);	
+			mysqli_autocommit($con,TRUE);
 			
 			if($sql)//sucesso
 			{
@@ -95,6 +120,7 @@
 
 					 <section class="main-content">
 						<h2>Solicitação de Transferência realizada com sucesso.</h2>
+						<script>finaliza();</script>
 					 </section>';
 			}
 			else
@@ -112,5 +138,8 @@
 		mysqli_close($con);
 		
 	?>
+	<?php
+      	include("footer.php");
+    ?>
 </body>
 </html>
