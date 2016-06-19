@@ -155,7 +155,7 @@
 						echo "<td>" . $row["NomeEquipeEntrada"] . "</td>";
 						echo "<td>" . $row["NomeUsuarioSolicitante"] . "</td>";
 						echo "<td>" . $row["NomeJogador"] . "</td>";
-						echo "<td>G$ " . $row["Valor"] . "</td>";
+						echo "<td>G$ " . number_format($row["Valor"],2,",",".") . "</td>";
 						echo "<td>" . $row["JogadorTrocaNome"] . "</td>";
 						echo "<td><button id='btnAceitar_'" . $row["JogadorID"] . " onclick='aceitarTransf(" . $row["ID"] . ")' class='botaoAceitar'>Aceitar</button></td>";
 						echo "<td><button id='btnRejeitar_'" . $row["JogadorID"] . " onclick='rejeitarTransf(" . $row["ID"] . ")' class='botaoRecusar'>Rejeitar</button></td>";
@@ -170,7 +170,7 @@
 				-------------------Aguardando resposta---------------------
 				----------------------------------------------------------*/
 				$sql = "SELECT t.ID, t.EquipeSaida, t.EquipeEntrada, t.DataInicio, t.Valor, t.Status, t.JogadorID, j.NomeJogador, 
-						ifnull(t.JogadorTrocaID, '') as JogadorTrocaID, ifnull(j2.NomeJogador, '') as JogadorTrocaNome, u.Nome AS NomeUsuarioSolicitante, e2.NomeEquipe as NomeEquipeEntrada
+						ifnull(t.JogadorTrocaID, '') as JogadorTrocaID, ifnull(j2.NomeJogador, '') as JogadorTrocaNome, u.Nome AS NomeUsuarioResposta, e.NomeEquipe as NomeEquipeSaida
 						  FROM transferencia t 
 						  JOIN equipe e 
 						    ON e.EquipeID = t.EquipeSaida 
@@ -181,7 +181,7 @@
 				     LEFT JOIN jogador j2 
 						    ON j2.JogadorID = t.JogadorTrocaID 
 						  JOIN usuario u 
-						    ON u.ID = e2.UsuarioID 
+						    ON u.ID = e.UsuarioID 
 						 WHERE t.EquipeEntrada = $equipeID
 						   AND t.Status = 'Aguardando'";
 								
@@ -207,10 +207,10 @@
 					while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
 					{
 						echo "<tr>";
-						echo "<td>" . $row["NomeEquipeEntrada"] . "</td>";
-						echo "<td>" . $row["NomeUsuarioSolicitante"] . "</td>";
+						echo "<td>" . $row["NomeEquipeSaida"] . "</td>";
+						echo "<td>" . $row["NomeUsuarioResposta"] . "</td>";
 						echo "<td>" . $row["NomeJogador"] . "</td>";
-						echo "<td>G$ " . $row["Valor"] . "</td>";
+						echo "<td>G$ " . number_format($row["Valor"],2,",",".") . "</td>";
 						echo "<td>" . $row["JogadorTrocaNome"] . "</td>";
 						echo "<td>" . $row["Status"] . "</td>";
 						echo "<td><button class='botaoRecusar' onclick='cancelarTransf(" . $row["ID"] . ")'>Retirar proposta</button></td>";
@@ -225,17 +225,17 @@
 				----------------------------------------------------------*/
 				$sql = "SELECT t.ID, t.EquipeSaida, t.EquipeEntrada, t.DataInicio, t.Valor, t.Status, t.JogadorID, j.NomeJogador, 
 						ifnull(t.JogadorTrocaID, '') as JogadorTrocaID, ifnull(j2.NomeJogador, '') as JogadorTrocaNome, u.Nome AS NomeUsuarioSolicitante, 
-						e2.NomeEquipe as NomeEquipeEntrada, ifnull(e.NomeEquipe, 'FREE AGENT') as NomeEquipeSaida, t.DataFim AS DataFim
+						ifnull(e2.NomeEquipe, 'FREE AGENT') as NomeEquipeEntrada, ifnull(e.NomeEquipe, 'FREE AGENT') as NomeEquipeSaida, t.DataFim AS DataFim
 						  FROM transferencia t 
 					 LEFT JOIN equipe e 
 						    ON e.EquipeID = t.EquipeSaida 
-                          JOIN equipe e2
+                     LEFT JOIN equipe e2
                             ON e2.EquipeID = T.EquipeEntrada
 						  JOIN jogador j 
 						    ON j.JogadorID = t.JogadorID 
 				     LEFT JOIN jogador j2 
 						    ON j2.JogadorID = t.JogadorTrocaID 
-						  JOIN usuario u 
+					 LEFT JOIN usuario u 
 						    ON u.ID = e2.UsuarioID 
 						 WHERE ((t.EquipeEntrada = $equipeID) OR (t.EquipeSaida = $equipeID))
 						   AND t.Status NOT IN ('Aguardando')
@@ -267,7 +267,7 @@
 						echo "<td>" . $row["NomeEquipeEntrada"] . "</td>";
 						echo "<td>" . $row["NomeEquipeSaida"] . "</td>";
 						echo "<td>" . $row["NomeJogador"] . "</td>";
-						echo "<td>G$ " . $row["Valor"] . "</td>";
+						echo "<td>G$ " . number_format($row["Valor"],2,",",".") . "</td>";
 						echo "<td>" . $row["JogadorTrocaNome"] . "</td>";
 						echo "<td>" . $row["Status"] . "</td>";
 						echo "<td>" . $row["DataFim"] . "</td>";

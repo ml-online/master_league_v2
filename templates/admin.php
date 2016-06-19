@@ -35,6 +35,8 @@
         <meta name="description" content="Organization of CR Galaticos Master League">
 
         <link rel="stylesheet" type="text/css" href="../static/css/base.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/teste_tabela_css.css">
+		<link rel="stylesheet" href="../static/css/estilo2.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     </head>
 
@@ -48,10 +50,52 @@
       </section>
 
       <section class="main-content">
+		<br/>
+		<div class='tituloPosicao'><center><h2>Pendências de cadastro</h2></center></div><br/>
+		<center>
 		<?php
-			include("conexao.php");
-			$psn = $_SESSION["psn"];
+
+			$sql = "SELECT u.`ID`, u.`Nome`, u.`PSN`, u.`Email`, u.`Senha`, u.`Orcamento`, u.`Ativo`, u.`Admin`, e.EquipeID, e.NomeEquipe
+				      FROM usuario u 
+					  JOIN equipe e
+					    on e.UsuarioID = u.ID
+					 where ativo = 0";
+							
+			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+			$rowcount = mysqli_num_rows($query);
+			
+			if($rowcount > 0)
+			{
+				echo "<table>";
+				echo "<caption>Propostas recebidas</caption>";
+				echo "<thead>";
+				echo "	<tr>";
+				echo "		<th>Nome Usuario</th>";
+				echo "		<th>Nome Time</th>";
+				echo "		<th>PSN</th>";
+				echo "		<th>E-mail</th>";
+				echo "		<th>Aceitar</th>";
+				echo "		<th>Recusar</th>";
+				echo "	</tr>";
+				echo "</thead>";
+
+				while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+				{
+					echo "<tr>";
+					echo "<td>" . $row["Nome"] . "</td>";
+					echo "<td>" . $row["NomeEquipe"] . "</td>";
+					echo "<td>" . $row["PSN"] . "</td>";
+					echo "<td>" . $row["Email"] . "</td>";
+					echo "<td><button id='btnAceitar_'" . $row["ID"] . " onclick='aceitarUsuario(" . $row["ID"] . ")' class='botaoAceitar'>Aceitar</button></td>";
+					echo "<td><button id='btnRejeitar_'" . $row["ID"] . " onclick='rejeitarUsuario(" . $row["ID"] . ")' class='botaoRecusar'>Rejeitar</button></td>";
+					echo "</tr>";
+				}
+				echo "</table>";
+			}
+			
+			echo "</br>";
 		?>
+		</center>
       </section>
 
       <?php

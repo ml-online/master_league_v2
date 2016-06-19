@@ -38,6 +38,11 @@
 			alert("Proposta realizada com sucesso.");
 			setTimeout("window.location='transferencia.php'", 0);
 		}
+		function dispensa()
+		{
+			alert("Jogador dispensado com sucesso.");
+			//setTimeout("window.location='transferencia.php'", 0);
+		}
 	</script>
 </head>
 
@@ -54,8 +59,45 @@
 		$tipoTransf = $_POST["tipoTransf"];
 		$freeAgent = $_POST["freeAgent"];
 		$preco = $_POST["preco"];
+		$multa = $_POST["multa"];
+		$dispensa = $_POST["dispensa"];
 		
-		if($freeAgent == 1)
+		if($dispensa == 1)
+		{
+			mysqli_autocommit($con,FALSE);
+			
+			$query = "UPDATE usuario 
+						 SET Orcamento = Orcamento - $multa
+					   WHERE ID = (SELECT UsuarioID
+											   FROM Equipe
+											  WHERE EquipeID = '$equipeEntrada')";
+											  
+			$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+					
+			$query = "UPDATE jogador 
+								   SET EquipeID = NULL
+								 WHERE JogadorID = '$jogadorID'";
+								 
+			$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+			
+			$query = "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID) 
+					  VALUES ($equipeEntrada, NULL, now(), $multa, now(), 'Concluido', $jogadorID)";
+			
+			$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+			
+			mysqli_commit($con);	
+			mysqli_autocommit($con,TRUE);
+			
+			echo '<section class="present">
+						<h1 class="present__title">CR Galaticos - Master League</h1>
+					 </section>
+
+					 <section class="main-content">
+						<h2>O jogador foi dispensado do seu clube.</h2>
+						<script>dispensa();</script>
+					 </section>';
+		}
+		else if($freeAgent == 1)
 		{
 			// Set autocommit to off
 			mysqli_autocommit($con,FALSE);
@@ -88,7 +130,7 @@
 					 </section>
 
 					 <section class="main-content">
-						<h2>Solicitação de Transferência realizada com sucesso.</h2>
+						<h2>O jogador assinou com o seu clube.</h2>
 						<script>finaliza();</script>
 					 </section>';
 					  

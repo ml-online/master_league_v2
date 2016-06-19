@@ -41,12 +41,12 @@ tbody th a { color:#363636;
  font-weight:normal;
  text-decoration:none;
 }
-tbody th a:hover { color:#b6323a;
+tbody th a:hover { color:#c9c9c9;
 }
 tbody td+td+td+td a { 
  background-position:left center;
  background-repeat:no-repeat;
- color:#b6323a;
+ color:#c9c9c9;
  padding-left:15px;
 }
 tbody td+td+td+td a:visited { 
@@ -62,7 +62,6 @@ tfoot td { background:#5C443A;
 }
 .odd { background:#fff;
 }
-tbody tr:hover { background:#e25e75;
- border:1px solid #b6323a;
- color:#b6323a;
+tbody tr:hover { background:#c9c9c9;
+ color:#c9c9c9;
 }

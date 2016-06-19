@@ -59,7 +59,7 @@
 			$psn = $_SESSION["psn"];
 			$pos = 1;
 			
-			$sql = "SELECT c.`Grupo`, c.`EquipeID`, c.`PontosGanhos`, c.`Jogos`, c.`Vitorias`, c.`Empates`, c.`Derrotas`, c.`GolsMarcados`, c.`GolsSofridos`, c.`SaldoGols`, e.NomeEquipe as NomeEquipe
+			$sql = "SELECT c.`Grupo`, c.`EquipeID`, c.`PontosGanhos`, c.`Jogos`, c.`Vitorias`, c.`Empates`, c.`Derrotas`, c.`GolsMarcados`, c.`GolsSofridos`, c.`SaldoGols`, e.NomeEquipe as NomeEquipe, ifnull(e.Escudo, 'http://www.clker.com/cliparts/t/m/N/L/J/Q/escudo.svg') AS Escudo
 			          FROM classificacao c
 					  JOIN equipe e
 					    ON e.EquipeID = c.EquipeID
@@ -87,7 +87,7 @@
 			{
 				echo "<tr>";
 				echo "<td style='text-align:left;'>" . $pos . "</td>";
-				echo "<td style='text-align:left;'> <a href='equipe.php?id=" . $row["EquipeID"] . "'>" . $row["NomeEquipe"] . "</a></td>";
+				echo "<td style='text-align:left;'><img style='max-width:20px;' src='" . $row["Escudo"] . "'/> <a href='equipe.php?id=" . $row["EquipeID"] . "'>" . $row["NomeEquipe"] . "</a></td>";
 				echo "<td style='text-align:right;'>" . $row["PontosGanhos"] . "</td>";
 				echo "<td style='text-align:right;'>" . $row["Jogos"] . "</td>";
 				echo "<td style='text-align:right;'>" . $row["Vitorias"] . "</td>";

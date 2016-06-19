@@ -127,7 +127,6 @@
 				if(orcamento < preco)
 				{
 					alert("Você não possui orçamento suficiente para contratar este jogador");
-					alert("Orc: " + orcamento + " Preço: " + preco);
 				}
 				else
 				{
@@ -136,6 +135,18 @@
 						$("#iptFreeAgent").val(1);
 						formConfirmacao.submit();
 					}
+				}
+			}
+			
+			function dispensarJogador()
+			{
+				var preco = parseFloat(document.getElementById("iptPreco").value);
+				var formConfirmacao = document.getElementById("formConfirmacao");
+				var multa = parseFloat(document.getElementById("iptMulta").value); //preco * 0.15;				
+				if(confirm("A multa rescisória deste jogador é de G$ " + multa + ". Tem certeza que gostaria de dispensá-lo?"))
+				{
+					$("#iptDispensa").val(1);
+					formConfirmacao.submit();
 				}
 			}
 		</script>
@@ -235,6 +246,13 @@
 								</div>
 							  </center>";
 					}
+					else
+					{
+						//o jogador que está sendo visualizado é da própria equipe do usuário logado
+						$multa = $preco * 0.15;
+						echo "<center><h3>Multa rescisória: G$ $multa</h3></br>";
+						echo "<button class='botao' onclick='dispensarJogador();'>Dispensar</button></center></br></br>";
+					}
 				}
 				//variáveis a serem passadas para a próxima tela de confirmação
 				echo "<form id='formConfirmacao' name='confirmacao' method='post' action='propostatransferencia.php'>";
@@ -246,6 +264,8 @@
 				echo "<input id='iptTipoTransf' name='tipoTransf' type='hidden'>";
 				echo "<input id='iptFreeAgent' name='freeAgent' type='hidden'>";
 				echo "<input id='iptPreco' name='preco' type='hidden' value='" . $preco . "'>";
+				echo "<input id='iptMulta' name='multa' type='hidden' value='" . $preco * 0.15 . "'>";
+				echo "<input id='iptDispensa' name='dispensa' type='hidden' value='0'>";
 				echo "</form>";
 				
 				$sql = "SELECT Orcamento

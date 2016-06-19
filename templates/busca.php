@@ -41,31 +41,67 @@
 		
 		<script src="auto-complete.js"></script>
 		<script>
+
 			function busca()
 			{
 				var chaveBusca = $("#iptBusca").val();
-				if(chaveBusca == "" || chaveBusca == undefined)
+				var tipoBusca = document.getElementById("slTipoBusca").value;
+				var posicao = document.getElementById("sltPosicao").value;
+				var semClube = document.getElementById("chkSemClube").value;
+				
+				if(tipoBusca == "Jogador")
 				{
-					alert("Preencha uma chave a ser buscada");
-				}
-				else
-				{
-					var tipoBusca = document.getElementById("slTipoBusca").value;
-					if(tipoBusca == "Jogador")
+					if($("input:checked").length > 0)
 					{
-						window.location.href = "busca.php?chave=" + chaveBusca + "&tipo=1";
-					}
-					else if(tipoBusca == "Clube")
-					{	
-						window.location.href = "busca.php?chave=" + chaveBusca + "&tipo=2";
+						if(posicao == "Qualquer")
+						{
+							window.location.href = "busca.php?chave=" + chaveBusca + "&tipo=1&posicao=%" + "&semclube=1";
+						}
+						else
+						{
+							window.location.href = "busca.php?chave=" + chaveBusca + "&tipo=1&posicao=" + posicao + "&semclube=1";
+						}
 					}
 					else
 					{
-						alert ("Corrigir os parâmetros de busca");
+						if(posicao == "Qualquer")
+						{
+							window.location.href = "busca.php?chave=" + chaveBusca + "&tipo=1&posicao=%" + "&semclube=0";
+						}
+						else
+						{
+							window.location.href = "busca.php?chave=" + chaveBusca + "&tipo=1&posicao=" + posicao + "&semclube=0";
+						}
 					}
+					
 				}
-				
+				else if(tipoBusca == "Clube")
+				{	
+					window.location.href = "busca.php?chave=" + chaveBusca + "&tipo=2";
+				}
+				else
+				{
+					alert ("Corrigir os parâmetros de busca");
+				}
 			}
+			
+			function trocaTipo()
+			{
+				var tipoBusca = document.getElementById("slTipoBusca").value;
+				if(tipoBusca == "Jogador")
+				{
+					$("#sltPosicao").toggle("slow", "swing");
+					$("#chkSemClube").toggle("slow", "swing");
+					$("#labelSemClube").toggle("slow", "swing");
+				}
+				else
+				{
+					$("#sltPosicao").toggle("slow", "swing");
+					$("#chkSemClube").toggle("slow", "swing");
+					$("#labelSemClube").toggle("slow", "swing");
+				}
+			}
+			
 		</script>
     </head>
 	
@@ -80,10 +116,22 @@
 			<center>
 				<div style="padding-top:20px;">
 					Busca: <input id="iptBusca" autofocus type="text" name="q" placeholder="Buscar conteudo..." class="campoTexto" style="width:100%;max-width:600px;outline:0;"/>
-					<select style="border-radius:10px; width:200px;" id='slTipoBusca' >
+					<select onchange="trocaTipo()" style="border-radius:10px; width:150px;" id='slTipoBusca' >
 						<option value='Jogador'>Jogador</option>
 						<option value='Clube'>Clube</option>
 					</select>
+					<select id="sltPosicao" style="border-radius:10px; width:150px;" id='slTipoBusca' >
+						<option value='Qualquer'>Qualquer posição</option>
+						<?php
+							$sql = "SELECT DISTINCT posicao FROM jogador";
+							$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+							while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+							{
+								echo "<option value='" . $row["posicao"] . "'>" . $row["posicao"] . "</option>";
+							}
+						?>
+					</select>
+					<input id="chkSemClube" type="checkbox"  /><span style="padding-left:8px;" id="labelSemClube">Sem clube</span>
 				</div>
 				<div>
 					<a onclick="busca()" ><img class="putLink" src="../static/img/lupa.png" style="max-width:40px;"/></a>
@@ -101,8 +149,23 @@
 									  FROM jogador j
 								 LEFT JOIN equipe e 
 										ON e.EquipeID = j.EquipeID
-									 WHERE NomeJogador LIKE '%" . $chaveBusca . "%'
-									 LIMIT 15";
+									 WHERE NomeJogador LIKE '%" . $chaveBusca . "%'";
+							
+							if(isset($_GET["posicao"]))
+							{
+								$posicao = $_GET["posicao"];
+								$sql = $sql . " AND j.Posicao LIKE '%" . $posicao . "%'";
+							}
+							if(isset($_GET["semclube"]))
+							{
+								$semClube = $_GET["semclube"];
+								if($semClube == 1)
+								{
+									$sql = $sql . " AND j.EquipeID IS NULL";
+								}
+							}
+							
+							$sql = $sql . " ORDER BY e.NomeEquipe desc";
 									 
 							$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 							$rowcount = mysqli_num_rows($query);
@@ -135,8 +198,9 @@
 								}
 								
 								echo "</table>";
+								echo "<br/><span>Total: $rowcount resultados.</span>";
 								
-								if($rowcount == 15)
+								if($rowcount == 20)
 								{
 									echo "<br/>Sua busca retornou muitos resultados, utilize uma chave mais específica para melhorar o resultado.";
 								}

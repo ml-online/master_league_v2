@@ -27,7 +27,8 @@
 				$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 				$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
 				$orcamento = (string)$row["Orcamento"];
-				echo "G$" . str_replace('.', ',', $orcamento);
+				//echo "G$" . str_replace('.', ',', $orcamento);
+				echo "G$ " . number_format($orcamento,2,",",".");
 
 			?>
         </li>

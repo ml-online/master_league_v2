@@ -97,7 +97,7 @@
 			
 		    if($escudoEquipe == null)
 		  	{
-			  	$escudoEquipe = "";
+			  	$escudoEquipe = "http://www.clker.com/cliparts/t/m/N/L/J/Q/escudo.svg";
 		  	}
 
 		  	echo "<center><h1>$nomeEquipe</h1></center></br>
@@ -119,14 +119,14 @@
 					 
 			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			
-			$j = 1;
+			$j = 0;
 			// Listando os jogadores buscados da tabela
 			echo "<div class='tituloPosicao'><center><h2>Goleiros</h2></center></div><br/>";
 			echo "<div class='row'>";
 			echo "<div class='main-content__row'>";
 			while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
 			{
-				if($j % 5 == 0)
+				if($j % 4 == 0)
 				{
 					echo "</div>";
 					echo "<div class='main-content__row'>";
@@ -152,14 +152,14 @@
 					 
 			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			
-			$j = 1;
+			$j = 0;
 			// Listando os jogadores buscados da tabela
 			echo "<div class='tituloPosicao'><center><h2>Defensores</h2></center></div><br/>";
 			echo "<div class='row'>";
 			echo "<div class='main-content__row'>";
 			while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
 			{
-				if($j % 5 == 0)
+				if($j % 4 == 0)
 				{
 					echo "</div>";
 					echo "<div class='main-content__row'>";
@@ -185,14 +185,14 @@
 					 
 			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			
-			$j = 1;
+			$j = 0;
 			// Listando os jogadores buscados da tabela
 			echo "<div class='tituloPosicao'><center><h2>Meias</h2></center></div><br/>";
 			echo "<div class='row'>";
 			echo "<div class='main-content__row'>";
 			while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
 			{
-				if($j % 5 == 0)
+				if($j % 4 == 0)
 				{
 					echo "</div>";
 					echo "<div class='main-content__row'>";
@@ -218,14 +218,14 @@
 					 
 			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			
-			$j = 1;
+			$j = 0;
 			// Listando os jogadores buscados da tabela
 			echo "<div class='tituloPosicao'><center><h2>Atacantes</h2></center></div><br/>";
 			echo "<div class='row'>";
 			echo "<div class='main-content__row'>";
 			while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
 			{
-				if($j % 5 == 0)
+				if($j % 4 == 0)
 				{
 					echo "</div>";
 					echo "<div class='main-content__row'>";

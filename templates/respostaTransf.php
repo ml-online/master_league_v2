@@ -66,35 +66,50 @@
 		{
 			mysqli_autocommit($con,false);
 			
-			mysqli_query($con, "UPDATE usuario 
+			$sql1 = mysqli_query($con, "UPDATE usuario 
 								   SET Orcamento = Orcamento - '$valor'
 								 WHERE ID = (SELECT UsuarioID
 											   FROM Equipe
 											  WHERE EquipeID = '$equipeEntrada')") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 											  
-			mysqli_query($con, "UPDATE usuario 
+			$sql2 = mysqli_query($con, "UPDATE usuario 
 								   SET Orcamento = Orcamento + '$valor'
 								 WHERE ID = (SELECT UsuarioID
 											   FROM Equipe
 											  WHERE EquipeID = '$equipeSaida')") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			
-			mysqli_query($con, "UPDATE jogador 
+			$sql3 = mysqli_query($con, "UPDATE jogador 
 								   SET EquipeID = '$equipeEntrada'
 								 WHERE JogadorID = '$jogadorID'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			
 			if($jogadorTrocaID != '')
 			{
-				mysqli_query($con, "UPDATE jogador 
+				$sql4 = mysqli_query($con, "UPDATE jogador 
 									   SET EquipeID = '$equipeSaida'
 									 WHERE JogadorID = '$jogadorTrocaID'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			}
+			else
+			{
+				$sql4 = true;
+			}
 			
-			mysqli_query($con, "UPDATE transferencia
+			$sql5 = mysqli_query($con, "UPDATE transferencia
 								   SET Status = 'Concluido', DataFim = now()
 								 WHERE ID = '$transfID'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 								 
-			mysqli_commit($con);	
-			mysqli_autocommit($con,TRUE);
+			
+			//Cancelando as solicitações de transferência pendentes para o jogador que se transferiu agora
+			$sql6 = mysqli_query($con, "UPDATE transferencia 
+								   SET Status = 'Cancelado', DataFim = now()
+								 WHERE JogadorID = '$jogadorID'
+								   AND Status like '%Aguardando%'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+					
+			if($sql1 && $sql2 && $sql3 && $sql4 && $sql5 && $sql6)
+			{
+				mysqli_commit($con);
+			}				
+			
+			//mysqli_autocommit($con,TRUE);
 		}
 		else if ($tipoResp == 'Rejeitado')
 		{
