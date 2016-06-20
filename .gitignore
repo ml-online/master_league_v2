@@ -63,3 +63,6 @@ target/
 
 #DS_Store
 .DS_Store
+templates/sorteio.php
+*.php
+templates/sorteio.php
