@@ -22,7 +22,7 @@
   </form>
 
   <br/><br/>
-  <center><a href="telacadastro.php">Não tem login? Cadastre-se</a></center>
+  <center><a href="telacadastro.php">Não tem login? Cadastre-se aqui</a></center>
 </div>
 </body>
 </html>
