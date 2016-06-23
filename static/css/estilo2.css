@@ -21,3 +21,11 @@
 	box-shadow: 2px 2px 1px #aaaaaa;
     border-radius: 2px;
 }
+
+.botaoReport{
+	background-color: #ffae1a;
+	color: white;
+	padding: 5px;
+	box-shadow: 2px 2px 1px #aaaaaa;
+    border-radius: 2px;	
+}

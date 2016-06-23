@@ -48,10 +48,7 @@
       </section>
 
       <section class="main-content">
-		<?php
-			include("conexao.php");
-			$psn = $_SESSION["psn"];
-		?>
+
       </section>
 
       <?php
