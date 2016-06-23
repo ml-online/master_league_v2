@@ -143,7 +143,7 @@
 				var preco = parseFloat(document.getElementById("iptPreco").value);
 				var formConfirmacao = document.getElementById("formConfirmacao");
 				var multa = parseFloat(document.getElementById("iptMulta").value); //preco * 0.15;				
-				if(confirm("A multa rescisória deste jogador é de G$ " + multa + ". Tem certeza que gostaria de dispensá-lo?"))
+				if(confirm("Você receberá apenas G$ " + multa + ". Tem certeza que gostaria de vendê-lo ao mercado?"))
 				{
 					$("#iptDispensa").val(1);
 					formConfirmacao.submit();
@@ -192,7 +192,7 @@
 				if($equipeJogador == null)
 				{
 					echo "<center><h3>SEM CLUBE - FREE AGENT</h3></br>";
-					echo "<center><h3>Preço: G$ $preco</h3></br>";
+					echo "<center><h3>Preço: G$ " . number_format($preco,2,",",".") . "</h3></br>";
 					echo "<button class='botao' onclick='contratarFreeAgent();'>Contratar</button></center></br></br>";
 				}
 				else
@@ -249,9 +249,10 @@
 					else
 					{
 						//o jogador que está sendo visualizado é da própria equipe do usuário logado
-						$multa = $preco * 0.15;
-						echo "<center><h3>Multa rescisória: G$ $multa</h3></br>";
-						echo "<button class='botao' onclick='dispensarJogador();'>Dispensar</button></center></br></br>";
+						$multa = $preco * 0.7;
+						echo "<center><h3>Valor do jogador: G$ ". number_format($preco,2,",",".") . "</h3></br>";
+						echo "<center><h3>Valor de venda ao mercado: G$ " . number_format($multa,2,",",".") . "</h3></br>";
+						echo "<button class='botao' onclick='dispensarJogador();'>Vender ao mercado</button></center></br></br>";
 					}
 				}
 				//variáveis a serem passadas para a próxima tela de confirmação
@@ -264,7 +265,7 @@
 				echo "<input id='iptTipoTransf' name='tipoTransf' type='hidden'>";
 				echo "<input id='iptFreeAgent' name='freeAgent' type='hidden'>";
 				echo "<input id='iptPreco' name='preco' type='hidden' value='" . $preco . "'>";
-				echo "<input id='iptMulta' name='multa' type='hidden' value='" . $preco * 0.15 . "'>";
+				echo "<input id='iptMulta' name='multa' type='hidden' value='" . $preco * 0.7 . "'>";
 				echo "<input id='iptDispensa' name='dispensa' type='hidden' value='0'>";
 				echo "</form>";
 				

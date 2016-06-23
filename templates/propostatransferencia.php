@@ -41,7 +41,7 @@
 		function dispensa()
 		{
 			alert("Jogador dispensado com sucesso.");
-			//setTimeout("window.location='transferencia.php'", 0);
+			setTimeout("window.location='transferencia.php'", 0);
 		}
 	</script>
 </head>
@@ -67,7 +67,7 @@
 			mysqli_autocommit($con,FALSE);
 			
 			$query = "UPDATE usuario 
-						 SET Orcamento = Orcamento - $multa
+						 SET Orcamento = Orcamento + $multa
 					   WHERE ID = (SELECT UsuarioID
 											   FROM Equipe
 											  WHERE EquipeID = '$equipeEntrada')";

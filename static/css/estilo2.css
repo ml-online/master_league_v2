@@ -1,5 +1,5 @@
 .botao {
-	background-color: #273747;
+	background-color: #333;
 	color: white;
 	padding: 8px;
 	box-shadow: 2px 2px 1px #aaaaaa;
@@ -7,17 +7,17 @@
 }
 
 .botaoAceitar{
-	background-color: #12A312;
+	background-color: #6bae87;
 	color: white;
 	padding: 5px;
 	box-shadow: 2px 2px 1px #aaaaaa;
-    border-radius: 10px;
+    border-radius: 2px;
 }
 
 .botaoRecusar{
-	background-color: #C81111;
+	background-color: #dd7878;
 	color: white;
 	padding: 5px;
 	box-shadow: 2px 2px 1px #aaaaaa;
-    border-radius: 10px;
+    border-radius: 2px;
 }
