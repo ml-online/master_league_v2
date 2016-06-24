@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 24-Jun-2016 às 01:29
+-- Generation Time: 24-Jun-2016 às 16:57
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -468,6 +468,28 @@ CREATE TABLE IF NOT EXISTS `report` (
   `DataReport` datetime NOT NULL,
   PRIMARY KEY (`ReportID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `rodadas`
+--
+
+CREATE TABLE IF NOT EXISTS `rodadas` (
+  `PartidaID` int(11) NOT NULL AUTO_INCREMENT,
+  `CampeonatoID` int(11) NOT NULL,
+  `nomeEquipeCasa` varchar(250) NOT NULL,
+  `nomeEquipeFora` varchar(250) NOT NULL,
+  `rodada` int(11) NOT NULL,
+  PRIMARY KEY (`PartidaID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Extraindo dados da tabela `rodadas`
+--
+
+INSERT INTO `rodadas` (`PartidaID`, `CampeonatoID`, `nomeEquipeCasa`, `nomeEquipeFora`, `rodada`) VALUES
+(2, 1, 'CR Flamengo', 'Alo FC', 1);
 
 -- --------------------------------------------------------
 
