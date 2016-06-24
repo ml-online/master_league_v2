@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	session_start("login_ml");
 	include("conexao.php");
 ?>
@@ -6,7 +6,7 @@
   if(!isset($_SESSION["psn"]) || !isset($_SESSION["senha"]))
   {
     header("Location: login.php");
-    exit; //encerra as funções da página
+    exit; //encerra as funções da páginas
   }
   else
   {
