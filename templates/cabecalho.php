@@ -78,11 +78,9 @@
 			<div class="dropdown">
 				<a href="campeonato.php">Campeonato</a>
 				<div class="dropdown-content">
-					<!--<a href="sorteio.php">Sorteio</a>-->
 					<a href="tabela.php">Tabela</a>
 					<a href="proximosJogos.php">Próximos jogos</a>
 					<a href="rodadas.php#">Rodadas</a>
-					<a href="report.php">Reportar partida</a>
 				</div>
 			</div>
 		</li>
