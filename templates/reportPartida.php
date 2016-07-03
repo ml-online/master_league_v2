@@ -70,7 +70,7 @@
       18 => $_POST["report18"],
       19 => $_POST["report19"],
       20 => $_POST["report20"]
-    )
+    );
 
     $sql = "INSERT INTO report (PartidaID, EquipeReportID, GolsCasa, GolsFora, DataReport)
                    VALUES (partidaID, $equipeReport, $golsCasaInput, $golsForaInput, now());";
@@ -93,7 +93,7 @@
                  VALUES ();";
       }
       
-      i++;
+      $i++;
     }
     
     
