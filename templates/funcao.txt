@@ -1,0 +1,35 @@
+/*
+void definePreco (idjogador* //Preciso ter o id do jogador nesse escopo) {
+
+
+		base = escala + 17;
+		escala = select escala from jogador
+		minOver = busca menor overral em cada escala select min(overral) from jogador where escala = $escala
+		maxOver = busca maior overral em cada escala select min(overral) from jogador where escala = $escala
+		total = maxOver - minOver;
+		overral = select overral from jogador where id=*idjogador*;
+		preco = overral * (maxOver - total) + base;
+		// alter table jogador set preco = $preco where id = *idjogador* 
+		
+	}
+}*/
+
+void definePrecoGeral () {
+	
+	int idT;
+	//colocar o numero de jogadores, 
+	for (int i = 1;i<270;i++){
+		idPlayer = select id from jogador where id = $idT;
+		escala = select escala from jogador where id = $idT;
+		base = escala + 17;
+		escala = select escala from jogador;
+		minOver = busca menor overral em cada escala select min(overral) from jogador where escala = $escala;
+		maxOver = busca maior overral em cada escala select min(overral) from jogador where escala = $escala;
+		total = maxOver - minOver;
+		overral = select overral from jogador where id=$idT;
+		preco = overral * (maxOver - total) + base;
+		// alter table jogador set preco = $preco where id = $idT ;
+		idT++;
+	}
+}
+
