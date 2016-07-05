@@ -78,9 +78,13 @@
           function removerEstats(tipoEstatistica, idJogador)
           {
             var str = "#estatistica_" + tipoEstatistica + "_" + idJogador;
+
+            if(tipoEstatistica == 1) tipoEstatistica = "Gol";
+            else if(tipoEstatistica == 2) tipoEstatistica = "Assistencia";
             //alert(str);
-            $.grep(estatistica, function(n, i){
-              return (n.JogadorID != idJogador && n.Tipo != tipoEstatistica);
+            estatistica = $.grep(estatistica, function(n, i)
+            {              
+              return ((n.JogadorID != idJogador) && (n.Tipo != tipoEstatistica));
             });
             $(str).remove();
           }
@@ -89,6 +93,7 @@
           {
             if(validaPreenchimento())
             {
+              var form = document.getElementById("formID");
               var partidaID = $("#partidaID").val();
               var equipeUsuarioLogado = $("#equipeReportID").val();
 
@@ -104,7 +109,7 @@
                     $("#report" + i).val(estatistica[i-1].JogadorID.toString() + "," + estatistica[i-1].Tipo.toString() + "," + estatistica[i-1].Quantidade.toString());
                   }
                 } 
-                alert($("#report1").val());
+                form.submit();
               }
             }
           }
@@ -119,6 +124,12 @@
             {
               return false;
             }
+          }
+
+          function cancelReport()
+          {
+            alert("Você já reportou esta partida. Não é possível reportar novamente.");
+            window.Location.href = "proximosJogos.php";
           }
         </script>
     </head>
@@ -139,61 +150,74 @@
           $equipeUsuarioLogado = $_SESSION['session_equipe_id'];
           $partidaID = $_POST['partidaID'];
 
-          $sql = "SELECT p.PartidaID, p.CampeonatoID, c.NomeCampeonato, p.EquipeCasa, e.NomeEquipe as NomeEquipeCasa, e.Escudo AS EscudoEquipeCasa, e2.Escudo AS EscudoEquipeFora,
-                        p.EquipeFora, e2.NomeEquipe AS NomeEquipeFora, DATE_FORMAT(p.DataAbertura, '%d/%m/%Y') AS DataAbertura, p.Rodada
-                    FROM partida p
-                    JOIN equipe e 
-                      ON e.EquipeID = p.EquipeCasa
-                    JOIN equipe e2 
-                      ON e2.EquipeID = p.EquipeFora
-                    JOIN campeonato c
-                      ON c.CampeonatoID = p.CampeonatoID
-                   WHERE ((p.EquipeCasa = '$equipeUsuarioLogado') OR (p.EquipeFora = '$equipeUsuarioLogado'))
-                     AND p.PartidaID = $partidaID";
-         
+          //Verificando se esta partida já foi reportada por este usuário
+          $sql = "SELECT 1 FROM report where EquipeReportID = $equipeUsuarioLogado AND PartidaID = $partidaID";
           $query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-          echo "<center>";
+          $rowcount = mysqli_num_rows($query);
 
-          while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+          if($rowcount <= 0)
           {
-            echo "<h3>" . $row["NomeCampeonato"] . " - " . $row["Rodada"] . "ª Rodada</h3>";
-            echo $row["NomeEquipeCasa"] . " <input id='iptGolCasa' type='text' style='width:27px;text-align:center;' />" . " x " . " <input id='iptGolFora' type='text' style='width:27px;text-align:center;' /> " . $row["NomeEquipeFora"];
-            echo "<br/><br/><h3>Estatísticas</h3><br/>
-                  <table id='tableEstatisticas'>
-                  <tbody>
-                  <tr>
-                    <td>Jogador</td>
-                    <td>Estatística</td>
-                    <td>Quantidade</td>
-                  </tr>
-                  <tr>
-                  <td>
-                  <select id='jogadorReport'>";
-            
-            $sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`
-                  FROM `jogador` 
-                 WHERE EquipeID = '$equipeUsuarioLogado'";
-               
+
+            $sql = "SELECT p.PartidaID, p.CampeonatoID, c.NomeCampeonato, p.EquipeCasa, e.NomeEquipe as NomeEquipeCasa, e.Escudo AS EscudoEquipeCasa, e2.Escudo AS EscudoEquipeFora,
+                          p.EquipeFora, e2.NomeEquipe AS NomeEquipeFora, DATE_FORMAT(p.DataAbertura, '%d/%m/%Y') AS DataAbertura, p.Rodada
+                      FROM partida p
+                      JOIN equipe e 
+                        ON e.EquipeID = p.EquipeCasa
+                      JOIN equipe e2 
+                        ON e2.EquipeID = p.EquipeFora
+                      JOIN campeonato c
+                        ON c.CampeonatoID = p.CampeonatoID
+                     WHERE ((p.EquipeCasa = '$equipeUsuarioLogado') OR (p.EquipeFora = '$equipeUsuarioLogado'))
+                       AND p.PartidaID = $partidaID";
+           
             $query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-            
-            // Listando os jogadores buscados da tabela 
+            echo "<center>";
+
             while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
             {
-              echo "<option id='jogador_" . $row["JogadorID"] . "' name='" . $row["JogadorID"] . "'>" . $row["NomeJogador"] . "</option>";
+              echo "<h3>" . $row["NomeCampeonato"] . " - " . $row["Rodada"] . "ª Rodada</h3>";
+              echo $row["NomeEquipeCasa"] . " <input id='iptGolCasa' type='text' style='width:27px;text-align:center;' />" . " x " . " <input id='iptGolFora' type='text' style='width:27px;text-align:center;' /> " . $row["NomeEquipeFora"];
+              echo "<br/><br/><h3>Estatísticas</h3><br/>
+                    <table id='tableEstatisticas'>
+                    <tbody>
+                    <tr>
+                      <td>Jogador</td>
+                      <td>Estatística</td>
+                      <td>Quantidade</td>
+                    </tr>
+                    <tr>
+                    <td>
+                    <select id='jogadorReport'>";
+              
+              $sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`
+                    FROM `jogador` 
+                   WHERE EquipeID = '$equipeUsuarioLogado'";
+                 
+              $query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+              
+              // Listando os jogadores buscados da tabela 
+              while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+              {
+                echo "<option id='jogador_" . $row["JogadorID"] . "' name='" . $row["JogadorID"] . "'>" . $row["NomeJogador"] . "</option>";
+              }
+              
+              echo "</select></td>";
+              echo "<td><select id='tipoEstatistica'>
+                      <option id='opGol'>Gol</option>
+                      <option id='opAssist'>Assistência</option>
+                    </select></td>";
+              echo "<td><input id='iptQtd' type='text' style='width:50%;' /><button class='botaoReport' style='width:30%;' onclick='inserirEstatistica()'>Enviar</button></td>";
             }
-            
-            echo "</select></td>";
-            echo "<td><select id='tipoEstatistica'>
-                    <option id='opGol'>Gol</option>
-                    <option id='opAssist'>Assistência</option>
-                  </select></td>";
-            echo "<td><input id='iptQtd' type='text' style='width:50%;' /><button class='botaoReport' style='width:30%;' onclick='inserirEstatistica()'>Enviar</button></td>";
+            echo "</tr>";
+            echo "</tbody>";
+            echo "</table>";
+            echo "</br><button onclick='finalizarReport()' class='botaoAceitar'>Finalizar</button>";
+            echo "</center>";
           }
-          echo "</tr>";
-          echo "</tbody>";
-          echo "</table>";
-          echo "</br><button onclick='finalizarReport()' class='botaoAceitar'>Finalizar</button>";
-          echo "</center>";
+          else
+          {
+            echo "<script>cancelReport();</script>";
+          }
         ?>
       </section>
 
