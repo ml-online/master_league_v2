@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 01-Jul-2016 às 22:17
+-- Generation Time: 05-Jul-2016 às 01:25
 -- Versão do servidor: 5.7.11
 -- PHP Version: 5.6.19
 
@@ -19,6 +19,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `bdtestecadastro`
 --
+
+drop table if exists assistencia;
+drop table if exists campeonato;
+drop table if exists classificacao;
+drop table if exists equipe;
+drop table if exists gol;
+drop table if exists grupo;
+drop table if exists jogador;
+drop table if exists jogadorpack;
+drop table if exists pack;
+drop table if exists partida;
+drop table if exists report;
+drop table if exists transferencia;
+drop table if exists usuario;
 
 -- --------------------------------------------------------
 
@@ -116,6 +130,13 @@ CREATE TABLE `gol` (
   `ReportID` int(11) NOT NULL,
   `Qtd` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `gol`
+--
+
+INSERT INTO `gol` (`JogadorID`, `PartidaID`, `ReportID`, `Qtd`) VALUES
+(110, 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -467,7 +488,7 @@ CREATE TABLE `partida` (
 --
 
 INSERT INTO `partida` (`PartidaID`, `CampeonatoID`, `EquipeCasa`, `GolsCasa`, `EquipeFora`, `GolsFora`, `DataAbertura`, `DataReport`, `Rodada`) VALUES
-(1, 1, 1, 1, 2, 0, '2016-06-27 00:00:00', NULL, 1),
+(1, 1, 1, NULL, 2, NULL, '2016-06-27 00:00:00', NULL, 1),
 (2, 1, 2, NULL, 1, NULL, '2016-07-01 00:00:00', NULL, 2),
 (3, 1, 1, NULL, 4, NULL, '2016-07-06 00:00:00', NULL, 3),
 (4, 1, 2, NULL, 4, NULL, '2016-06-30 00:00:00', NULL, 2),
@@ -606,12 +627,6 @@ ALTER TABLE `jogador`
   ADD PRIMARY KEY (`JogadorID`);
 
 --
--- Indexes for table `pack`
---
-ALTER TABLE `pack`
-  ADD PRIMARY KEY (`PackID`);
-
---
 -- Indexes for table `partida`
 --
 ALTER TABLE `partida`
@@ -660,11 +675,6 @@ ALTER TABLE `grupo`
 ALTER TABLE `jogador`
   MODIFY `JogadorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=270;
 --
--- AUTO_INCREMENT for table `pack`
---
-ALTER TABLE `pack`
-  MODIFY `PackID` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `partida`
 --
 ALTER TABLE `partida`
@@ -678,7 +688,7 @@ ALTER TABLE `report`
 -- AUTO_INCREMENT for table `transferencia`
 --
 ALTER TABLE `transferencia`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
