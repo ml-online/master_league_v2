@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 05-Jul-2016 às 06:17
+-- Generation Time: 05-Jul-2016 às 22:37
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `jogador` (
   `Imagem` varchar(500) DEFAULT NULL,
   `Escala` int(11) NOT NULL,
   PRIMARY KEY (`JogadorID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=270 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=271 ;
 
 --
 -- Extraindo dados da tabela `jogador`
@@ -68,27 +68,27 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (22, 'Sirigu', 'GOL', 'PSG', '61500.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
 (23, 'Diego Alves', 'GOL', 'Valencia', '61500.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
 (24, 'Julio Cesar', 'GOL', 'Benfica', '61500.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
-(25, 'Lahm', 'LD', 'BayernMunich', '65250.00', 87, NULL, 'http://media-titanium.cursecdn.com/attachments/68/152/lahm-16.JPG', 0),
-(26, 'Dani Alves', 'LD', 'Barcelona', '63000.00', 84, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(27, 'Carvajal', 'LD', 'RealMadrid', '61500.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(28, 'Zabaleta', 'LD', 'ManCity', '61500.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(29, 'Lichtsteiner', 'LD', 'Juventus', '61500.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(30, 'Aurier', 'LD', 'PSG', '60750.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(31, 'Darmian', 'LD', 'ManUtd', '60750.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(32, 'Coleman', 'LD', 'Everton', '60750.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(33, 'JuanFran', 'LD', 'AtlMadrid', '60750.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(34, 'Danilo', 'LD', 'RealMadrid', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(35, 'Mario Gaspar', 'LD', 'Villareal', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(36, 'Clyne', 'LD', 'Liverpool', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(37, 'De Marcos', 'LD', 'AtlBilbao', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(38, 'Smolnikov', 'LD', 'Zenit', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(39, 'Ivanovic', 'LD', 'Chelsea', '60000.00', 80, 2, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(40, 'Piszczek', 'LD', 'BorDortmund', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(41, 'Coke', 'LD', 'Sevilla', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(42, 'Sagna', 'LD', 'ManCity', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(43, 'Thiago Silva', 'ZAG', 'PSG', '66000.00', 88, 1, 'http://media-titanium.cursecdn.com/attachments/68/192/tsilva-16.JPG', 0),
-(44, 'Boateng', 'ZAG', 'BayernMunich', '65250.00', 87, 1, 'http://media-titanium.cursecdn.com/attachments/68/145/boateng-16.JPG', 0),
-(45, 'Sergio Ramos', 'ZAG', 'RealMadrid', '65250.00', 87, 1, 'http://media-titanium.cursecdn.com/attachments/68/150/ramos-16.JPG', 0),
+(25, 'Lahm', 'LD', 'BayernMunich', '65250.00', 87, NULL, 'http://media-titanium.cursecdn.com/attachments/68/152/lahm-16.JPG', 9),
+(26, 'Dani Alves', 'LD', 'Barcelona', '63000.00', 84, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
+(27, 'Carvajal', 'LD', 'RealMadrid', '61500.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
+(28, 'Zabaleta', 'LD', 'ManCity', '61500.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
+(29, 'Lichtsteiner', 'LD', 'Juventus', '61500.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
+(30, 'Aurier', 'LD', 'PSG', '60750.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
+(31, 'Darmian', 'LD', 'ManUtd', '60750.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
+(32, 'Coleman', 'LD', 'Everton', '60750.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
+(33, 'JuanFran', 'LD', 'AtlMadrid', '60750.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
+(34, 'Danilo', 'LD', 'RealMadrid', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
+(35, 'Mario Gaspar', 'LD', 'Villareal', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
+(36, 'Clyne', 'LD', 'Liverpool', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
+(37, 'De Marcos', 'LD', 'AtlBilbao', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
+(38, 'Smolnikov', 'LD', 'Zenit', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 1),
+(39, 'Ivanovic', 'LD', 'Chelsea', '60000.00', 80, 2, 'http://i.imgur.com/UGm0Av8.jpg', 5),
+(40, 'Piszczek', 'LD', 'BorDortmund', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
+(41, 'Coke', 'LD', 'Sevilla', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
+(42, 'Sagna', 'LD', 'ManCity', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
+(43, 'Thiago Silva', 'ZAG', 'PSG', '66000.00', 88, 1, 'http://media-titanium.cursecdn.com/attachments/68/192/tsilva-16.JPG', 9),
+(44, 'Boateng', 'ZAG', 'BayernMunich', '65250.00', 87, 1, 'http://media-titanium.cursecdn.com/attachments/68/145/boateng-16.JPG', 9),
+(45, 'Sergio Ramos', 'ZAG', 'RealMadrid', '65250.00', 87, 1, 'http://media-titanium.cursecdn.com/attachments/68/150/ramos-16.JPG', 9),
 (46, 'Godin', 'ZAG', 'AtlMadrid', '64500.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
 (47, 'Hummels', 'ZAG', 'BorDortmund', '64500.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
 (48, 'Chiellini', 'ZAG', 'Juventus', '64500.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
@@ -312,7 +312,8 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (266, 'Berbatov', 'ATA', 'PAOK', '60000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
 (267, 'Vardy', 'ATA', 'Leicester City', '59250.00', 79, 1, 'http://i.imgur.com/UGm0Av8.jpg', 0),
 (268, 'Ricardo Oliveira', 'ATA', 'Santos', '59250.00', 79, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
-(269, 'Fernando Torres', 'ATA', 'Atl Madrid', '59250.00', 79, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0);
+(269, 'Fernando Torres', 'ATA', 'Atl Madrid', '59250.00', 79, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 0),
+(270, 'Ivanovic', 'LD', 'Chelsea', '60000.00', 80, 2, 'http://i.imgur.com/UGm0Av8.jpg', 5);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
