@@ -43,6 +43,11 @@
 			alert("Jogador dispensado com sucesso.");
 			setTimeout("window.location='transferencia.php'", 0);
 		}
+		function aborta()
+		{
+			alert("Outro clube já contratou este jogador.");
+			setTimeout("window.location='home.php'", 0);
+		}
 	</script>
 </head>
 
@@ -101,38 +106,62 @@
 		{
 			// Set autocommit to off
 			mysqli_autocommit($con,FALSE);
-			
-			$query = "UPDATE usuario 
+
+			//verifica se nesse meio tempo algum outro usuario ja contratou este jogador
+			$sql = "SELECT * FROM jogador where JogadorID = $jogadorID AND EquipeID IS NULL";
+			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+			$rowcount = mysqli_num_rows($query);
+
+			if($rowcount > 0)
+			{
+				//ninguém contratou nesse meio tempo
+				$query = "UPDATE usuario 
 						 SET Orcamento = Orcamento - $preco
 					   WHERE ID = (SELECT UsuarioID
 											   FROM Equipe
 											  WHERE EquipeID = '$equipeEntrada')";
 											  
-			$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-					
-			$query = "UPDATE jogador 
-								   SET EquipeID = '$equipeEntrada'
-								 WHERE JogadorID = '$jogadorID'";
-								 
-			$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-			
-			$query = "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID, jogadorTrocaID) 
-					  VALUES (NULL, $equipeEntrada, now(), $preco, now(), 'Concluido', $jogadorID, NULL)";
-			
-			$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-			
-			// Commit transaction
-			mysqli_commit($con);	
-			mysqli_autocommit($con,TRUE);
-					  
-			echo '<section class="present">
-						<h1 class="present__title">CR Galaticos - Master League</h1>
-					 </section>
+				$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+						
+				$query = "UPDATE jogador 
+									   SET EquipeID = '$equipeEntrada'
+									 WHERE JogadorID = '$jogadorID'";
+									 
+				$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+				
+				$query = "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID, jogadorTrocaID) 
+						  VALUES (NULL, $equipeEntrada, now(), $preco, now(), 'Concluido', $jogadorID, NULL)";
+				
+				$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+				
+				// Commit transaction
+				mysqli_commit($con);	
+				mysqli_autocommit($con,TRUE);
+						  
+				echo '<section class="present">
+							<h1 class="present__title">CR Galaticos - Master League</h1>
+						 </section>
 
-					 <section class="main-content">
-						<h2>O jogador assinou com o seu clube.</h2>
-						<script>finaliza();</script>
-					 </section>';
+						 <section class="main-content">
+							<h2>O jogador assinou com o seu clube.</h2>
+							<script>finaliza();</script>
+						 </section>';
+			}
+			else
+			{
+				//possui time ja
+				echo '<section class="present">
+							<h1 class="present__title">CR Galaticos - Master League</h1>
+						 </section>
+
+						 <section class="main-content">
+							<h2>O jogador já assinou com outro clube.</h2>
+							<script>aborta();</script>
+						 </section>';
+
+			}
+			
+			
 					  
 		}
 		else

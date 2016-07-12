@@ -37,6 +37,16 @@
 		{
 			setTimeout("window.location='transferencia.php'", 0);
 		}
+		function numeroInferior()
+		{
+			alert("Você não pode vender este jogador.\nNúmero mínimo de jogadores no elenco: 16");
+      		window.location.href = "transferencia.php";
+		}
+		function numeroSuperior()
+		{
+			alert("Você não pode vender este jogador.\nNúmero máximo de jogadores no elenco adversário seria excedido.");
+      		window.location.href = "transferencia.php";
+		}
 	</script>
 </head>
 
@@ -65,51 +75,69 @@
 		if($tipoResp == "Aceito")
 		{
 			mysqli_autocommit($con,false);
-			
-			$sql1 = mysqli_query($con, "UPDATE usuario 
+
+			$query = mysqli_query($con, "SELECT * from jogador WHERE EquipeID = '$equipeSaida'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+			$rowcount1 = mysqli_num_rows($query);
+
+			if($rowcount1 <= 16)
+			{
+				echo "<script>numeroInferior()</script>";
+			}
+
+			$query = mysqli_query($con, "SELECT * from jogador WHERE EquipeID = '$equipeEntrada'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+			$rowcount2 = mysqli_num_rows($query);
+
+			if($rowcount2 >= 23)
+			{
+				echo "<script>numeroSuperior()</script>";
+			}
+			else if($rowcount1 >= 16 && $rowcount2 < 23)
+			{
+				$sql1 = mysqli_query($con, "UPDATE usuario 
 								   SET Orcamento = Orcamento - '$valor'
 								 WHERE ID = (SELECT UsuarioID
 											   FROM Equipe
 											  WHERE EquipeID = '$equipeEntrada')") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 											  
-			$sql2 = mysqli_query($con, "UPDATE usuario 
-								   SET Orcamento = Orcamento + '$valor'
-								 WHERE ID = (SELECT UsuarioID
-											   FROM Equipe
-											  WHERE EquipeID = '$equipeSaida')") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-			
-			$sql3 = mysqli_query($con, "UPDATE jogador 
-								   SET EquipeID = '$equipeEntrada'
-								 WHERE JogadorID = '$jogadorID'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-			
-			if($jogadorTrocaID != '')
-			{
-				$sql4 = mysqli_query($con, "UPDATE jogador 
-									   SET EquipeID = '$equipeSaida'
-									 WHERE JogadorID = '$jogadorTrocaID'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+				$sql2 = mysqli_query($con, "UPDATE usuario 
+									   SET Orcamento = Orcamento + '$valor'
+									 WHERE ID = (SELECT UsuarioID
+												   FROM Equipe
+												  WHERE EquipeID = '$equipeSaida')") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+				
+				$sql3 = mysqli_query($con, "UPDATE jogador 
+									   SET EquipeID = '$equipeEntrada'
+									 WHERE JogadorID = '$jogadorID'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+				
+				if($jogadorTrocaID != '')
+				{
+					$sql4 = mysqli_query($con, "UPDATE jogador 
+										   SET EquipeID = '$equipeSaida'
+										 WHERE JogadorID = '$jogadorTrocaID'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+				}
+				else
+				{
+					$sql4 = true;
+				}
+				
+				$sql5 = mysqli_query($con, "UPDATE transferencia
+									   SET Status = 'Concluido', DataFim = now()
+									 WHERE ID = '$transfID'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+									 
+				
+				//Cancelando as solicitações de transferência pendentes para o jogador que se transferiu agora
+				$sql6 = mysqli_query($con, "UPDATE transferencia 
+									   SET Status = 'Cancelado', DataFim = now()
+									 WHERE JogadorID = '$jogadorID'
+									   AND Status like '%Aguardando%'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+						
+				if($sql1 && $sql2 && $sql3 && $sql4 && $sql5 && $sql6)
+				{
+					mysqli_commit($con);
+				}
 			}
-			else
-			{
-				$sql4 = true;
-			}
 			
-			$sql5 = mysqli_query($con, "UPDATE transferencia
-								   SET Status = 'Concluido', DataFim = now()
-								 WHERE ID = '$transfID'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-								 
-			
-			//Cancelando as solicitações de transferência pendentes para o jogador que se transferiu agora
-			$sql6 = mysqli_query($con, "UPDATE transferencia 
-								   SET Status = 'Cancelado', DataFim = now()
-								 WHERE JogadorID = '$jogadorID'
-								   AND Status like '%Aguardando%'") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-					
-			if($sql1 && $sql2 && $sql3 && $sql4 && $sql5 && $sql6)
-			{
-				mysqli_commit($con);
-			}				
-			
-			//mysqli_autocommit($con,TRUE);
+			mysqli_autocommit($con,TRUE);
 		}
 		else if ($tipoResp == 'Rejeitado')
 		{
