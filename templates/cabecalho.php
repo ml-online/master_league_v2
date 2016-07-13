@@ -80,7 +80,8 @@
 				<div class="dropdown-content">
 					<a href="tabela.php">Tabela</a>
 					<a href="proximosJogos.php">Próximos jogos</a>
-					<a href="rodadas.php#">Rodadas</a>
+					<a href="rodadas.php?rodada=1">Rodadas</a>
+					<a href="estatisticas.php">Estatisticas</a>
 				</div>
 			</div>
 		</li>

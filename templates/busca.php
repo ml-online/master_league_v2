@@ -113,6 +113,8 @@
             <h1 class="present__title">CR Galaticos - Master League</h1>
         </section>
 		<section class="main-content">
+			<br/>
+			<div class='tituloPosicao'><center><h2>Busca</h2></center></div><br/>
 			<center>
 				<div style="padding-top:20px;">
 					Busca: <input id="iptBusca" autofocus type="text" name="q" placeholder="Buscar conteudo..." class="campoTexto" style="width:100%;max-width:600px;outline:0;"/>

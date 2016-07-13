@@ -48,6 +48,10 @@
 			alert("Outro clube já contratou este jogador.");
 			setTimeout("window.location='home.php'", 0);
 		}
+		function redirect()
+		{
+			setTimeout("window.location='transferencia.php'", 0);
+		}
 	</script>
 </head>
 
@@ -69,38 +73,53 @@
 		
 		if($dispensa == 1)
 		{
+			//verifica se o jogador já foi dispensado
+			$sql = "SELECT * FROM jogador where JogadorID = $jogadorID AND EquipeID IS NULL";
+			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+			$rowcount = mysqli_num_rows($query);
+
 			mysqli_autocommit($con,FALSE);
 			
-			$query = "UPDATE usuario 
+			if($rowcount == 0)
+			{
+				//ainda não foi
+				$query = "UPDATE usuario 
 						 SET Orcamento = Orcamento + $multa
 					   WHERE ID = (SELECT UsuarioID
 											   FROM Equipe
 											  WHERE EquipeID = '$equipeEntrada')";
 											  
-			$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-					
-			$query = "UPDATE jogador 
-								   SET EquipeID = NULL
-								 WHERE JogadorID = '$jogadorID'";
-								 
-			$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-			
-			$query = "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID) 
-					  VALUES ($equipeEntrada, NULL, now(), $multa, now(), 'Concluido', $jogadorID)";
-			
-			$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-			
-			mysqli_commit($con);	
-			mysqli_autocommit($con,TRUE);
-			
-			echo '<section class="present">
-						<h1 class="present__title">CR Galaticos - Master League</h1>
-					 </section>
+				$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+						
+				$query = "UPDATE jogador 
+									   SET EquipeID = NULL
+									 WHERE JogadorID = '$jogadorID'";
+									 
+				$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+				
+				$query = "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID) 
+						  VALUES ($equipeEntrada, NULL, now(), $multa, now(), 'Concluido', $jogadorID)";
+				
+				$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+				
+				mysqli_commit($con);	
+				mysqli_autocommit($con,TRUE);
+				
+				echo '<section class="present">
+							<h1 class="present__title">CR Galaticos - Master League</h1>
+						 </section>
 
-					 <section class="main-content">
-						<h2>O jogador foi dispensado do seu clube.</h2>
-						<script>dispensa();</script>
-					 </section>';
+						 <section class="main-content">
+						 	<br/>
+							<h2>O jogador foi dispensado do seu clube.</h2>
+							<script>dispensa();</script>
+						 </section>';
+			}
+			else
+			{
+				echo "<script>redirect();</script>";	
+			}
+			
 		}
 		else if($freeAgent == 1)
 		{
