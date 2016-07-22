@@ -57,7 +57,7 @@
       ?>
 
       <section class="present">
-          <h1 class="present__title">CR Galaticos - Master League</h1>
+          <h1 class="present__title"></h1>
       </section>
         <section class="main-content">
 			<center>

@@ -33,3 +33,22 @@ h3 {
     padding-left: 5px;
     font: 10pt helvetica;
 }
+
+.widgetMenu{
+    width:21%;
+    height:250px;
+    float:left;
+    border-style:1px solid; 
+    border-radius:16px;
+    background: rgba(0,0,0, 0.3);
+    margin-left:2%;
+    margin-top:2%;
+}
+
+.widgetMenu:hover{
+    background: rgba(0,0,0, 0.2);
+}
+
+.widgetMenu:hover .insideWidget{
+    color: rgba(0,0,0, 0.2);
+}

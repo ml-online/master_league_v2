@@ -52,7 +52,7 @@
       	</script>
 
         <section class="present">
-            <h1 class="present__title">CR Galaticos - Master League</h1>
+            <h1 class="present__title"></h1>
         </section>
 
         <form id="formID" name="signup" method="post" action="equipe.php" style="display: none;">

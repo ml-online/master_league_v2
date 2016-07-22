@@ -106,7 +106,7 @@
 				mysqli_autocommit($con,TRUE);
 				
 				echo '<section class="present">
-							<h1 class="present__title">CR Galaticos - Master League</h1>
+							<h1 class="present__title"></h1>
 						 </section>
 
 						 <section class="main-content">
@@ -158,7 +158,7 @@
 				mysqli_autocommit($con,TRUE);
 						  
 				echo '<section class="present">
-							<h1 class="present__title">CR Galaticos - Master League</h1>
+							<h1 class="present__title"></h1>
 						 </section>
 
 						 <section class="main-content">
@@ -170,7 +170,7 @@
 			{
 				//possui time ja
 				echo '<section class="present">
-							<h1 class="present__title">CR Galaticos - Master League</h1>
+							<h1 class="present__title"></h1>
 						 </section>
 
 						 <section class="main-content">
@@ -205,7 +205,7 @@
 			if($sql)//sucesso
 			{
 				echo '<section class="present">
-						<h1 class="present__title">CR Galaticos - Master League</h1>
+						<h1 class="present__title"></h1>
 					 </section>
 
 					 <section class="main-content">
@@ -216,7 +216,7 @@
 			else
 			{
 				echo '<section class="present">
-						<h1 class="present__title">CR Galaticos - Master League</h1>
+						<h1 class="present__title"></h1>
 					 </section>
 
 					 <section class="main-content">
