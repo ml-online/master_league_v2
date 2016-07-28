@@ -59,6 +59,19 @@
     display: inline-block;
 }
 
+.widgetTitle{
+    background-color:#333;
+    color: white;
+    margin-top:5%;
+    font-weight: bold;
+}
+
+.widgetContent{
+    color: #202020;
+    font-weight: bold;
+    /*font-family: "Verdana", Times, sans-serif;*/
+}
+
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
     display: none;
