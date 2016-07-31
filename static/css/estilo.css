@@ -52,6 +52,19 @@ span.foco {
     border-radius: 10px;
 }
 
+.button3 {
+    color: #fff;
+    padding: 20px 100px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    text-shadow: -2px 2px 0 rgba(0,0,0,0.2);
+    font-weight: 700;
+    transition: all .1s linear;
+    background: linear-gradient(to bottom,#273747,#273747);
+    box-shadow: -1px 0 1px #A72222,0 1px 1px #A72222,-2px 1px 1px #A72222,-1px 2px 1px #A72222,-3px 2px 1px #A72222,-2px 3px 1px #A72222,-4px 3px 1px #A72222,-3px 4px 1px #A72222,-5px 4px 1px #A72222,-4px 5px 1px #A72222,-6px 5px 1px #A72222;
+}
+
 .errorMessage {
     color: red;
 }
