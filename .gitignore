@@ -67,3 +67,4 @@ templates/sorteio.php
 *.php
 templates/sorteio.php
 /programaSorteio/ProgramaSQLSorteio/nbproject/private/
+/templates/nbproject/private/
