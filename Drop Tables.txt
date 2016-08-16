@@ -11,3 +11,4 @@ drop table if exists partida;
 drop table if exists report;
 drop table if exists transferencia;
 drop table if exists usuario;
+drop table if exists noticia;
