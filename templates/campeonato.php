@@ -67,13 +67,13 @@
 				$psn = $_SESSION["psn"];
 				
 				//Buscando o usuarioID
-				$sql = "SELECT id 
+				$sql = "SELECT ID 
 						  FROM usuario 
 					     WHERE psn = '$psn'";
 								
 				$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 				$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
-				$usuarioID = $row["id"];
+				$usuarioID = $row["ID"];
 				
 				//echo "UsuarioID = " . $usuarioID;
 				//$_SESSION['session_usuario_id'] = $usuarioID;
@@ -89,11 +89,11 @@
 				$equipeID = $row["equipeID"];
 				
 
-				$sql = "SELECT u.ID, u.Nome, u.PSN, u.Orcamento, e.NomeEquipe, e.Escudo, e.equipeID
+				$sql = "SELECT u.ID, u.Nome, u.PSN, u.Orcamento, e.NomeEquipe, e.Escudo, e.EquipeID
 						  FROM usuario u
 						  JOIN equipe e
 						    ON e.UsuarioID = u.ID
-						 WHERE u.ativo = 1";
+						 WHERE u.Ativo = 1";
 								
 				$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 
@@ -110,8 +110,8 @@
 				while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
 				{
 					echo "<tr>";
-					echo "<td>" . $row["equipeID"] . "</td>";
-					echo "<td><a href='equipe.php?id=" . $row["equipeID"] . "'>" . $row["NomeEquipe"] . "</a></td>";
+					echo "<td>" . $row["EquipeID"] . "</td>";
+					echo "<td><a href='equipe.php?id=" . $row["EquipeID"] . "'>" . $row["NomeEquipe"] . "</a></td>";
 					echo "<td>" . $row["Nome"] . "</td>";
 					echo "</tr>";
 				}

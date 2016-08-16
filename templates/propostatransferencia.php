@@ -97,7 +97,7 @@
 									 
 				$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 				
-				$query = "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID) 
+				$query = "INSERT INTO transferencia(EquipeSaida, EquipeEntrada, DataInicio, Valor, DataFim, Status, JogadorID) 
 						  VALUES ($equipeEntrada, NULL, now(), $multa, now(), 'Concluido', $jogadorID)";
 				
 				$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
@@ -148,7 +148,7 @@
 									 
 				$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 				
-				$query = "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID, jogadorTrocaID) 
+				$query = "INSERT INTO transferencia(EquipeSaida, EquipeEntrada, DataInicio, Valor, DataFim, Status, JogadorID, JogadorTrocaID) 
 						  VALUES (NULL, $equipeEntrada, now(), $preco, now(), 'Concluido', $jogadorID, NULL)";
 				
 				$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
@@ -189,12 +189,12 @@
 			
 			if($tipoTransf == "Troca")
 			{
-				$query = "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID, jogadorTrocaID) 
+				$query = "INSERT INTO transferencia(EquipeSaida, EquipeEntrada, DataInicio, Valor, DataFim, Status, JogadorID, JogadorTrocaID) 
 						  VALUES ($equipeSaida, $equipeEntrada, now(), $valorTransf, NULL, 'Aguardando', $jogadorID, $jogadorTroca)";
 			}
 			else
 			{
-				$query = "INSERT INTO transferencia(equipeSaida, equipeEntrada, dataInicio, Valor, dataFim, status, jogadorID) 
+				$query = "INSERT INTO transferencia(EquipeSaida, EquipeEntrada, DataInicio, Valor, DataFim, Status, JogadorID) 
 						  VALUES ($equipeSaida, $equipeEntrada, now(), $valorTransf, NULL, 'Aguardando', $jogadorID)";
 			}
 			$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);

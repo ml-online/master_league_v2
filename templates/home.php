@@ -66,32 +66,32 @@
 			$psn = $_SESSION["psn"];
 			
 			//Buscando o usuarioID
-			$sql = "SELECT id 
+			$sql = "SELECT ID 
 					  FROM usuario 
-				     WHERE psn = '$psn'";
+				     WHERE PSN = '$psn'";
 							
 			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
-			$usuarioID = $row["id"];
+			$usuarioID = $row["ID"];
 			
 			//echo "UsuarioID = " . $usuarioID;
 			$_SESSION['session_usuario_id'] = $usuarioID;
 			
 			
 			//Buscando o equipeID
-			$sql = "SELECT equipe.equipeID, equipe.nomeEquipe, equipe.Escudo, usuario.Nome
+			$sql = "SELECT equipe.EquipeID, equipe.NomeEquipe, equipe.Escudo, usuario.Nome
 					 FROM equipe
 					 JOIN usuario 
-					   ON equipe.usuarioID = usuario.ID
-				    WHERE equipe.usuarioID = '$usuarioID'";
+					   ON equipe.UsuarioID = usuario.ID
+				    WHERE equipe.UsuarioID = '$usuarioID'";
 							
 			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
 
-			$equipeID = $row["equipeID"];
+			$equipeID = $row["EquipeID"];
 			$_SESSION['session_equipe_id'] = $equipeID;
 			
-			$nomeEquipe = $row["nomeEquipe"];
+			$nomeEquipe = $row["NomeEquipe"];
 			$escudoEquipe = $row["Escudo"];
 			$nomeDono = $row["Nome"];
 			

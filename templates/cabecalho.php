@@ -52,6 +52,7 @@
 		</li>
         <li><a href="home.php">Home</a></li>
 		<li><a href="busca.php">Busca</a></li>
+		<li><a href="noticias.php">Notícias</a></li>
         <li>
         	<a href="transferencia.php">Transferências</a>
         	<?php

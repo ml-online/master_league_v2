@@ -97,7 +97,7 @@
 
       $query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 
-      $sql = "SELECT max(reportID) as ReportID from report";
+      $sql = "SELECT max(ReportID) as ReportID from report";
 
       $query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 

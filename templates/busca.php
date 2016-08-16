@@ -125,7 +125,7 @@
 					<select id="sltPosicao" style="border-radius:10px; width:150px;" id='slTipoBusca' >
 						<option value='Qualquer'>Qualquer posição</option>
 						<?php
-							$sql = "SELECT DISTINCT posicao FROM jogador";
+							$sql = "SELECT DISTINCT Posicao FROM jogador";
 							$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 							while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
 							{

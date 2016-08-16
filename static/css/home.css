@@ -47,23 +47,10 @@ h3 {
     text-shadow: 2px 2px 8px #000000;
 }
 
-.widgetMenu p,td{
-    color:white;
-}
-
 .widgetMenu:hover{
     background: rgba(0,0,0, 0.2);
 }
 
 .widgetMenu:hover .insideWidget{
     color: rgba(0,0,0, 0.2);
-}
-
-.noticia{
-    width: 90%;
-    height: 30%;
-}
-
-.noticia h2,a{
-    color:#333;
 }

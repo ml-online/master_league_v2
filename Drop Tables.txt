@@ -1,0 +1,13 @@
+drop table if exists assistencia;
+drop table if exists campeonato;
+drop table if exists classificacao;
+drop table if exists equipe;
+drop table if exists gol;
+drop table if exists grupo;
+drop table if exists jogador;
+drop table if exists jogadorpack;
+drop table if exists pack;
+drop table if exists partida;
+drop table if exists report;
+drop table if exists transferencia;
+drop table if exists usuario;
