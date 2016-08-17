@@ -7,6 +7,10 @@
 			setTimeout("window.location='home.php'", 10);
 		}
 
+		function telapack(){
+			setTimeout("window.location='pack.php'", 10);
+		}
+
 		function loginFailed(){
 			setTimeout("window.location='login.php'", 10); //milisegundos
 		}
@@ -22,7 +26,7 @@
 		$psn = $_POST["psn"];
 		$senha = $_POST["senha"];
 
-		$sql = "SELECT `ID`, `Nome`, `PSN`, `Email`, `Senha`, `Orcamento`, `Ativo`, `Admin`
+		$sql = "SELECT `ID`, `Nome`, `PSN`, `Email`, `Senha`, `Orcamento`, `Ativo`, `Admin`, `PackDisponivel`
 		          FROM usuario 
 				 WHERE psn = '$psn' 
 				   AND senha = '$senha'";
@@ -50,8 +54,20 @@
 				$_SESSION['CREATED'] = time();  // update creation time
 			}
 			
+			$usuarioID = $row["ID"];
+			//echo "UsuarioID = " . $usuarioID;
+			$_SESSION['session_usuario_id'] = $usuarioID;
+
 	  		echo "Login realizado com sucesso.";
-	  		echo "<script>loginsuccessful()</script>";
+	  		if($row["PackDisponivel"] == 0)
+	  		{
+	  			echo "<script>loginsuccessful()</script>";	
+	  		}
+	  		else
+	  		{
+	  			echo "<script>telapack()</script>";	
+	  		}
+	  		
 	  	}
 	  	else if ($rowcount == 1 && $row["Ativo"] == 0)
 	  	{

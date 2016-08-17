@@ -1,11 +1,11 @@
--- phpMyAdmin SQL Dump
--- version 4.1.14
+﻿-- phpMyAdmin SQL Dump
+-- version 4.5.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 16-Ago-2016 às 04:21
--- Versão do servidor: 5.6.17
--- PHP Version: 5.5.12
+-- Generation Time: 17-Ago-2016 às 02:55
+-- Versão do servidor: 5.7.11
+-- PHP Version: 5.6.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `bdtestecadastro`
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `assistencia`
 --
 
-CREATE TABLE IF NOT EXISTS `assistencia` (
+CREATE TABLE `assistencia` (
   `JogadorID` int(11) NOT NULL,
   `PartidaID` int(11) NOT NULL,
   `ReportID` int(11) NOT NULL,
@@ -39,11 +39,10 @@ CREATE TABLE IF NOT EXISTS `assistencia` (
 -- Estrutura da tabela `campeonato`
 --
 
-CREATE TABLE IF NOT EXISTS `campeonato` (
-  `CampeonatoID` int(11) NOT NULL AUTO_INCREMENT,
-  `NomeCampeonato` varchar(250) NOT NULL,
-  PRIMARY KEY (`CampeonatoID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+CREATE TABLE `campeonato` (
+  `CampeonatoID` int(11) NOT NULL,
+  `NomeCampeonato` varchar(250) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `campeonato`
@@ -58,7 +57,7 @@ INSERT INTO `campeonato` (`CampeonatoID`, `NomeCampeonato`) VALUES
 -- Estrutura da tabela `classificacao`
 --
 
-CREATE TABLE IF NOT EXISTS `classificacao` (
+CREATE TABLE `classificacao` (
   `Grupo` int(11) NOT NULL,
   `EquipeID` int(11) NOT NULL,
   `PontosGanhos` int(11) NOT NULL DEFAULT '0',
@@ -87,13 +86,12 @@ INSERT INTO `classificacao` (`Grupo`, `EquipeID`, `PontosGanhos`, `Jogos`, `Vito
 -- Estrutura da tabela `equipe`
 --
 
-CREATE TABLE IF NOT EXISTS `equipe` (
-  `EquipeID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `equipe` (
+  `EquipeID` int(11) NOT NULL,
   `NomeEquipe` varchar(250) NOT NULL,
   `Escudo` varchar(500) DEFAULT NULL,
-  `UsuarioID` int(11) NOT NULL,
-  PRIMARY KEY (`EquipeID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `UsuarioID` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `equipe`
@@ -112,7 +110,7 @@ INSERT INTO `equipe` (`EquipeID`, `NomeEquipe`, `Escudo`, `UsuarioID`) VALUES
 -- Estrutura da tabela `gol`
 --
 
-CREATE TABLE IF NOT EXISTS `gol` (
+CREATE TABLE `gol` (
   `JogadorID` int(11) NOT NULL,
   `PartidaID` int(11) NOT NULL,
   `ReportID` int(11) NOT NULL,
@@ -132,11 +130,10 @@ INSERT INTO `gol` (`JogadorID`, `PartidaID`, `ReportID`, `Qtd`) VALUES
 -- Estrutura da tabela `grupo`
 --
 
-CREATE TABLE IF NOT EXISTS `grupo` (
-  `Grupo` int(11) NOT NULL AUTO_INCREMENT,
-  `NomeGrupo` varchar(200) NOT NULL,
-  PRIMARY KEY (`Grupo`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+CREATE TABLE `grupo` (
+  `Grupo` int(11) NOT NULL,
+  `NomeGrupo` varchar(200) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -144,8 +141,8 @@ CREATE TABLE IF NOT EXISTS `grupo` (
 -- Estrutura da tabela `jogador`
 --
 
-CREATE TABLE IF NOT EXISTS `jogador` (
-  `JogadorID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `jogador` (
+  `JogadorID` int(11) NOT NULL,
   `NomeJogador` varchar(250) NOT NULL,
   `Posicao` varchar(5) NOT NULL,
   `EquipeOriginal` varchar(250) DEFAULT NULL,
@@ -153,17 +150,16 @@ CREATE TABLE IF NOT EXISTS `jogador` (
   `Overall` int(11) NOT NULL,
   `EquipeID` int(11) DEFAULT NULL,
   `Imagem` varchar(500) DEFAULT NULL,
-  `Escala` int(11) NOT NULL,
-  PRIMARY KEY (`JogadorID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=280 ;
+  `Escala` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `jogador`
 --
 
 INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, `Preco`, `Overall`, `EquipeID`, `Imagem`, `Escala`) VALUES
-(1, 'Neuer', 'GOL', 'Bayern Munich', '90000.00', 90, 1, 'http://media-titanium.cursecdn.com/attachments/68/186/neuer-16.JPG', 10),
-(2, 'De Gea', 'GOL', 'ManUtd', '78300.00', 87, 2, 'http://media-titanium.cursecdn.com/attachments/68/64/degea-16.JPG', 9),
+(1, 'Neuer', 'GOL', 'Bayern Munich', '90000.00', 90, NULL, 'http://media-titanium.cursecdn.com/attachments/68/186/neuer-16.JPG', 10),
+(2, 'De Gea', 'GOL', 'ManUtd', '78300.00', 87, 1, 'http://media-titanium.cursecdn.com/attachments/68/64/degea-16.JPG', 9),
 (3, 'Courtois', 'GOL', 'Chelsea', '77400.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 9),
 (4, 'Cech', 'GOL', 'Arsenal', '68800.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
 (5, 'Lloris', 'GOL', 'Tottenham', '51000.00', 85, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
@@ -179,7 +175,7 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (15, 'A.Lopes', 'GOL', 'Lyon', '32800.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
 (16, 'K.Navas', 'GOL', 'RealMadrid', '57400.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
 (17, 'Ter Stegen', 'GOL', 'Barcelona', '49200.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
-(18, 'K.Trapp', 'GOL', 'PSG', '32800.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
+(18, 'K.Trapp', 'GOL', 'PSG', '32800.00', 82, 1, 'http://i.imgur.com/UGm0Av8.jpg', 4),
 (19, 'Muslera', 'GOL', 'Galatasaray', '32800.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
 (20, 'Sommer', 'GOL', 'BorussiaMonchengladbach', '8200.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 1),
 (21, 'Begovic', 'GOL', 'Chelsea', '24600.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
@@ -200,19 +196,19 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (36, 'Clyne', 'LD', 'Liverpool', '40000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
 (37, 'De Marcos', 'LD', 'AtlBilbao', '32000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
 (38, 'Smolnikov', 'LD', 'Zenit', '8000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 1),
-(39, 'Ivanovic', 'LD', 'Chelsea', '40000.00', 80, 2, 'http://i.imgur.com/UGm0Av8.jpg', 5),
+(39, 'Ivanovic', 'LD', 'Chelsea', '40000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
 (40, 'Piszczek', 'LD', 'BorDortmund', '56000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
 (41, 'Coke', 'LD', 'Sevilla', '16000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
-(42, 'Sagna', 'LD', 'ManCity', '40000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
-(43, 'Thiago Silva', 'ZAG', 'PSG', '79200.00', 88, 1, 'http://media-titanium.cursecdn.com/attachments/68/192/tsilva-16.JPG', 9),
-(44, 'Boateng', 'ZAG', 'BayernMunich', '78300.00', 87, 1, 'http://media-titanium.cursecdn.com/attachments/68/145/boateng-16.JPG', 9),
-(45, 'Sergio Ramos', 'ZAG', 'RealMadrid', '78300.00', 87, 1, 'http://media-titanium.cursecdn.com/attachments/68/150/ramos-16.JPG', 9),
+(42, 'Sagna', 'LD', 'ManCity', '40000.00', 80, 1, 'http://i.imgur.com/UGm0Av8.jpg', 5),
+(43, 'Thiago Silva', 'ZAG', 'PSG', '79200.00', 88, NULL, 'http://media-titanium.cursecdn.com/attachments/68/192/tsilva-16.JPG', 9),
+(44, 'Boateng', 'ZAG', 'BayernMunich', '78300.00', 87, NULL, 'http://media-titanium.cursecdn.com/attachments/68/145/boateng-16.JPG', 9),
+(45, 'Sergio Ramos', 'ZAG', 'RealMadrid', '78300.00', 87, NULL, 'http://media-titanium.cursecdn.com/attachments/68/150/ramos-16.JPG', 9),
 (46, 'Godin', 'ZAG', 'AtlMadrid', '68800.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
 (47, 'Hummels', 'ZAG', 'BorDortmund', '68800.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
 (48, 'Chiellini', 'ZAG', 'Juventus', '68800.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
 (49, 'Miranda', 'ZAG', 'InterMilan', '59500.00', 85, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
-(50, 'Pique', 'ZAG', 'Barcelona', '68000.00', 85, 1, 'http://i.imgur.com/UGm0Av8.jpg', 8),
-(51, 'Kompany', 'ZAG', 'ManCity', '68000.00', 85, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
+(50, 'Pique', 'ZAG', 'Barcelona', '68000.00', 85, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
+(51, 'Kompany', 'ZAG', 'ManCity', '68000.00', 85, 1, 'http://i.imgur.com/UGm0Av8.jpg', 8),
 (52, 'Barzagli', 'ZAG', 'Juventus', '59500.00', 85, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
 (53, 'Otamendi', 'ZAG', 'ManCity', '67200.00', 84, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
 (54, 'Javi Martinez', 'ZAG', 'BayernMunich', '50400.00', 84, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
@@ -236,13 +232,13 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (72, 'Glik', 'ZAG', 'Torino', '24600.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
 (73, 'Alderweireld', 'ZAG', 'Tottenham', '49200.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (74, 'Bender', 'ZAG', 'BorDortmund', '41000.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
-(75, 'Vertonghen', 'ZAG', 'Tottenham', '49200.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
+(75, 'Vertonghen', 'ZAG', 'Tottenham', '49200.00', 82, 1, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (76, 'Cahill', 'ZAG', 'Chelsea', '32800.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
 (77, 'Perrin', 'ZAG', 'SaintEtienne', '16400.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
 (78, 'Mathieu', 'ZAG', 'Barcelona', '32800.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
 (79, 'Gimenez', 'ZAG', 'AtlMadrid', '32400.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
 (80, 'Marquinhos', 'ZAG', 'PSG', '48600.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
-(81, 'Savic', 'ZAG', 'AtlMadrid', '24300.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
+(81, 'Savic', 'ZAG', 'AtlMadrid', '24300.00', 81, 1, 'http://i.imgur.com/UGm0Av8.jpg', 3),
 (82, 'De Vrij', 'ZAG', 'Lazio', '16200.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
 (83, 'Abdennour', 'ZAG', 'Valencia', '8100.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 1),
 (84, 'Matip', 'ZAG', 'Schallke04', '24300.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
@@ -259,23 +255,23 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (95, 'Alex Sandro', 'LE', 'Juventus', '49200.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (96, 'Azpilicueta', 'LE', 'Chelsea', '57400.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
 (97, 'Filipe Luis', 'LE', 'AtlMadrid', '49200.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
-(98, 'Baines', 'LE', 'Everton', '49200.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
+(98, 'Baines', 'LE', 'Everton', '49200.00', 82, 1, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (99, 'Tremoulinas', 'LE', 'Sevilla', '40500.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
 (100, 'Evra', 'LE', 'Juventus', '48600.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (101, 'Gaya', 'LE', 'Valencia', '24000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
 (102, 'Kurzawa', 'LE', 'PSG', '40000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
-(103, 'Nacho Monreal', 'LE', 'Arsenal', '32000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
+(103, 'Nacho Monreal', 'LE', 'Arsenal', '32000.00', 80, 1, 'http://i.imgur.com/UGm0Av8.jpg', 4),
 (104, 'Fabio Coentrao', 'LE', 'Monaco', '40000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
 (105, 'Bernat', 'LE', 'BayernMunich', '23700.00', 79, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
 (106, 'Balenziaga', 'LE', 'AtlBilbao', '23700.00', 79, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
 (107, 'Jefferson', 'LE', 'Sporting', '7900.00', 79, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 1),
 (108, 'Gibbs', 'LE', 'Arsenal', '23700.00', 79, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
-(109, 'Iniesta', 'VOL', 'Barcelona', '88000.00', 88, NULL, 'http://media-titanium.cursecdn.com/attachments/68/142/iniesta-16.JPG', 10),
-(110, 'Kroos', 'VOL', 'RealMadrid', '78300.00', 87, 1, 'http://media-titanium.cursecdn.com/attachments/68/146/kroos-16.JPG', 9),
-(111, 'Modric', 'VOL', 'RealMadrid', '69600.00', 87, 1, 'http://media-titanium.cursecdn.com/attachments/68/147/modric-16.JPG', 8),
-(112, 'Pogba', 'VOL', 'Juventus', '77400.00', 86, 1, 'https://www.thesun.co.uk/wp-content/uploads/2016/03/2587251.main_image.jpg', 9),
+(109, 'Iniesta', 'VOL', 'Barcelona', '88000.00', 88, 1, 'http://media-titanium.cursecdn.com/attachments/68/142/iniesta-16.JPG', 10),
+(110, 'Kroos', 'VOL', 'RealMadrid', '78300.00', 87, NULL, 'http://media-titanium.cursecdn.com/attachments/68/146/kroos-16.JPG', 9),
+(111, 'Modric', 'VOL', 'RealMadrid', '69600.00', 87, NULL, 'http://media-titanium.cursecdn.com/attachments/68/147/modric-16.JPG', 8),
+(112, 'Pogba', 'VOL', 'Juventus', '77400.00', 86, NULL, 'https://www.thesun.co.uk/wp-content/uploads/2016/03/2587251.main_image.jpg', 9),
 (113, 'Busquets', 'VOL', 'Barcelona', '68800.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
-(114, 'Fabregas', 'VOL', 'Chelsea', '68800.00', 86, 2, 'http://i.imgur.com/UGm0Av8.jpg', 8),
+(114, 'Fabregas', 'VOL', 'Chelsea', '68800.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
 (115, 'Vidal', 'VOL', 'BayernMunich', '68000.00', 85, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
 (116, 'Rakitic', 'VOL', 'Barcelona', '68000.00', 85, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
 (117, 'Schweinsteiger', 'VOL', 'ManUtd', '59500.00', 85, NULL, 'http://media-titanium.cursecdn.com/attachments/68/14/basti-16.JPG', 7),
@@ -283,7 +279,7 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (119, 'Verratti', 'VOL', 'PSG', '42000.00', 84, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
 (120, 'Pastore', 'VOL', 'PSG', '50400.00', 84, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (121, 'Gundogan', 'VOL', 'BorDortmund', '50400.00', 84, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
-(122, 'Pjanic', 'VOL', 'Roma', '50400.00', 84, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
+(122, 'Pjanic', 'VOL', 'Roma', '50400.00', 84, 1, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (123, 'Marchisio', 'VOL', 'Juventus', '58800.00', 84, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
 (124, 'Matuidi', 'VOL', 'PSG', '58800.00', 84, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
 (125, 'Xabi Alonso', 'VOL', 'BayernMunich', '50400.00', 84, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
@@ -302,11 +298,11 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (138, 'Toulalan', 'VOL', 'Monaco', '41000.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
 (139, 'De Rossi', 'VOL', 'Roma', '49200.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (140, 'Thiago Motta', 'VOL', 'PSG', '41000.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
-(141, 'Pirlo', 'VOL', 'NewYorkCityFootball', '49200.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
+(141, 'Pirlo', 'VOL', 'NewYorkCityFootball', '49200.00', 82, 1, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (142, 'William Carvalho', 'VOL', 'Sporting', '16200.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
 (143, 'Medel', 'VOL', 'InterMilan', '32400.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
 (144, 'Ander Herrera', 'VOL', 'ManUtd', '32400.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
-(145, 'Iturraspe', 'VOL', 'AtlBilbao', '32400.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
+(145, 'Iturraspe', 'VOL', 'AtlBilbao', '32400.00', 81, 1, 'http://i.imgur.com/UGm0Av8.jpg', 4),
 (146, 'Iborra', 'VOL', 'Sevilla', '8100.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 1),
 (147, 'Wilshere', 'VOL', 'Arsenal', '40500.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
 (148, 'Bruno', 'VOL', 'Villareal', '8100.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 1),
@@ -316,13 +312,13 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (152, 'Sahin', 'VOL', 'BorDortmund', '16200.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
 (153, 'G.Castro', 'VOL', 'BorDortmund', '16200.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
 (154, 'Biglia', 'VOL', 'Lazio', '40500.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
-(155, 'Robben', 'MEIA', 'BayernMunich', '80100.00', 89, 1, 'http://media-titanium.cursecdn.com/attachments/68/187/robben-16.JPG', 9),
-(156, 'Hazard', 'MEIA', 'Chelsea', '79200.00', 88, NULL, 'http://media-titanium.cursecdn.com/attachments/68/188/hazard-16.JPG', 9),
-(157, 'Ozil', 'MEIA', 'Arsenal', '70400.00', 88, 1, 'http://media-titanium.cursecdn.com/attachments/68/148/ozil-16.JPG', 8),
+(155, 'Robben', 'MEIA', 'BayernMunich', '80100.00', 89, NULL, 'http://media-titanium.cursecdn.com/attachments/68/187/robben-16.JPG', 9),
+(156, 'Hazard', 'MEIA', 'Chelsea', '79200.00', 88, 1, 'http://media-titanium.cursecdn.com/attachments/68/188/hazard-16.JPG', 9),
+(157, 'Ozil', 'MEIA', 'Arsenal', '70400.00', 88, NULL, 'http://media-titanium.cursecdn.com/attachments/68/148/ozil-16.JPG', 8),
 (158, 'James Rodriguez', 'MEIA', 'RealMadrid', '69600.00', 87, NULL, 'http://media-titanium.cursecdn.com/attachments/68/143/james-16.JPG', 8),
 (159, 'De Bruyne', 'MEIA', 'ManCity', '77400.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 9),
-(160, 'Reus', 'MEIA', 'BorDortmund', '77400.00', 86, 1, 'http://i.imgur.com/UGm0Av8.jpg', 9),
-(161, 'David Silva', 'MEIA', 'ManCity', '60200.00', 86, 2, 'http://i.imgur.com/UGm0Av8.jpg', 7),
+(160, 'Reus', 'MEIA', 'BorDortmund', '77400.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 9),
+(161, 'David Silva', 'MEIA', 'ManCity', '60200.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
 (162, 'Ribery', 'MEIA', 'BayernMunich', '68800.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
 (163, 'Mkhitaryan', 'MEIA', 'BorDortmund', '59500.00', 85, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
 (164, 'Cazorla', 'MEIA', 'Arsenal', '59500.00', 85, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
@@ -350,7 +346,7 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (186, 'Ben Arfa', 'MEIA', 'OGCNice', '32800.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
 (187, 'Sneijder', 'MEIA', 'Galatasaray', '49200.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (188, 'Danny', 'MEIA', 'Zenit', '24600.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
-(189, 'Mahrez', 'MEIA', 'Leicester', '48600.00', 81, 1, 'http://i.imgur.com/UGm0Av8.jpg', 6),
+(189, 'Mahrez', 'MEIA', 'Leicester', '48600.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (190, 'Sterling', 'MEIA', 'ManCity', '48600.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (191, 'Vitolo', 'MEIA', 'Sevilla', '16200.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
 (192, 'Hermann', 'MEIA', 'BorMochengladbach', '16200.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
@@ -361,12 +357,12 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (197, 'Raul Garcia', 'MEIA', 'AtlBilbao', '16200.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
 (198, 'Walcott', 'MEIA', 'Arsenal', '48600.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (199, 'Kaka', 'MEIA', 'OrlandoCity', '48600.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
-(200, 'Joao Mario', 'MEIA', 'Sporting', '8000.00', 80, 2, 'http://i.imgur.com/UGm0Av8.jpg', 1),
+(200, 'Joao Mario', 'MEIA', 'Sporting', '8000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 1),
 (201, 'LucasLima', 'MEIA', 'Santos', '24000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
 (202, 'Carrasco', 'MEIA', 'AtlMadrid', '24000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
-(203, 'Messi', 'PNT', 'Barcelona', '120000.00', 94, 1, 'https://pbs.twimg.com/media/CNrxOQrVAAAetgf.png', 11),
-(204, 'Cristiano Ronaldo', 'PNT', 'RealMadrid', '110000.00', 93, 1, 'http://media-titanium.cursecdn.com/attachments/68/184/ronaldo-16.JPG', 11),
-(205, 'Neymar', 'PNT', 'Barcelona', '90000.00', 90, 2, 'http://media-titanium.cursecdn.com/attachments/68/190/neymar-16.JPG', 10),
+(203, 'Messi', 'PNT', 'Barcelona', '120000.00', 94, NULL, 'https://pbs.twimg.com/media/CNrxOQrVAAAetgf.png', 11),
+(204, 'Cristiano Ronaldo', 'PNT', 'RealMadrid', '110000.00', 93, NULL, 'http://media-titanium.cursecdn.com/attachments/68/184/ronaldo-16.JPG', 11),
+(205, 'Neymar', 'PNT', 'Barcelona', '90000.00', 90, NULL, 'http://media-titanium.cursecdn.com/attachments/68/190/neymar-16.JPG', 10),
 (206, 'Bale', 'PNT', 'RealMadrid', '87000.00', 87, NULL, 'http://media-titanium.cursecdn.com/attachments/68/57/bale-16.JPG', 10),
 (207, 'Di Maria', 'PNT', 'PSG', '68800.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
 (208, 'Sanchez', 'PNT', 'Arsenal', '68800.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
@@ -374,7 +370,7 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (210, 'Brahimi', 'PNT', 'Porto', '24600.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
 (211, 'Insigne', 'PNT', 'Napoli', '32800.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
 (212, 'Nolito', 'PNT', 'CeltaVigo', '8200.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 1),
-(213, 'Vela', 'PNT', 'RealSociedad', '40500.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
+(213, 'Vela', 'PNT', 'RealSociedad', '40500.00', 81, 1, 'http://i.imgur.com/UGm0Av8.jpg', 5),
 (214, 'Candreva', 'PNT', 'Lazio', '40500.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
 (215, 'Feghouli', 'PNT', 'Valencia', '24300.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
 (216, 'Callejon', 'PNT', 'Napoli', '40500.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
@@ -383,21 +379,21 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (219, 'Muniain', 'PNT', 'AtlBilbao', '8000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 1),
 (220, 'Orellana', 'PNT', 'CeltaVigo', '8000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 1),
 (221, 'Jese', 'PNT', 'RealMadrid', '16000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
-(222, 'Salah', 'PNT', 'Roma', '24000.00', 80, 2, 'http://i.imgur.com/UGm0Av8.jpg', 3),
+(222, 'Salah', 'PNT', 'Roma', '24000.00', 80, 1, 'http://i.imgur.com/UGm0Av8.jpg', 3),
 (223, 'Suarez', 'ATA', 'Barcelona', '90000.00', 90, NULL, 'http://media-titanium.cursecdn.com/attachments/68/185/suarez-16.JPG', 10),
 (224, 'Ibrahimovic', 'ATA', 'PSG', '89000.00', 89, NULL, 'http://media-titanium.cursecdn.com/attachments/68/189/zlatan-16.JPG', 10),
-(225, 'Lewandowski', 'ATA', 'BayernMunich', '88000.00', 88, 2, 'http://media-titanium.cursecdn.com/attachments/68/56/robert-16.JPG', 10),
-(226, 'Aguero', 'ATA', 'ManCity', '79200.00', 88, 1, 'http://media-titanium.cursecdn.com/attachments/68/151/agueri-16.JPG', 9),
-(227, 'Higuain', 'ATA', 'Napoli', '60200.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
-(228, 'Benzema', 'ATA', 'RealMadrid', '77400.00', 86, 1, 'http://i.imgur.com/UGm0Av8.jpg', 9),
+(225, 'Lewandowski', 'ATA', 'BayernMunich', '88000.00', 88, NULL, 'http://media-titanium.cursecdn.com/attachments/68/56/robert-16.JPG', 10),
+(226, 'Aguero', 'ATA', 'ManCity', '79200.00', 88, NULL, 'http://media-titanium.cursecdn.com/attachments/68/151/agueri-16.JPG', 9),
+(227, 'Higuain', 'ATA', 'Napoli', '60200.00', 86, 1, 'http://i.imgur.com/UGm0Av8.jpg', 7),
+(228, 'Benzema', 'ATA', 'RealMadrid', '77400.00', 86, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 9),
 (229, 'Diego Costa', 'ATA', 'Chelsea', '68000.00', 85, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
 (230, 'Cavani', 'ATA', 'PSG', '76500.00', 85, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 9),
-(231, 'Tevez', 'ATA', 'BocaJuniors', '59500.00', 85, 1, 'http://i.imgur.com/UGm0Av8.jpg', 7),
+(231, 'Tevez', 'ATA', 'BocaJuniors', '59500.00', 85, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
 (232, 'Rooney', 'ATA', 'ManUtd', '76500.00', 85, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 9),
-(233, 'Griezzmann', 'ATA', 'AtlMadrid', '67200.00', 84, 1, 'http://i.imgur.com/UGm0Av8.jpg', 8),
-(234, 'Aubameyang', 'ATA', 'BorDortmund', '58800.00', 84, 1, 'http://i.imgur.com/UGm0Av8.jpg', 7),
-(235, 'Lacazette', 'ATA', 'Lyon', '49800.00', 83, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
-(236, 'Jonas', 'ATA', 'Benfica', '49800.00', 83, 1, 'http://i.imgur.com/UGm0Av8.jpg', 6),
+(233, 'Griezzmann', 'ATA', 'AtlMadrid', '67200.00', 84, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 8),
+(234, 'Aubameyang', 'ATA', 'BorDortmund', '58800.00', 84, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
+(235, 'Lacazette', 'ATA', 'Lyon', '49800.00', 83, 1, 'http://i.imgur.com/UGm0Av8.jpg', 6),
+(236, 'Jonas', 'ATA', 'Benfica', '49800.00', 83, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (237, 'Sturridge', 'ATA', 'Liverpool', '49800.00', 83, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (238, 'Bacca', 'ATA', 'Milan', '32800.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
 (239, 'Kane', 'ATA', 'Tottenham', '41000.00', 82, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
@@ -416,7 +412,7 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (252, 'Drogba', 'ATA', 'MontrealImpact', '48600.00', 81, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (253, 'Slimani', 'ATA', 'Sporting Lisboa', '16000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
 (254, 'Icardi', 'ATA', 'Inter de Milão', '40000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
-(255, 'Morata', 'ATA', 'Juventus', '48000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
+(255, 'Morata', 'ATA', 'Juventus', '48000.00', 80, 1, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (256, 'Immobile', 'ATA', 'Torino', '23700.00', 79, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
 (257, 'Balotelli', 'ATA', 'Milan', '55300.00', 79, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
 (258, 'Bony', 'ATA', 'Man City', '24000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 3),
@@ -428,10 +424,10 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 (264, 'Remy', 'ATA', 'Chelsea', '32000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 4),
 (265, 'Dempsey', 'ATA', 'Seattle Sounders', '16000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
 (266, 'Berbatov', 'ATA', 'PAOK', '16000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
-(267, 'Vardy', 'ATA', 'Leicester City', '47400.00', 79, 1, 'http://i.imgur.com/UGm0Av8.jpg', 6),
+(267, 'Vardy', 'ATA', 'Leicester City', '47400.00', 79, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (268, 'Ricardo Oliveira', 'ATA', 'Santos', '15800.00', 79, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 2),
 (269, 'Fernando Torres', 'ATA', 'Atl Madrid', '55300.00', 79, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 7),
-(270, 'Ivanovic', 'LD', 'Chelsea', '40000.00', 80, 2, 'http://i.imgur.com/UGm0Av8.jpg', 5),
+(270, 'Ivanovic', 'LD', 'Chelsea', '40000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 5),
 (271, 'Clichy', 'LE', 'ManCity', '48000.00', 80, NULL, 'http://i.imgur.com/UGm0Av8.jpg', 6),
 (272, 'Romero', 'GOL', 'ManUnited', '38000.00', 76, NULL, NULL, 5),
 (273, 'Helton', 'GOL', 'Porto', '24300.00', 81, NULL, NULL, 3),
@@ -448,12 +444,11 @@ INSERT INTO `jogador` (`JogadorID`, `NomeJogador`, `Posicao`, `EquipeOriginal`, 
 -- Estrutura da tabela `jogadorpack`
 --
 
-CREATE TABLE IF NOT EXISTS `jogadorpack` (
+CREATE TABLE `jogadorpack` (
   `JogadorID` int(11) NOT NULL,
   `PackID` int(11) NOT NULL,
   `NomeJogador` varchar(250) NOT NULL,
-  `TipoPack` char(1) NOT NULL,
-  UNIQUE KEY `JogadorID` (`JogadorID`)
+  `TipoPack` char(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -470,7 +465,7 @@ INSERT INTO `jogadorpack` (`JogadorID`, `PackID`, `NomeJogador`, `TipoPack`) VAL
 (122, 1, 'Pjanic', 'T'),
 (141, 1, 'Pirlo', 'T'),
 (156, 1, 'Hazard', 'T'),
-(204, 1, 'Cristiano Ronaldo', 'T'),
+(204, 14, 'Cristiano Ronaldo', 'T'),
 (227, 1, 'Higuain', 'T'),
 (5, 2, 'Lloris', 'T'),
 (39, 2, 'Ivanovic', 'T'),
@@ -613,7 +608,7 @@ INSERT INTO `jogadorpack` (`JogadorID`, `PackID`, `NomeJogador`, `TipoPack`) VAL
 (196, 14, 'Mertens', 'T'),
 (267, 14, 'Vardy', 'T'),
 (16, 14, 'K.Navas', 'T'),
-(235, 14, 'Lacazette', 'T'),
+(235, 1, 'Lacazette', 'T'),
 (13, 15, 'Mandanda', 'R'),
 (72, 15, 'Glik', 'R'),
 (85, 15, 'Musacchio', 'R'),
@@ -717,14 +712,70 @@ INSERT INTO `jogadorpack` (`JogadorID`, `PackID`, `NomeJogador`, `TipoPack`) VAL
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `noticia`
+--
+
+CREATE TABLE `noticia` (
+  `NoticiaID` int(11) NOT NULL,
+  `Titulo` varchar(100) NOT NULL,
+  `Texto` varchar(6000) NOT NULL,
+  `Imagem` varchar(500) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `noticia`
+--
+
+INSERT INTO `noticia` (`NoticiaID`, `Titulo`, `Texto`, `Imagem`) VALUES
+(1, 'Noticia teste', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', 'http://s2.glbimg.com/cvgaUl6eMafZubIbijclg5jqy9w=/0x0:2000x1332/690x460/s.glbimg.com/es/ge/f/original/2016/07/10/2016-07-10t221026z_111190226_mt1aci14477971_rtrmadp_3_soccer-euro-por-fra_Hak3ss1.jpg'),
+(2, 'This is a News Test', 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?', 'http://img.emol.com/2012/11/27/tonnacionalfilas600_9730.jpg'),
+(3, 'Teste Noticia sem Imagem', 'Esta notícia não tem imagem.', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `pack`
 --
 
-CREATE TABLE IF NOT EXISTS `pack` (
+CREATE TABLE `pack` (
   `PackID` int(11) NOT NULL,
   `TipoPack` varchar(50) DEFAULT NULL,
   `Sorteado` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `pack`
+--
+
+INSERT INTO `pack` (`PackID`, `TipoPack`, `Sorteado`) VALUES
+(1, 'T', 1),
+(2, 'T', 0),
+(3, 'T', 0),
+(4, 'T', 0),
+(5, 'T', 0),
+(6, 'T', 0),
+(7, 'T', 0),
+(8, 'T', 0),
+(9, 'T', 0),
+(10, 'T', 0),
+(11, 'T', 0),
+(12, 'T', 0),
+(13, 'T', 0),
+(14, 'T', 0),
+(15, 'R', 0),
+(16, 'R', 0),
+(17, 'R', 0),
+(18, 'R', 0),
+(19, 'R', 0),
+(20, 'R', 0),
+(21, 'R', 0),
+(22, 'R', 0),
+(23, 'R', 0),
+(24, 'R', 0),
+(25, 'R', 0),
+(26, 'R', 1),
+(27, 'R', 0),
+(28, 'R', 0);
 
 -- --------------------------------------------------------
 
@@ -732,8 +783,8 @@ CREATE TABLE IF NOT EXISTS `pack` (
 -- Estrutura da tabela `partida`
 --
 
-CREATE TABLE IF NOT EXISTS `partida` (
-  `PartidaID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `partida` (
+  `PartidaID` int(11) NOT NULL,
   `CampeonatoID` int(11) NOT NULL,
   `EquipeCasa` int(11) NOT NULL,
   `GolsCasa` int(11) DEFAULT NULL,
@@ -741,9 +792,8 @@ CREATE TABLE IF NOT EXISTS `partida` (
   `GolsFora` int(11) DEFAULT NULL,
   `DataAbertura` datetime NOT NULL,
   `DataReport` datetime DEFAULT NULL,
-  `Rodada` int(11) DEFAULT NULL,
-  PRIMARY KEY (`PartidaID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `Rodada` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `partida`
@@ -762,15 +812,14 @@ INSERT INTO `partida` (`PartidaID`, `CampeonatoID`, `EquipeCasa`, `GolsCasa`, `E
 -- Estrutura da tabela `report`
 --
 
-CREATE TABLE IF NOT EXISTS `report` (
-  `ReportID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `report` (
+  `ReportID` int(11) NOT NULL,
   `PartidaID` int(11) NOT NULL,
   `EquipeReportID` int(11) NOT NULL,
   `GolsCasa` int(11) DEFAULT NULL,
   `GolsFora` int(11) DEFAULT NULL,
-  `DataReport` datetime NOT NULL,
-  PRIMARY KEY (`ReportID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `DataReport` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -778,8 +827,8 @@ CREATE TABLE IF NOT EXISTS `report` (
 -- Estrutura da tabela `transferencia`
 --
 
-CREATE TABLE IF NOT EXISTS `transferencia` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `transferencia` (
+  `ID` int(11) NOT NULL,
   `EquipeSaida` int(11) DEFAULT NULL,
   `EquipeEntrada` int(11) DEFAULT NULL,
   `DataInicio` datetime NOT NULL,
@@ -787,52 +836,8 @@ CREATE TABLE IF NOT EXISTS `transferencia` (
   `Valor` decimal(12,2) DEFAULT NULL,
   `Status` varchar(10) DEFAULT NULL,
   `JogadorID` int(11) NOT NULL,
-  `JogadorTrocaID` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
-
---
--- Extraindo dados da tabela `transferencia`
---
-
-INSERT INTO `transferencia` (`ID`, `EquipeSaida`, `EquipeEntrada`, `DataInicio`, `DataFim`, `Valor`, `Status`, `JogadorID`, `JogadorTrocaID`) VALUES
-(1, 2, 1, '2016-06-05 13:27:53', '2016-06-18 23:17:59', '20000.00', 'Cancelado', 205, NULL),
-(6, 1, 2, '2016-06-05 16:22:34', '2016-06-18 18:38:16', '1000.00', 'Concluido', 155, 161),
-(5, 1, 2, '2016-06-05 16:22:00', '2016-06-18 18:38:10', '20000.00', 'Rejeitado', 226, NULL),
-(4, 2, 1, '2016-06-05 14:29:45', '2016-06-18 23:18:10', '200.00', 'Cancelado', 225, 228),
-(11, 1, 2, '2016-06-18 20:31:39', '2016-06-18 20:33:32', '70000.00', 'Concluido', 207, NULL),
-(8, NULL, 1, '2016-06-18 19:09:56', '2016-06-18 19:09:56', '15000.00', 'Concluido', 253, NULL),
-(9, NULL, 1, '2016-06-18 19:41:06', '2016-06-18 19:41:06', '41000.00', 'Concluido', 75, NULL),
-(10, NULL, 1, '2016-06-18 19:43:29', '2016-06-18 19:43:29', '40000.00', 'Concluido', 202, NULL),
-(12, 1, 2, '2016-06-18 20:32:44', '2016-06-18 20:33:37', '18000.00', 'Concluido', 193, NULL),
-(13, NULL, 2, '2016-06-18 20:55:36', '2016-06-18 20:55:36', '42500.00', 'Concluido', 117, NULL),
-(14, NULL, 5, '2016-06-18 21:07:56', '2016-06-18 21:07:56', '42000.00', 'Concluido', 26, NULL),
-(15, NULL, 5, '2016-06-18 21:08:19', '2016-06-18 21:08:19', '42000.00', 'Concluido', 8, NULL),
-(16, NULL, 5, '2016-06-18 21:08:31', '2016-06-18 21:08:31', '44000.00', 'Concluido', 226, NULL),
-(17, NULL, 5, '2016-06-18 21:08:59', '2016-06-18 21:08:59', '42000.00', 'Concluido', 120, NULL),
-(18, NULL, 4, '2016-06-18 22:04:21', '2016-06-18 22:04:21', '41000.00', 'Concluido', 17, NULL),
-(19, NULL, 4, '2016-06-18 22:05:46', '2016-06-18 22:05:46', '45000.00', 'Concluido', 223, NULL),
-(20, NULL, 4, '2016-06-18 22:07:51', '2016-06-18 22:07:51', '40500.00', 'Concluido', 31, NULL),
-(21, NULL, 1, '2016-06-19 00:17:52', '2016-06-19 00:17:52', '41500.00', 'Concluido', 93, NULL),
-(22, 2, 1, '2016-06-19 00:21:39', '2016-06-19 00:25:03', '40000.00', 'Concluido', 117, 231),
-(23, NULL, 1, '2016-06-19 15:33:35', '2016-06-19 15:33:35', '41500.00', 'Concluido', 176, NULL),
-(24, 1, NULL, '2016-06-19 16:24:31', '2016-06-19 16:24:31', '6150.00', 'Concluido', 182, NULL),
-(25, 1, NULL, '2016-06-19 16:30:59', '2016-06-19 16:30:59', '6450.00', 'Concluido', 161, NULL),
-(26, 1, NULL, '2016-06-19 16:36:57', '2016-06-19 16:36:57', '6225.00', 'Concluido', 175, NULL),
-(27, 2, NULL, '2016-06-19 17:31:58', '2016-06-19 17:31:58', '6075.00', 'Concluido', 189, NULL),
-(28, 2, NULL, '2016-06-19 17:35:14', '2016-06-19 17:35:14', '6300.00', 'Concluido', 166, NULL),
-(29, 1, 2, '2016-06-19 17:43:15', NULL, '32000.00', 'Cancelado', 228, NULL),
-(30, 1, 4, '2016-06-19 17:44:51', '2016-06-19 17:49:52', '38000.00', 'Concluido', 228, NULL),
-(31, 1, 4, '2016-06-19 18:08:04', '2016-06-19 18:10:43', '80000.00', 'Cancelado', 160, NULL),
-(32, 1, 2, '2016-06-19 18:08:38', '2016-06-19 18:10:43', '86000.00', 'Concluido', 160, NULL),
-(33, 1, 5, '2016-06-19 18:09:21', '2016-06-19 18:10:43', '79000.00', 'Cancelado', 160, NULL),
-(34, 2, 1, '2016-06-19 18:14:00', '2016-06-19 18:31:43', '30000.00', 'Concluido', 225, 233),
-(35, NULL, 4, '2016-06-19 19:29:27', '2016-06-19 19:29:27', '40000.00', 'Concluido', 201, NULL),
-(36, NULL, 1, '2016-06-19 19:33:19', '2016-06-19 19:33:19', '41000.00', 'Concluido', 21, NULL),
-(37, NULL, 1, '2016-06-22 20:49:06', '2016-06-22 20:49:06', '59250.00', 'Concluido', 267, NULL),
-(38, 1, NULL, '2016-06-22 20:56:59', '2016-06-22 20:56:59', '43050.00', 'Concluido', 185, NULL),
-(39, 1, NULL, '2016-06-22 20:59:21', '2016-06-22 20:59:21', '42525.00', 'Concluido', 193, NULL),
-(40, 2, 1, '2016-06-22 21:00:24', NULL, '70000.00', 'Aguardando', 2, NULL);
+  `JogadorTrocaID` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -840,8 +845,8 @@ INSERT INTO `transferencia` (`ID`, `EquipeSaida`, `EquipeEntrada`, `DataInicio`,
 -- Estrutura da tabela `usuario`
 --
 
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usuario` (
+  `ID` int(11) NOT NULL,
   `Nome` varchar(250) NOT NULL,
   `PSN` varchar(250) NOT NULL,
   `Email` varchar(250) NOT NULL,
@@ -849,20 +854,122 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `Orcamento` decimal(12,2) NOT NULL DEFAULT '250000.00',
   `Ativo` tinyint(1) NOT NULL DEFAULT '0',
   `Admin` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `PackDisponivel` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`ID`, `Nome`, `PSN`, `Email`, `Senha`, `Orcamento`, `Ativo`, `Admin`) VALUES
-(1, 'Thiago Oliva', 'thiag6', 'thiagosfoliva@gmail.com', 'testes', '114350.00', 1, 1),
-(2, 'Lucas Domingues', 'luped720', 'luped@galaticos', 'testes', '90125.00', 1, 0),
-(3, 'Teste NÃ£o Aprovado', 'naoAtivo', 'teste', 'testes', '250000.00', 0, 0),
-(4, 'Marreiros', 'marreiros10', 'marreiros', 'testes', '45500.00', 1, 0),
-(5, 'Rangel', 'HBRangel', 'hbrangel@es', 'testes', '80000.00', 1, 0);
+INSERT INTO `usuario` (`ID`, `Nome`, `PSN`, `Email`, `Senha`, `Orcamento`, `Ativo`, `Admin`, `PackDisponivel`) VALUES
+(1, 'Thiago Oliva', 'thiag6', 'thiagosfoliva@gmail.com', 'testes', '114350.00', 1, 1, 0),
+(2, 'Lucas Domingues', 'luped720', 'luped@galaticos', 'testes', '90125.00', 1, 0, 1),
+(3, 'Teste NÃ£o Aprovado', 'naoAtivo', 'teste', 'testes', '250000.00', 0, 0, 1),
+(4, 'Marreiros', 'marreiros10', 'marreiros', 'testes', '45500.00', 1, 0, 1),
+(5, 'Rangel', 'HBRangel', 'hbrangel@es', 'testes', '80000.00', 1, 0, 1);
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `campeonato`
+--
+ALTER TABLE `campeonato`
+  ADD PRIMARY KEY (`CampeonatoID`);
+
+--
+-- Indexes for table `equipe`
+--
+ALTER TABLE `equipe`
+  ADD PRIMARY KEY (`EquipeID`);
+
+--
+-- Indexes for table `grupo`
+--
+ALTER TABLE `grupo`
+  ADD PRIMARY KEY (`Grupo`);
+
+--
+-- Indexes for table `jogador`
+--
+ALTER TABLE `jogador`
+  ADD PRIMARY KEY (`JogadorID`);
+
+--
+-- Indexes for table `jogadorpack`
+--
+ALTER TABLE `jogadorpack`
+  ADD UNIQUE KEY `JogadorID` (`JogadorID`);
+
+--
+-- Indexes for table `partida`
+--
+ALTER TABLE `partida`
+  ADD PRIMARY KEY (`PartidaID`);
+
+--
+-- Indexes for table `report`
+--
+ALTER TABLE `report`
+  ADD PRIMARY KEY (`ReportID`);
+
+--
+-- Indexes for table `transferencia`
+--
+ALTER TABLE `transferencia`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `campeonato`
+--
+ALTER TABLE `campeonato`
+  MODIFY `CampeonatoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `equipe`
+--
+ALTER TABLE `equipe`
+  MODIFY `EquipeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `grupo`
+--
+ALTER TABLE `grupo`
+  MODIFY `Grupo` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `jogador`
+--
+ALTER TABLE `jogador`
+  MODIFY `JogadorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=280;
+--
+-- AUTO_INCREMENT for table `partida`
+--
+ALTER TABLE `partida`
+  MODIFY `PartidaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `report`
+--
+ALTER TABLE `report`
+  MODIFY `ReportID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `transferencia`
+--
+ALTER TABLE `transferencia`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+--
+-- AUTO_INCREMENT for table `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
