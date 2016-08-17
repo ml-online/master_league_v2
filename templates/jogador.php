@@ -250,6 +250,7 @@
 					{
 						//o jogador que está sendo visualizado é da própria equipe do usuário logado
 						$multa = $preco * 0.7;
+						echo "<center><h3>Equipe Original: $equipeOriginal</h3></center></br>";
 						echo "<center><h3>Valor do jogador: G$ ". number_format($preco,2,",",".") . "</h3></br>";
 						echo "<center><h3>Valor de venda ao mercado: G$ " . number_format($multa,2,",",".") . "</h3></br>";
 						echo "<button class='botao' onclick='dispensarJogador();'>Vender ao mercado</button></center></br></br>";
