@@ -150,6 +150,8 @@
           $equipeUsuarioLogado = $_SESSION['session_equipe_id'];
           $partidaID = $_POST['partidaID'];
 
+          $bloqueioPreenchePlacar = "";
+
           //Verificando se esta partida já foi reportada por este usuário
           $sql = "SELECT 1 FROM report where EquipeReportID = $equipeUsuarioLogado AND PartidaID = $partidaID";
           $query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
@@ -159,7 +161,7 @@
           {
 
             $sql = "SELECT p.PartidaID, p.CampeonatoID, c.NomeCampeonato, p.EquipeCasa, e.NomeEquipe as NomeEquipeCasa, e.Escudo AS EscudoEquipeCasa, e2.Escudo AS EscudoEquipeFora,
-                          p.EquipeFora, e2.NomeEquipe AS NomeEquipeFora, DATE_FORMAT(p.DataAbertura, '%d/%m/%Y') AS DataAbertura, p.Rodada
+                          p.EquipeFora, e2.NomeEquipe AS NomeEquipeFora, DATE_FORMAT(p.DataAbertura, '%d/%m/%Y') AS DataAbertura, p.Rodada, p.GolsCasa, p.GolsFora
                       FROM partida p
                       JOIN equipe e 
                         ON e.EquipeID = p.EquipeCasa
@@ -176,7 +178,17 @@
             while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
             {
               echo "<h3>" . $row["NomeCampeonato"] . " - " . $row["Rodada"] . "ª Rodada</h3>";
-              echo $row["NomeEquipeCasa"] . " <input id='iptGolCasa' type='text' style='width:27px;text-align:center;' />" . " x " . " <input id='iptGolFora' type='text' style='width:27px;text-align:center;' /> " . $row["NomeEquipeFora"];
+
+              $golsCasa = $row["GolsCasa"];
+              $golsFora = $row["GolsFora"];
+
+              if($golsCasa != "" && $golsFora != "")
+              {
+                $bloqueioPreenchePlacar = "disabled";  
+              }
+              
+
+              echo $row["NomeEquipeCasa"] . " <input id='iptGolCasa' type='text' style='width:27px;text-align:center;' value='$golsCasa' $bloqueioPreenchePlacar />" . " x " . " <input id='iptGolFora' type='text' style='width:27px;text-align:center;' value='$golsFora' $bloqueioPreenchePlacar /> " . $row["NomeEquipeFora"];
               echo "<br/><br/><h3>Estatísticas</h3><br/>
                     <table id='tableEstatisticas'>
                     <tbody>

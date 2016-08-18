@@ -60,7 +60,7 @@
     $golsCasaInput = $_POST["golsCasa"];
     $golsForaInput = $_POST["golsFora"];
     $partidaID = $_POST["partidaID"];
-    $equipeReport = $_POST["equipeReportID"];
+    $equipeReport = $_POST["equipeReportID"]; 
 
     //Verificando se esta partida já foi reportada por este usuário
     $sql = "SELECT 1 FROM report where EquipeReportID = $equipeReport AND PartidaID = $partidaID";

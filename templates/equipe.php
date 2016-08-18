@@ -122,7 +122,7 @@
 			
 			$j = 0;
 			// Listando os jogadores buscados da tabela
-			echo "<div class='tituloPosicao'><center><h2>Goleiros</h2></center></div><br/>";
+			echo "<div class='tituloPosicao'><center><h2 style='color:white;'>Goleiros</h2></center></div><br/>";
 			echo "<div class='row'>";
 			echo "<div class='main-content__row'>";
 			while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
@@ -154,7 +154,7 @@
 			
 			$j = 0;
 			// Listando os jogadores buscados da tabela
-			echo "<div class='tituloPosicao'><center><h2>Defensores</h2></center></div><br/>";
+			echo "<div class='tituloPosicao'><center><h2 style='color:white;'>Defensores</h2></center></div><br/>";
 			echo "<div class='row'>";
 			echo "<div class='main-content__row'>";
 			while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
@@ -186,7 +186,7 @@
 			
 			$j = 0;
 			// Listando os jogadores buscados da tabela
-			echo "<div class='tituloPosicao'><center><h2>Meias</h2></center></div><br/>";
+			echo "<div class='tituloPosicao'><center><h2 style='color:white;'>Meias</h2></center></div><br/>";
 			echo "<div class='row'>";
 			echo "<div class='main-content__row'>";
 			while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
@@ -198,7 +198,7 @@
 				}
 				echo "<div class='main-content__col'>";
 				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img class='imgJogador' src='" . $row["Imagem"] . "'/></a>";
-				echo "<h3>J<span>" . $row["NomeJogador"] . "</span></h3>";
+				echo "<h3><span>" . $row["NomeJogador"] . "</span></h3>";
 				echo "</div>";
 				$j++;
 				//echo "<br/>";
@@ -218,7 +218,7 @@
 			
 			$j = 0;
 			// Listando os jogadores buscados da tabela
-			echo "<div class='tituloPosicao'><center><h2>Atacantes</h2></center></div><br/>";
+			echo "<div class='tituloPosicao'><center><h2 style='color:white;'>Atacantes</h2></center></div><br/>";
 			echo "<div class='row'>";
 			echo "<div class='main-content__row'>";
 			while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))

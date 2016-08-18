@@ -39,10 +39,11 @@
         <link rel="stylesheet" href="../static/css/estilo2.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script>
-          function reportar(partidaID)
+          function reportar(partidaID, equipeReport1)
           {
             var form = document.getElementById("formID");
             $("#partidaReport").val(partidaID);
+            $("#equipeReport1").val(equipeReport1);
             form.submit();
           }
         </script>
@@ -63,7 +64,7 @@
             $equipeID = $_SESSION['session_equipe_id'];
 
             $sql = "SELECT p.PartidaID, p.CampeonatoID, c.NomeCampeonato, p.EquipeCasa, e.NomeEquipe as NomeEquipeCasa, 
-                          p.EquipeFora, e2.NomeEquipe AS NomeEquipeFora, DATE_FORMAT(p.DataAbertura, '%d/%m/%Y') AS DataAbertura
+                          p.EquipeFora, e2.NomeEquipe AS NomeEquipeFora, DATE_FORMAT(p.DataAbertura, '%d/%m/%Y') AS DataAbertura, r.EquipeReportID
                       FROM partida p
                       JOIN equipe e 
                         ON e.EquipeID = p.EquipeCasa
@@ -75,9 +76,18 @@
                         ON u.ID = e.UsuarioID
                       JOIN usuario u2
                         ON u2.ID = e2.UsuarioID
+                 LEFT JOIN report r
+                        ON r.PartidaID = p.PartidaID
                      WHERE ((p.EquipeCasa = '$equipeID') OR (p.EquipeFora = '$equipeID'))
                        AND ((u.Ativo = 1) AND (u2.Ativo = 1))
-                       AND p.DataReport is null";
+                       AND ((r.EquipeReportID <> $equipeID) OR (r.EquipeReportID IS NULL))
+                       AND ((r.EquipeReportID IS NULL) 
+                            OR
+                            (NOT EXISTS (SELECT count(r2.EquipeReportID)
+                                          FROM report r2
+                                         WHERE r2.PartidaID = p.PartidaID
+                                         GROUP BY r2.PartidaID
+                                        HAVING count(*) > 1))) ";
            
              $query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
              $rowcount = mysqli_num_rows($query);
@@ -85,7 +95,7 @@
              if($rowcount == 0)
              {
                 echo "<center>";
-                echo "Não há partidas futuras agendadas.";
+                echo "Não há partidas a serem reportadas.";
                 echo "</center>";
              }
              else
@@ -108,7 +118,7 @@
                   echo "<td>" . $row["NomeCampeonato"] . "</td>";
                   echo "<td>" . $row["NomeEquipeCasa"] . " x " . $row["NomeEquipeFora"] . "</td>";
                   echo "<td style='text-align:right;'>" . $row["DataAbertura"] . "</td>";
-                  echo "<td style='text-align:center;'><button id='btnReport_'" . $row["PartidaID"] . " onclick='reportar(" . $row["PartidaID"] . ")' class='botaoReport'>Reportar</button></td>";
+                  echo "<td style='text-align:center;'><button id='btnReport_" . $row["PartidaID"] . "' onclick='reportar(" . $row["PartidaID"] . ")' class='botaoReport'>Reportar</button></td>";
                   echo "</tr>";
                 }
 

@@ -25,6 +25,16 @@ h1 {
 
 h3 {
     font-size: 1em;
+    color: #333;
+}
+
+/*h2 {
+    color: #333;
+}*/
+
+span{
+    color: #333;
+    text-shadow: 2px 2px 8px #ffffff;
 }
 
 .campoTexto{
@@ -47,7 +57,11 @@ h3 {
     text-shadow: 2px 2px 8px #000000;
 }
 
-.widgetMenu p,td{
+.widgetMenu p,{
+    color:white;
+}
+
+.widgetMenu td{
     color:white;
 }
 
