@@ -129,7 +129,7 @@
           function cancelReport()
           {
             alert("Você já reportou esta partida. Não é possível reportar novamente.");
-            window.Location.href = "proximosJogos.php";
+            window.location.href = "proximosJogos.php";
           }
         </script>
     </head>

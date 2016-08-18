@@ -102,10 +102,8 @@
 
 		  	echo "<center><h1>$nomeEquipe</h1></center></br>
 				  <center><img src='$escudoEquipe' alt='Sem escudo cadastrado' style='max-width:300px;'></center><br/>
-				  <center><h2>Presidente: $nomeDono</h3></center></br>";
+				  <center><h2 style='color:#333;'>Presidente: $nomeDono</h2></center></br>";
 				
-
-		  	echo "<div class=''><center><h1>Jogadores</h1></center></div><br/>";
 
 			/* -----------------------------------------------------------
 				Buscando a lista dos goleiros

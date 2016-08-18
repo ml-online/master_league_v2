@@ -61,7 +61,7 @@
 			$usuarioID = (int)$row["ID"];
 			//echo $usuarioID;
 			
-			$query = mysqli_query($con, "INSERT INTO equipe(NomeEquipe, Escudo, usuarioID) VALUES ('$time', 'Não Cadastrado', '$usuarioID')") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+			$query = mysqli_query($con, "INSERT INTO equipe(NomeEquipe, usuarioID) VALUES ('$time', '$usuarioID')") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			mysqli_commit($con);
 			
 			echo "<div>

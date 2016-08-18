@@ -41,6 +41,27 @@
     </head>
 
     <body>
+    	<script type="text/javascript">
+	        function aceitarUsuario(id){
+	          var form = document.getElementById("formID");
+	          if(confirm("Tem certeza que deseja aceitar este novo usuário?"))
+	          {
+	          	$("#idusuario").val(id);
+	            $("#tipooperacao").val("Aceitar");
+	            form.submit();
+	          }
+	        }
+
+	        function rejeitarUsuario(id){
+	          var form = document.getElementById("formID");
+	          if(confirm("Tem certeza que deseja rejeitar este novo usuário?"))
+	          {
+	            $("#idusuario").val(id);
+	            $("#tipooperacao").val("Rejeitar");
+	            form.submit();
+	          }
+	        }
+      	</script>
       <?php
       	include("cabecalho.php");
       ?>
@@ -92,10 +113,19 @@
 				}
 				echo "</table>";
 			}
+			else
+			{
+				echo "<h3>Nenhuma pendência cadastral.</h3><br/><br/>";
+			}
 			
 			echo "</br>";
 		?>
 		</center>
+
+		<form id="formID" name="signup" method="post" action="aprovacao.php" style="display: none;">
+        	<input id="idusuario" name="UsuarioID" type="hidden"></input>
+        	<input id="tipooperacao" name="TipoOperacao" type="hidden"></input>
+      	</form>
       </section>
 
       <?php
