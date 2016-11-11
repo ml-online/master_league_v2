@@ -1,8 +1,8 @@
 <?php
-	$host = "localhost";
-	$user = "root";
-	$pass = "";
-	$banco = "bdtestecadastro";
+	$host = "mysql.hostinger.com.br";
+	$user = "u998726246_thiag";
+	$pass = "vmpyetcc";
+	$banco = "u998726246_crg";
 	//$conexao = mysql_connect($host, $user, $pass) or die (mysql_error());
 	$con = mysqli_connect($host,$user,$pass,$banco);
 

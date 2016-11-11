@@ -35,7 +35,7 @@
         <meta name="description" content="Organization of CR Galaticos Master League">
 
         <link rel="stylesheet" type="text/css" href="../static/css/base.css">
-        <link rel="stylesheet" type="text/css" href="../static/css/teste_tabela_css.css">
+        <link rel="stylesheet" type="text/css" href="../static/css/Teste_tabela_css.css">
 		<link rel="stylesheet" href="../static/css/estilo2.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     </head>
@@ -120,7 +120,7 @@
 						  JOIN equipe e 
 						    ON e.EquipeID = t.EquipeSaida 
                           JOIN equipe e2
-                            ON e2.EquipeID = T.EquipeEntrada
+                            ON e2.EquipeID = t.EquipeEntrada
 						  JOIN jogador j 
 						    ON j.JogadorID = t.JogadorID 
 				     LEFT JOIN jogador j2 
@@ -175,7 +175,7 @@
 						  JOIN equipe e 
 						    ON e.EquipeID = t.EquipeSaida 
                           JOIN equipe e2
-                            ON e2.EquipeID = T.EquipeEntrada
+                            ON e2.EquipeID = t.EquipeEntrada
 						  JOIN jogador j 
 						    ON j.JogadorID = t.JogadorID 
 				     LEFT JOIN jogador j2 
@@ -230,7 +230,7 @@
 					 LEFT JOIN equipe e 
 						    ON e.EquipeID = t.EquipeSaida 
                      LEFT JOIN equipe e2
-                            ON e2.EquipeID = T.EquipeEntrada
+                            ON e2.EquipeID = t.EquipeEntrada
 						  JOIN jogador j 
 						    ON j.JogadorID = t.JogadorID 
 				     LEFT JOIN jogador j2 
