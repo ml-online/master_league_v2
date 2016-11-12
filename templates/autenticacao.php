@@ -58,15 +58,10 @@
 			//echo "UsuarioID = " . $usuarioID;
 			$_SESSION['session_usuario_id'] = $usuarioID;
 
-	  		echo "Login realizado com sucesso.";
-	  		if($row["PackDisponivel"] == 0)
-	  		{
-	  			echo "<script>loginsuccessful()</script>";	
-	  		}
-	  		else
-	  		{
-	  			echo "<script>telapack()</script>";	
-	  		}
+	  		echo "Login realizado com sucesso.</br></br></br></br></br></br>";
+
+			echo "<script>loginsuccessful()</script>";	
+
 	  		
 	  	}
 	  	else if ($rowcount == 1 && $row["Ativo"] == 0)

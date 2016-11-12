@@ -1,9 +1,14 @@
 <?php
-	$host = "mysql.hostinger.com.br";
-	$user = "u998726246_thiag";
-	$pass = "vmpyetcc";
-	$banco = "u998726246_crg";
+	//$host = "mysql.hostinger.com.br";
+	//$user = "u998726246_thiag";
+	//$pass = "vmpyetcc";
+	//$banco = "u998726246_crg";
 	//$conexao = mysql_connect($host, $user, $pass) or die (mysql_error());
+	$host = "localhost";
+	$user = "root";
+	$pass = "";
+	$banco = "bd_masterleague";
+
 	$con = mysqli_connect($host,$user,$pass,$banco);
 
 	// Check connection

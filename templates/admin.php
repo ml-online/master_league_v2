@@ -42,6 +42,11 @@
 
     <body>
     	<script type="text/javascript">
+			function redirect()
+			{
+				window.location='home.php';
+			}
+			
 	        function aceitarUsuario(id){
 	          var form = document.getElementById("formID");
 	          if(confirm("Tem certeza que deseja aceitar este novo usuário?"))
@@ -61,6 +66,36 @@
 	            form.submit();
 	          }
 	        }
+			
+			function IncDerrota(id){
+				var form = document.getElementById("formID2");
+				if(confirm("Gostaria de reportar uma derrota e adicionar D$200 ao usuário " + id + "?"))
+				  {
+					$("#usuarioID").val(id);
+					$("#ValorIncorporado").val(200);
+					form.submit();
+				  }
+			}
+			
+			function IncEmpate(id){
+				var form = document.getElementById("formID2");
+				if(confirm("Gostaria de reportar um empate e adicionar D$300 ao usuário " + id + "?"))
+				  {
+					$("#usuarioID").val(id);
+					$("#ValorIncorporado").val(300);
+					form.submit();
+				  }
+			}
+			
+			function IncVitoria(id){
+				var form = document.getElementById("formID2");
+				if(confirm("Gostaria de reportar uma vitória e adicionar D$400 ao usuário " + id + "?"))
+				  {
+					$("#usuarioID").val(id);
+					$("#ValorIncorporado").val(400);
+					form.submit();
+				  }
+			}
       	</script>
       <?php
       	include("cabecalho.php");
@@ -72,6 +107,23 @@
 
       <section class="main-content">
 		<br/>
+		<?php
+			$psn = $_SESSION["psn"];
+			
+			$sql = "SELECT Admin
+					  FROM usuario 
+					 WHERE psn = '$psn'";
+							
+			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+			$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
+			$admin = $row["Admin"];
+			
+			if($admin != 1)
+			{
+				echo "<script>redirect();</script>";
+			}
+		?>
+		
 		<div class='tituloPosicao'><center><h2>Pendências de cadastro</h2></center></div><br/>
 		<center>
 		<?php
@@ -126,6 +178,61 @@
         	<input id="idusuario" name="UsuarioID" type="hidden"></input>
         	<input id="tipooperacao" name="TipoOperacao" type="hidden"></input>
       	</form>
+		
+		<div class='tituloPosicao'><center><h2>Incorporação Financeira</h2></center></div><br/>
+		<center>
+			<?php
+				$sql = "SELECT u.`ID`, u.`Nome`, u.`PSN`, u.`Email`, u.`Senha`, u.`Orcamento`, u.`Ativo`, u.`Admin`, e.EquipeID, e.NomeEquipe
+				      FROM usuario u 
+					  JOIN equipe e
+					    on e.UsuarioID = u.ID
+					 where ativo = 1";
+							
+				$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+				$rowcount = mysqli_num_rows($query);
+				
+				if($rowcount > 0)
+				{
+					echo "<table>";
+					echo "<caption>Incorporação financeira</caption>";
+					echo "<thead>";
+					echo "	<tr>";
+					echo "		<th>Nome Usuario</th>";
+					echo "		<th>Nome Time</th>";
+					echo "		<th>PSN</th>";
+					echo "		<th>Orçamento Atual</th>";
+					echo "		<th>Incorporação</th>";
+					echo "	</tr>";
+					echo "</thead>";
+					
+					while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+					{
+						echo "<tr>";
+						echo "<td>" . $row["Nome"] . "</td>";
+						echo "<td>" . $row["NomeEquipe"] . "</td>";
+						echo "<td>" . $row["PSN"] . "</td>";
+						echo "<td> D$" . number_format($row["Orcamento"],2,",",".") . "</td>";
+						echo "<td>
+						<button title='Derrota' id='btnDerrota_'" . $row["ID"] . " onclick='IncDerrota(" . $row["ID"] . ")' class='botaoAceitar'>+200</button>
+						<button title='Empate' id='btnEmpate_'" . $row["ID"] . " onclick='IncEmpate(" . $row["ID"] . ")' class='botaoAceitar'>+300</button>
+						<button title='Vitoria' id='btnVitoria_'" . $row["ID"] . " onclick='IncVitoria(" . $row["ID"] . ")' class='botaoAceitar'>+400</button>
+						</td>";
+						echo "</tr>";
+					}
+					echo "</table>";
+				}
+				else
+				{
+					echo "Nao ha usuarios cadastrados.";
+				}
+			?>
+		</center>
+		
+		<form id="formID2" name="signup" method="post" action="incorporacao.php" style="display: none;">
+        	<input id="usuarioID" name="usuarioID" type="hidden"></input>
+        	<input id="ValorIncorporado" name="ValorIncorporado" type="hidden"></input>
+      	</form>
+		
       </section>
 
       <?php

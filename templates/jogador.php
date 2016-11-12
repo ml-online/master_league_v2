@@ -143,7 +143,7 @@
 				var preco = parseFloat(document.getElementById("iptPreco").value);
 				var formConfirmacao = document.getElementById("formConfirmacao");
 				var multa = parseFloat(document.getElementById("iptMulta").value); //preco * 0.15;				
-				if(confirm("Você receberá apenas G$ " + multa + ". Tem certeza que gostaria de vendê-lo ao mercado?"))
+				if(confirm("Você receberá apenas D$ " + multa + ". Tem certeza que gostaria de vendê-lo ao mercado?"))
 				{
 					$("#iptDispensa").val(1);
 					formConfirmacao.submit();
@@ -205,7 +205,7 @@
 				if($equipeJogador == null && $sorteado == "")
 				{
 					echo "<center><h3>SEM CLUBE - FREE AGENT</h3></br>";
-					echo "<center><h3>Preço: G$ " . number_format($preco,2,",",".") . "</h3></br>";
+					echo "<center><h3>Preço: D$ " . number_format($preco,2,",",".") . "</h3></br>";
 					echo "<button class='botao' onclick='contratarFreeAgent();'>Contratar</button></center></br></br>";
 				}
 				else
@@ -251,7 +251,7 @@
 										</tr>
 										<tr>
 											<td>Valor: </td>
-											<td>G$ <input id='tdValor' type='text' onkeyup='moeda(this)'></td>
+											<td>D$ <input id='tdValor' type='text' onkeyup='moeda(this)'></td>
 										</tr>
 									</table>
 								</form>
@@ -266,8 +266,8 @@
 							//o jogador que está sendo visualizado é da própria equipe do usuário logado
 							$multa = $preco * 0.7;
 							echo "<center><h3>Equipe Original: $equipeOriginal</h3></center></br>";
-							echo "<center><h3>Valor do jogador: G$ ". number_format($preco,2,",",".") . "</h3></br>";
-							echo "<center><h3>Valor de venda ao mercado: G$ " . number_format($multa,2,",",".") . "</h3></br>";
+							echo "<center><h3>Valor do jogador: D$ ". number_format($preco,2,",",".") . "</h3></br>";
+							echo "<center><h3>Valor de venda ao mercado: D$ " . number_format($multa,2,",",".") . "</h3></br>";
 							echo "<button class='botao' onclick='dispensarJogador();'>Vender ao mercado</button></center></br></br>";
 						}
 						else if($sorteado == 0)

@@ -96,13 +96,13 @@
 				$sql1 = mysqli_query($con, "UPDATE usuario 
 								   SET Orcamento = Orcamento - '$valor'
 								 WHERE ID = (SELECT UsuarioID
-											   FROM Equipe
+											   FROM equipe
 											  WHERE EquipeID = '$equipeEntrada')") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 											  
 				$sql2 = mysqli_query($con, "UPDATE usuario 
 									   SET Orcamento = Orcamento + '$valor'
 									 WHERE ID = (SELECT UsuarioID
-												   FROM Equipe
+												   FROM equipe
 												  WHERE EquipeID = '$equipeSaida')") or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 				
 				$sql3 = mysqli_query($con, "UPDATE jogador 

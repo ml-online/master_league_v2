@@ -28,7 +28,7 @@
 				$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
 				$orcamento = (string)$row["Orcamento"];
 				//echo "G$" . str_replace('.', ',', $orcamento);
-				echo "G$ " . number_format($orcamento,2,",",".");
+				echo "D$ " . number_format($orcamento,2,",",".");
 
 			?>
         </li>
@@ -50,7 +50,7 @@
 				}
 			?>
 		</li>
-        <li><a href="home2.php">Home</a></li>
+        <li><a href="home.php">Home</a></li>
 		<li><a href="busca.php">Busca</a></li>
 		<li><a href="noticias.php">Notícias</a></li>
         <li>
@@ -77,12 +77,11 @@
         </li>
         <li>
 			<div class="dropdown">
-				<a href="campeonato.php">Campeonato</a>
+				<a href="#">Campeonato</a>
 				<div class="dropdown-content">
-					<a href="tabela.php">Tabela</a>
-					<a href="proximosJogos.php">Próximos jogos</a>
-					<a href="rodadas.php?rodada=1">Rodadas</a>
-					<a href="home2.php">Estatisticas</a>
+					<a href="campeonato.php">Inscritos</a>
+					<a href="http://www.webcup.com.br/" target="_blank">Tabela</a>
+					<a href="http://www.webcup.com.br/" target="_blank">Estatisticas</a>
 				</div>
 			</div>
 		</li>

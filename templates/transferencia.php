@@ -155,13 +155,17 @@
 						echo "<td>" . $row["NomeEquipeEntrada"] . "</td>";
 						echo "<td>" . $row["NomeUsuarioSolicitante"] . "</td>";
 						echo "<td>" . $row["NomeJogador"] . "</td>";
-						echo "<td>G$ " . number_format($row["Valor"],2,",",".") . "</td>";
+						echo "<td>D$ " . number_format($row["Valor"],2,",",".") . "</td>";
 						echo "<td>" . $row["JogadorTrocaNome"] . "</td>";
 						echo "<td><button id='btnAceitar_'" . $row["JogadorID"] . " onclick='aceitarTransf(" . $row["ID"] . ")' class='botaoAceitar'>Aceitar</button></td>";
 						echo "<td><button id='btnRejeitar_'" . $row["JogadorID"] . " onclick='rejeitarTransf(" . $row["ID"] . ")' class='botaoRecusar'>Rejeitar</button></td>";
 						echo "</tr>";
 					}
 					echo "</table>";
+				}
+				else
+				{
+					echo "Nenhuma pendência de transferencia no momento.";
 				}
 				
 				echo "</br>";
@@ -210,7 +214,7 @@
 						echo "<td>" . $row["NomeEquipeSaida"] . "</td>";
 						echo "<td>" . $row["NomeUsuarioResposta"] . "</td>";
 						echo "<td>" . $row["NomeJogador"] . "</td>";
-						echo "<td>G$ " . number_format($row["Valor"],2,",",".") . "</td>";
+						echo "<td>D$ " . number_format($row["Valor"],2,",",".") . "</td>";
 						echo "<td>" . $row["JogadorTrocaNome"] . "</td>";
 						echo "<td>" . $row["Status"] . "</td>";
 						echo "<td><button class='botaoRecusar' onclick='cancelarTransf(" . $row["ID"] . ")'>Retirar proposta</button></td>";
@@ -267,7 +271,7 @@
 						echo "<td>" . $row["NomeEquipeEntrada"] . "</td>";
 						echo "<td>" . $row["NomeEquipeSaida"] . "</td>";
 						echo "<td>" . $row["NomeJogador"] . "</td>";
-						echo "<td>G$ " . number_format($row["Valor"],2,",",".") . "</td>";
+						echo "<td>D$ " . number_format($row["Valor"],2,",",".") . "</td>";
 						echo "<td>" . $row["JogadorTrocaNome"] . "</td>";
 						echo "<td>" . $row["Status"] . "</td>";
 						echo "<td>" . $row["DataFim"] . "</td>";
