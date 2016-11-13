@@ -29,7 +29,7 @@
 ?>
 <html lang="pt-BR">
     <head>
-        <title>Master League - CR Galáticos</title>
+        <title>Master League</title>
 
         <meta charset="utf-8"/>
         <meta name="author" content="CR Galaticos">
@@ -288,7 +288,7 @@
 				echo "<input id='iptTipoTransf' name='tipoTransf' type='hidden'>";
 				echo "<input id='iptFreeAgent' name='freeAgent' type='hidden'>";
 				echo "<input id='iptPreco' name='preco' type='hidden' value='" . $preco . "'>";
-				echo "<input id='iptMulta' name='multa' type='hidden' value='" . $preco * 0.7 . "'>";
+				echo "<input id='iptMulta' name='multa' type='hidden' value='" . $preco * 0.9 . "'>";
 				echo "<input id='iptDispensa' name='dispensa' type='hidden' value='0'>";
 				echo "</form>";
 				

@@ -29,7 +29,7 @@
 ?>
 <html lang="pt-BR">
     <head>
-        <title>Master League - CR Galáticos</title>
+        <title>Master League</title>
 
         <meta charset="utf-8"/>
         <meta name="author" content="CR Galaticos">
