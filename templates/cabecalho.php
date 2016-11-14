@@ -80,11 +80,14 @@
 				<a href="#">Campeonato</a>
 				<div class="dropdown-content">
 					<a href="campeonato.php">Inscritos</a>
-					<a href="http://www.webcup.com.br/" target="_blank">Tabela</a>
-					<a href="http://www.webcup.com.br/" target="_blank">Estatisticas</a>
+					<a href="http://www.webcup.com.br/campeonato/mlj-1453568935" target="_blank">Tabela</a>
+					<a href="http://www.webcup.com.br/campeonato/mlj-1453568935" target="_blank">Estatisticas</a>
 				</div>
 			</div>
 		</li>
+		<li>
+        	<a href="usuario.php">Meu usuario</a>
+        </li>
         <li><a href="logout.php">Sair</a></li>
     </ul>
 	
