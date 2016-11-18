@@ -280,6 +280,58 @@
 					echo "</table>";
 				}
 				
+				echo "</br>";
+
+				$sql = "SELECT t.ID, t.EquipeSaida, t.EquipeEntrada, t.DataInicio, t.Valor, t.Status, t.JogadorID, j.NomeJogador, 
+						ifnull(t.JogadorTrocaID, '') as JogadorTrocaID, ifnull(j2.NomeJogador, '') as JogadorTrocaNome, u.Nome AS NomeUsuarioSolicitante, 
+						ifnull(e2.NomeEquipe, 'FREE AGENT') as NomeEquipeEntrada, ifnull(e.NomeEquipe, 'FREE AGENT') as NomeEquipeSaida, t.DataFim AS DataFim
+						  FROM transferencia t 
+					 LEFT JOIN equipe e 
+						    ON e.EquipeID = t.EquipeSaida 
+                     LEFT JOIN equipe e2
+                            ON e2.EquipeID = t.EquipeEntrada
+						  JOIN jogador j 
+						    ON j.JogadorID = t.JogadorID 
+				     LEFT JOIN jogador j2 
+						    ON j2.JogadorID = t.JogadorTrocaID 
+					 LEFT JOIN usuario u 
+						    ON u.ID = e2.UsuarioID 
+						 ORDER BY t.DataFim desc
+						 LIMIT 20";
+								
+				$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+				$rowcount = mysqli_num_rows($query);
+				
+				if($rowcount > 0)
+				{
+					echo "<table>";
+					echo "<caption>Últimas Movimentacoes</caption>";
+					echo "<thead>";
+					echo "	<tr>";
+					echo "		<th>Equipe Entrada</th>";
+					echo "		<th>Equipe Saída</th>";
+					echo "		<th>Jogador</th>";
+					echo "		<th>Valor Proposta</th>";
+					echo "		<th>Jogador Incluso</th>";
+					echo "		<th>Status</th>";
+					echo "	</tr>";
+					echo "</thead>";
+
+					while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+					{
+						echo "<tr>";
+						echo "<td>" . $row["NomeEquipeEntrada"] . "</td>";
+						echo "<td>" . $row["NomeEquipeSaida"] . "</td>";
+						echo "<td>" . $row["NomeJogador"] . "</td>";
+						echo "<td>D$ " . number_format($row["Valor"],2,",",".") . "</td>";
+						echo "<td>" . $row["JogadorTrocaNome"] . "</td>";
+						echo "<td>" . $row["Status"] . "</td>";
+						echo "</tr>";
+					}
+					echo "</table>";
+				}
+
+
 				echo "</center>";
 			?>
 		<p style="height:100px;"></p>

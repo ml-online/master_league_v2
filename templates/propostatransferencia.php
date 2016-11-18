@@ -86,7 +86,7 @@
 				$query = "UPDATE usuario 
 						 SET Orcamento = Orcamento + $multa
 					   WHERE ID = (SELECT UsuarioID
-											   FROM Equipe
+											   FROM equipe
 											  WHERE EquipeID = '$equipeEntrada')";
 											  
 				$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
@@ -137,7 +137,7 @@
 				$query = "UPDATE usuario 
 						 SET Orcamento = Orcamento - $preco
 					   WHERE ID = (SELECT UsuarioID
-											   FROM Equipe
+											   FROM equipe
 											  WHERE EquipeID = '$equipeEntrada')";
 											  
 				$sql = mysqli_query($con, $query) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);

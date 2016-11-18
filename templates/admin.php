@@ -96,6 +96,28 @@
 					form.submit();
 				  }
 			}
+
+			function insertPlayer(){
+				var form = document.getElementById("formID3");
+				if(confirm("Gostaria de inserir este jogador?"))
+				  {
+				  	if($("#nomeJogador").val() != "")
+				  	{
+				  		$("#jogadorNome").val($("#nomeJogador").val());
+				  	}
+				  	else
+				  	{
+				  		alert("Preencha com um nome válido")
+				  		return;
+				  	}
+					
+					$("#jogadorPosicao").val($("#selectPosicaoJogador").val());
+					$("#jogadorOverall").val($("#overallJogador").val());
+					$("#jogadorPreco").val($("#precoJogador").val());
+					$("#jogadorImagem").val($("#imagemJogador").val());
+					form.submit();
+				  }
+			}
       	</script>
       <?php
       	include("cabecalho.php");
@@ -231,6 +253,59 @@
 		<form id="formID2" name="signup" method="post" action="incorporacao.php" style="display: none;">
         	<input id="usuarioID" name="usuarioID" type="hidden"></input>
         	<input id="ValorIncorporado" name="ValorIncorporado" type="hidden"></input>
+      	</form>
+
+      	<div class='tituloPosicao'><center><h2>Inserir Jogador</h2></center></div><br/>
+		<center>
+			<?php
+				echo "<table>";
+				echo "<caption>Inserir Jogador</caption>";
+				echo "<thead>";
+				echo "	<tr>";
+				echo "		<th>Nome Jogador</th>";
+				echo "		<th>Posicao</th>";
+				echo "		<th>Overall</th>";
+				echo "		<th>Preco</th>";
+				echo "		<th>Imagem</th>";
+				echo "		<th>Inserir</th>";
+				echo "	</tr>";
+				echo "</thead>";
+				
+
+				echo "<tr>";
+				echo "<td><input type='text' name='nomeJogador' id='nomeJogador' class='campoTexto'/></td>";
+				echo "<td><select style='border-radius:10px; width:150px;' id='selectPosicaoJogador' >
+						<option value='GOL'>GOL</option>
+						<option value='LD'>LD</option>
+						<option value='ZAG'>ZAG</option>
+						<option value='LE'>LE</option>
+						<option value='VOL'>VOL</option>
+						<option value='MC'>MC</option>
+						<option value='MEI'>MEI</option>
+						<option value='MD'>MD</option>
+						<option value='ME'>ME</option>
+						<option value='ATA'>ATA</option>
+						<option value='PE'>PE</option>
+						<option value='PD'>PD</option>
+					  </select></td>";
+				echo "<td><input type='text' name='overallJogador' id='overallJogador' class='campoTexto'/></td>";
+				echo "<td><input type='text' name='precoJogador' id='precoJogador' class='campoTexto'/></td>";
+				echo "<td><input type='text' name='imagemJogador' id='imagemJogador' class='campoTexto'/></td>";
+				echo "<td>
+				<button title='Inserir jogador' id='insertPlayer' onclick='insertPlayer()' class='botaoAceitar'>Inserir</button>
+				</td>";
+				echo "</tr>";
+
+				echo "</table>";
+			?>
+		</center>
+		
+		<form id="formID3" name="signup" method="post" action="inserirjogador.php" style="display: none;">
+        	<input id="jogadorNome" name="jogadorNome" type="hidden"></input>
+        	<input id="jogadorPosicao" name="jogadorPosicao" type="hidden"></input>
+        	<input id="jogadorOverall" name="jogadorOverall" type="hidden"></input>
+        	<input id="jogadorPreco" name="jogadorPreco1" type="hidden"></input>
+        	<input id="jogadorImagem" name="jogadorImagem" type="hidden"></input>
       	</form>
 		
       </section>

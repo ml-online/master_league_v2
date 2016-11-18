@@ -184,25 +184,12 @@
 					$ImagemJogador = "";
 				}
 
-				$sql = "SELECT Sorteado
-						  FROM jogador j
-				     LEFT JOIN jogadorpack jp
-						    ON jp.JogadorID = j.JogadorID
-					 LEFT JOIN pack p
-					        ON p.PackID = jp.PackID
-					     WHERE j.jogadorID = '$jogadorID'";
-								
-				$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-				$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
-
-				//variavel que informa se o jogador está presente em algum pack que ainda não foi sorteado
-				$sorteado = $row["Sorteado"];
-
 				echo "<center><h1>$NomeJogador</h1></center><br/>
 					  <center><div class='imgJogador'><img class='imgJogador' src='$ImagemJogador' alt=''></center></div></br>
-					  <center><h3>Posição: $posicaoJogador</h3></center></br>";
+					  <center><h3>Posição: $posicaoJogador</h3></center>;
+					  <center><h3>Overall: $overall</h3></center></br>";
 				
-				if($equipeJogador == null && $sorteado == "")
+				if($equipeJogador == null)
 				{
 					echo "<center><h3>SEM CLUBE - FREE AGENT</h3></br>";
 					echo "<center><h3>Preço: D$ " . number_format($preco,2,",",".") . "</h3></br>";
@@ -212,7 +199,7 @@
 				{
 					echo "<center><h3>Equipe: <img src='$Escudo' alt='' style='width:20px;'> $NomeEquipe</h3></center></br>";
 					
-					if($equipeUsuarioLogado != $equipeJogador && $sorteado != 0)
+					if($equipeUsuarioLogado != $equipeJogador)
 					{
 						echo "<center>
 								<button class='botao' onclick='fazerProposta();'>Fazer Proposta</button></br></br>
@@ -261,20 +248,14 @@
 					}
 					else
 					{
-						if($sorteado != 0)
-						{
-							//o jogador que está sendo visualizado é da própria equipe do usuário logado
-							$multa = $preco * 0.7;
-							echo "<center><h3>Equipe Original: $equipeOriginal</h3></center></br>";
-							echo "<center><h3>Valor do jogador: D$ ". number_format($preco,2,",",".") . "</h3></br>";
-							echo "<center><h3>Valor de venda ao mercado: D$ " . number_format($multa,2,",",".") . "</h3></br>";
-							echo "<button class='botao' onclick='dispensarJogador();'>Vender ao mercado</button></center></br></br>";
-						}
-						else if($sorteado == 0)
-						{
-							echo "<center><h3>Equipe Original: $equipeOriginal</h3></center></br>";
-							echo "<center><h3>Jogador presente em pack ainda não sorteado.</h3></center></br>";
-						}
+
+						//o jogador que está sendo visualizado é da própria equipe do usuário logado
+						$multa = $preco * 0.9;
+						echo "<center><h3>Equipe Original: $equipeOriginal</h3></center></br>";
+						echo "<center><h3>Valor do jogador: D$ ". number_format($preco,2,",",".") . "</h3></br>";
+						echo "<center><h3>Valor de venda ao mercado: D$ " . number_format($multa,2,",",".") . "</h3></br>";
+						echo "<button class='botao' onclick='dispensarJogador();'>Vender ao mercado</button></center></br></br>";
+
 						
 					}
 				}

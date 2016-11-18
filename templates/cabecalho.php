@@ -85,9 +85,7 @@
 				</div>
 			</div>
 		</li>
-		<li>
-        	<a href="usuario.php">Meu usuario</a>
-        </li>
+
         <li><a href="logout.php">Sair</a></li>
     </ul>
 	

@@ -132,6 +132,7 @@
 				echo "<div class='main-content__col'>";
 				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img class='imgJogador' src='" . $row["Imagem"] . "'/></a>";
 				echo "<h3><span>" . $row["NomeJogador"] . "</span></h3>";
+				echo "<h3><span>" . $row["Overall"] . "</span></h3>";
 				echo "</div>";
 				$j++;
 				//echo "<br/>";
@@ -164,6 +165,7 @@
 				echo "<div class='main-content__col'>";
 				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img class='imgJogador' src='" . $row["Imagem"] . "'/></a>";
 				echo "<h3><span>" . $row["NomeJogador"] . "</span></h3>";
+				echo "<h3><span>" . $row["Overall"] . "</span></h3>";
 				echo "</div>";
 				$j++;
 				//echo "<br/>";
@@ -196,6 +198,7 @@
 				echo "<div class='main-content__col'>";
 				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img class='imgJogador' src='" . $row["Imagem"] . "'/></a>";
 				echo "<h3><span>" . $row["NomeJogador"] . "</span></h3>";
+				echo "<h3><span>" . $row["Overall"] . "</span></h3>";
 				echo "</div>";
 				$j++;
 				//echo "<br/>";
@@ -228,6 +231,7 @@
 				echo "<div class='main-content__col'>";
 				echo "<a href='jogador.php?id=" . $row["JogadorID"] . "'><img class='imgJogador' src='" . $row["Imagem"] . "'/></a>";
 				echo "<h3><span>" . $row["NomeJogador"] . "</span></h3>";
+				echo "<h3><span>" . $row["Overall"] . "</span></h3>";
 				echo "</div>";
 				$j++;
 				//echo "<br/>";
