@@ -88,6 +88,8 @@
 
             $pack11 = $row["PackID"];
 
+
+
             $sql = "SELECT PackID 
                       FROM pack
                      WHERE Sorteado = 0

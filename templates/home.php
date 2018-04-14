@@ -146,7 +146,7 @@
 			$sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`, `Imagem`
 					  FROM `jogador` 
 					 WHERE EquipeID = '$equipeID'
-					   AND Posicao IN ('LD', 'LE', 'ZAG')";
+					   AND Posicao IN ('LD', 'LE', 'ZAG', 'LAT')";
 					 
 			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			

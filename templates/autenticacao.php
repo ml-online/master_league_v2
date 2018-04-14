@@ -60,7 +60,7 @@
 
 	  		echo "Login realizado com sucesso.</br></br></br></br></br></br>";
 
-			echo "<script>loginsuccessful()</script>";	
+			echo "<script>telapack()</script>";	
 
 	  		
 	  	}
