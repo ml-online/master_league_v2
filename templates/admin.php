@@ -201,10 +201,11 @@
         	<input id="tipooperacao" name="TipoOperacao" type="hidden"></input>
       	</form>
 		
+		<!--
 		<div class='tituloPosicao'><center><h2>Incorporação Financeira</h2></center></div><br/>
 		<center>
 			<?php
-				$sql = "SELECT u.`ID`, u.`Nome`, u.`PSN`, u.`Email`, u.`Senha`, u.`Orcamento`, u.`Ativo`, u.`Admin`, e.EquipeID, e.NomeEquipe
+				/*$sql = "SELECT u.`ID`, u.`Nome`, u.`PSN`, u.`Email`, u.`Senha`, u.`Orcamento`, u.`Ativo`, u.`Admin`, e.EquipeID, e.NomeEquipe
 				      FROM usuario u 
 					  JOIN equipe e
 					    on e.UsuarioID = u.ID
@@ -246,7 +247,7 @@
 				else
 				{
 					echo "Nao ha usuarios cadastrados.";
-				}
+				}*/
 			?>
 		</center>
 		
@@ -254,7 +255,7 @@
         	<input id="usuarioID" name="usuarioID" type="hidden"></input>
         	<input id="ValorIncorporado" name="ValorIncorporado" type="hidden"></input>
       	</form>
-
+      	!-->
       	<div class='tituloPosicao'><center><h2>Inserir Jogador</h2></center></div><br/>
 		<center>
 			<?php
@@ -277,6 +278,7 @@
 				echo "<td><select style='border-radius:10px; width:150px;' id='selectPosicaoJogador' >
 						<option value='GOL'>GOL</option>
 						<option value='LD'>LD</option>
+						<option value='LAT'>LAT</option>
 						<option value='ZAG'>ZAG</option>
 						<option value='LE'>LE</option>
 						<option value='VOL'>VOL</option>
@@ -287,6 +289,7 @@
 						<option value='ATA'>ATA</option>
 						<option value='PE'>PE</option>
 						<option value='PD'>PD</option>
+						<option value='PNT'>PNT</option>
 					  </select></td>";
 				echo "<td><input type='text' name='overallJogador' id='overallJogador' class='campoTexto'/></td>";
 				echo "<td><input type='text' name='precoJogador' id='precoJogador' class='campoTexto'/></td>";

@@ -80,8 +80,8 @@
 				<a href="#">Campeonato</a>
 				<div class="dropdown-content">
 					<a href="campeonato.php">Inscritos</a>
-					<a href="http://www.webcup.com.br/campeonato/mlj-1453568935" target="_blank">Tabela</a>
-					<a href="http://www.webcup.com.br/campeonato/mlj-1453568935" target="_blank">Estatisticas</a>
+					<a href="http://www.webcup.com.br/campeonato/liga-fernando-bornhausen-1523881662" target="_blank">Liga</a>
+					<a href="http://www.webcup.com.br/campeonato/copa-dedeu-galo-doido-1523883079" target="_blank">Copa</a>
 				</div>
 			</div>
 		</li>

@@ -165,7 +165,7 @@
 				}
 				else
 				{
-					echo "Nenhuma pendência de transferencia no momento.";
+					echo "Nenhuma pendência de transferencia no momento.</br></br>";
 				}
 				
 				echo "</br>";

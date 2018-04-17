@@ -45,8 +45,8 @@
 		}
 		function aborta()
 		{
-			alert("Outro clube já contratou este jogador.");
-			setTimeout("window.location='home.php'", 0);
+			alert("O jogador já assinou com outro clube ou está em um pack não aberto.");
+			setTimeout("window.location='transferencia.php'", 0);
 		}
 		function redirect()
 		{
@@ -120,6 +120,8 @@
 				echo "<script>redirect();</script>";	
 			}
 			
+			mysqli_autocommit($con,TRUE);
+
 		}
 		else if($freeAgent == 1)
 		{
@@ -127,7 +129,15 @@
 			mysqli_autocommit($con,FALSE);
 
 			//verifica se nesse meio tempo algum outro usuario ja contratou este jogador
-			$sql = "SELECT * FROM jogador where JogadorID = $jogadorID AND EquipeID IS NULL";
+			$sql = "SELECT * 
+					  FROM jogador j 
+					  left JOIN jogadorpack jp 
+					    ON jp.JogadorID = j.JogadorID 
+					  left JOIN pack p 
+					    on P.PackID = JP.PackID 
+					 where j.JogadorID = '$jogadorID' 
+					   AND j.EquipeID IS NULL 
+					   AND ifnull(p.Sorteado, 1) = 1";
 			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			$rowcount = mysqli_num_rows($query);
 
@@ -174,13 +184,13 @@
 						 </section>
 
 						 <section class="main-content">
-							<h2>O jogador já assinou com outro clube.</h2>
+							<h2>O jogador já assinou com outro clube ou está em um pack não aberto.</h2>
 							<script>aborta();</script>
 						 </section>';
 
 			}
 			
-			
+			mysqli_autocommit($con,TRUE);
 					  
 		}
 		else
