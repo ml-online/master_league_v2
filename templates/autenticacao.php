@@ -60,19 +60,21 @@
 
 	  		echo "Login realizado com sucesso.</br></br></br></br></br></br>";
 
-			echo "<script>telapack()</script>";	
-
-	  		
+	  		if($row["PackDisponivel"] == 1)
+	  		{
+	  			echo "<script>telapack()</script>";		
+	  		}
+	  		else
+	  		{
+	  			echo "<script>loginsuccessful()</script>";
+	  		}
 	  	}
 	  	else if ($rowcount == 1 && $row["Ativo"] == 0)
 	  	{
 	  		echo "<div>
 					<center>Usuário ainda não aprovado. Aguarde ou entre em contato com um administrador.</center><br/>
-					<center><a href='login.php'>Voltar para a tela de login</a></center>
-				  </div>";
-	  	}
-	  	else if ($rowcount > 1)
-	  	{
+					<center><a href='login.php'>Voltar para a tela de login</a></center>";
+			
 	  		echo "Ops! Ocorreu um erro";
 	  		echo "<script>loginFailed()</script>";
 	  	}
