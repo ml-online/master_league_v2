@@ -120,8 +120,6 @@
 				echo "<script>redirect();</script>";	
 			}
 			
-			mysqli_autocommit($con,TRUE);
-
 		}
 		else if($freeAgent == 1)
 		{
@@ -190,7 +188,7 @@
 
 			}
 			
-			mysqli_autocommit($con,TRUE);
+			
 					  
 		}
 		else
