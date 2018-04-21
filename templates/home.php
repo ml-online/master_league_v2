@@ -63,20 +63,8 @@
 		
 		<?php
 			include("conexao.php");
-			$psn = $_SESSION["psn"];
-			
-			//Buscando o usuarioID
-			$sql = "SELECT ID 
-					  FROM usuario 
-				     WHERE PSN = '$psn'";
-							
-			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-			$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
-			$usuarioID = $row["ID"];
-			
-			//echo "UsuarioID = " . $usuarioID;
-			$_SESSION['session_usuario_id'] = $usuarioID;
-			
+			$psn = $_SESSION["psn"];		
+			$usuarioID = $_SESSION['session_usuario_id'];	
 			
 			//Buscando o equipeID
 			$sql = "SELECT equipe.EquipeID, equipe.NomeEquipe, equipe.Escudo, usuario.Nome
@@ -88,9 +76,7 @@
 			$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
 			$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
 
-			$equipeID = $row["EquipeID"];
-			$_SESSION['session_equipe_id'] = $equipeID;
-			
+			$equipeID = $row["EquipeID"];			
 			$nomeEquipe = $row["NomeEquipe"];
 			$escudoEquipe = $row["Escudo"];
 			$nomeDono = $row["Nome"];

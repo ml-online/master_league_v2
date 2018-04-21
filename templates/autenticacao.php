@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="../static/css/estilo.css"/>
 	<script type="text/javascript">
 		function loginsuccessful(){
-			setTimeout("window.location='home.php'", 10);
+			setTimeout("window.location='noticias.php'", 10);
 		}
 
 		function telapack(){
@@ -42,7 +42,9 @@
 	  		session_start("login_ml");
 	  		$_SESSION['psn'] = $psn;
 	  		$_SESSION['senha'] = $senha;
-			
+          	$usuarioID = $row["ID"];
+			$packDisponivel = $row["PackDisponivel"];
+
 			if (!isset($_SESSION['CREATED'])) 
 			{
 				$_SESSION['CREATED'] = time();
@@ -58,9 +60,22 @@
 			//echo "UsuarioID = " . $usuarioID;
 			$_SESSION['session_usuario_id'] = $usuarioID;
 
-	  		echo "Login realizado com sucesso.</br></br></br></br></br></br>";
+			//Buscando o equipeID
+          	$sql = "SELECT equipe.EquipeID, equipe.NomeEquipe, equipe.Escudo, usuario.Nome
+               FROM equipe
+               JOIN usuario 
+                 ON equipe.UsuarioID = usuario.ID
+                WHERE equipe.UsuarioID = '$usuarioID'";
+                  
+          	$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+          	$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
 
-	  		if($row["PackDisponivel"] == 1)
+          	$equipeID = $row["EquipeID"];
+          	$_SESSION['session_equipe_id'] = $equipeID;
+
+	  		echo "</br>Login realizado com sucesso.</br></br></br></br></br></br>";
+
+	  		if($packDisponivel == 1)
 	  		{
 	  			echo "<script>telapack()</script>";		
 	  		}
@@ -86,7 +101,7 @@
 				  </div>";
 	  	}
 
-		mysqli_free_result($sql);
+		mysqli_free_result($query);
 	?>
 </body>
 </html>

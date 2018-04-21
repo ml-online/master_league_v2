@@ -186,13 +186,13 @@
 
 				echo "<center><h1>$NomeJogador</h1></center><br/>
 					  <center><div class='imgJogador'><img class='imgJogador' src='$ImagemJogador' alt=''></center></div></br>
-					  <center><h3>Posição: $posicaoJogador</h3></center>;
-					  <center><h3>Overall: $overall</h3></center></br>";
+					  <center><h3>Posição: $posicaoJogador</h3></center></br>
+					  <center><h3>Overall: $overall</h3></center></br>
+					  <center><h3>Valor do jogador: D$ ". number_format($preco,2,",",".") . "</h3></br>";
 				
 				if($equipeJogador == null)
 				{
 					echo "<center><h3>SEM CLUBE - FREE AGENT</h3></br>";
-					echo "<center><h3>Preço: D$ " . number_format($preco,2,",",".") . "</h3></br>";
 					echo "<button class='botao' onclick='contratarFreeAgent();'>Contratar</button></center></br></br>";
 				}
 				else
@@ -251,8 +251,7 @@
 
 						//o jogador que está sendo visualizado é da própria equipe do usuário logado
 						$multa = $preco * 0.9;
-						echo "<center><h3>Equipe Original: $equipeOriginal</h3></center></br>";
-						echo "<center><h3>Valor do jogador: D$ ". number_format($preco,2,",",".") . "</h3></br>";
+						//echo "<center><h3>Equipe Original: $equipeOriginal</h3></center></br>";
 						echo "<center><h3>Valor de venda ao mercado: D$ " . number_format($multa,2,",",".") . "</h3></br>";
 						echo "<button class='botao' onclick='dispensarJogador();'>Vender ao mercado</button></center></br></br>";
 

@@ -45,7 +45,7 @@
 		}
 		function aborta()
 		{
-			alert("O jogador já assinou com outro clube ou está em um pack não aberto.");
+			alert("O jogador ja assinou com outro clube ou esta em um pack nao aberto.");
 			setTimeout("window.location='transferencia.php'", 0);
 		}
 		function redirect()
@@ -105,15 +105,7 @@
 				mysqli_commit($con);	
 				mysqli_autocommit($con,TRUE);
 				
-				echo '<section class="present">
-							<h1 class="present__title"></h1>
-						 </section>
-
-						 <section class="main-content">
-						 	<br/>
-							<h2>O jogador foi dispensado do seu clube.</h2>
-							<script>dispensa();</script>
-						 </section>';
+				echo '<script>dispensa();</script>';
 			}
 			else
 			{
@@ -132,7 +124,7 @@
 					  left JOIN jogadorpack jp 
 					    ON jp.JogadorID = j.JogadorID 
 					  left JOIN pack p 
-					    on P.PackID = JP.PackID 
+					    on p.PackID = jp.PackID 
 					 where j.JogadorID = '$jogadorID' 
 					   AND j.EquipeID IS NULL 
 					   AND ifnull(p.Sorteado, 1) = 1";
@@ -165,27 +157,12 @@
 				mysqli_commit($con);	
 				mysqli_autocommit($con,TRUE);
 						  
-				echo '<section class="present">
-							<h1 class="present__title"></h1>
-						 </section>
-
-						 <section class="main-content">
-							<h2>O jogador assinou com o seu clube.</h2>
-							<script>finaliza();</script>
-						 </section>';
+				echo '<script>finaliza();</script>';
 			}
 			else
 			{
 				//possui time ja
-				echo '<section class="present">
-							<h1 class="present__title"></h1>
-						 </section>
-
-						 <section class="main-content">
-							<h2>O jogador já assinou com outro clube ou está em um pack não aberto.</h2>
-							<script>aborta();</script>
-						 </section>';
-
+				echo '<script>aborta();</script>';
 			}
 			
 			
@@ -212,14 +189,7 @@
 			
 			if($sql)//sucesso
 			{
-				echo '<section class="present">
-						<h1 class="present__title"></h1>
-					 </section>
-
-					 <section class="main-content">
-						<h2>Solicitação de Transferência realizada com sucesso.</h2>
-						<script>finaliza();</script>
-					 </section>';
+				echo '<script>finaliza();</script>';
 			}
 			else
 			{
@@ -228,7 +198,7 @@
 					 </section>
 
 					 <section class="main-content">
-						<h2>Erro ao processar solicitação.</h2>
+						</br></br><h2>Erro ao processar solicitação.</h2></br></br>
 					 </section>';
 			}
 		}

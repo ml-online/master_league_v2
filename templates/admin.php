@@ -118,6 +118,17 @@
 					form.submit();
 				  }
 			}
+
+			function insertNoticia(){
+				var form = document.getElementById("formID4");
+				if(confirm("Gostaria de inserir esta noticia?"))
+				  {					
+					$("#noticiaTitulo").val($("#tituloNoticia").val());
+					$("#noticiaTexto").val($("#textoNoticia").val());
+					$("#noticiaImagem").val($("#imagemNoticia").val());
+					form.submit();
+				  }
+			}
       	</script>
       <?php
       	include("cabecalho.php");
@@ -256,10 +267,11 @@
         	<input id="ValorIncorporado" name="ValorIncorporado" type="hidden"></input>
       	</form>
       	!-->
+      	<!--
       	<div class='tituloPosicao'><center><h2>Inserir Jogador</h2></center></div><br/>
 		<center>
 			<?php
-				echo "<table>";
+				/*echo "<table>";
 				echo "<caption>Inserir Jogador</caption>";
 				echo "<thead>";
 				echo "	<tr>";
@@ -299,7 +311,7 @@
 				</td>";
 				echo "</tr>";
 
-				echo "</table>";
+				echo "</table>";*/
 			?>
 		</center>
 		
@@ -309,6 +321,42 @@
         	<input id="jogadorOverall" name="jogadorOverall" type="hidden"></input>
         	<input id="jogadorPreco" name="jogadorPreco1" type="hidden"></input>
         	<input id="jogadorImagem" name="jogadorImagem" type="hidden"></input>
+      	</form>
+		
+      </section>-->
+
+      <div class='tituloPosicao'><center><h2>Inserir Noticia</h2></center></div><br/>
+		<center>
+			<?php
+				echo "<table>";
+				echo "<caption>Inserir Noticia</caption>";
+				echo "<thead>";
+				echo "	<tr>";
+				echo "		<th>Titulo</th>";
+				echo "		<th>Texto</th>";
+				echo "		<th>Imagem</th>";
+				echo "		<th>Inserir</th>";
+				echo "	</tr>";
+				echo "</thead>";
+				
+
+				echo "<tr>";
+				echo "<td><input type='text' name='tituloNoticia' id='tituloNoticia' class='campoTexto'/></td>";
+				echo "<td><input type='textarea' name='textoNoticia' id='textoNoticia' class='campoTexto'/></td>";
+				echo "<td><input type='text' name='imagemNoticia' id='imagemNoticia' class='campoTexto'/></td>";
+				echo "<td>
+				<button title='Inserir noticia' id='insertNoticia' onclick='insertNoticia()' class='botaoAceitar'>Inserir</button>
+				</td>";
+				echo "</tr>";
+
+				echo "</table>";
+			?>
+		</center>
+		
+		<form id="formID4" name="signup" method="post" action="inserirnoticia.php" style="display: none;">
+        	<input id="noticiaTitulo" name="noticiaTitulo" type="hidden"></input>
+        	<input id="noticiaTexto" name="noticiaTexto" type="hidden"></input>
+        	<input id="noticiaImagem" name="noticiaImagem" type="hidden"></input>
       	</form>
 		
       </section>

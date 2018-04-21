@@ -51,7 +51,7 @@
         <br/>
         <div class='tituloPosicao'><center><h2>Notícias</h2></center></div><br/>
         <?php
-          //Buscando o usuarioID
+
           $sql = "SELECT NoticiaID, Titulo, CONCAT(SUBSTRING(Texto, 1, 200), '...') AS Texto, Imagem 
                 FROM noticia 
                 ORDER BY NoticiaID DESC
@@ -61,11 +61,6 @@
 
           while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
           {
-            /*echo "<tr>";
-            echo "<td>" . $row["EquipeID"] . "</td>";
-            echo "<td><a href='equipe.php?id=" . $row["EquipeID"] . "'>" . $row["NomeEquipe"] . "</a></td>";
-            echo "<td>" . $row["Nome"] . "</td>";
-            echo "</tr>";*/
             echo "<div class='noticia'>
                     <img src='" . $row["Imagem"] . "' style='width:20%;height:80%;float:left;'/>
                     <div style='padding-left: 22%;'>
