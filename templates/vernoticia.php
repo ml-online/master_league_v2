@@ -61,14 +61,16 @@
 
           while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
           {
-            echo "<img src='" . $row["Imagem"] . "' style='float:left;height:40%;width:40%;'/>
+            echo "<div class='textoLeitura'>
+                  <img src='" . $row["Imagem"] . "' style='float:left;height:40%;width:40%;'/>
                   <div style='padding-left:42%;'>
                     <h2>" . $row["Titulo"] . "</h2>
                     <p>" . $row["Texto"] . "</p>
-                  </div>";
+                  </div></div>";
           }                   
           echo "<br/><br/>";
         ?>
+        <br><br><br><br><br><br><br>
       </section>
 
       <?php

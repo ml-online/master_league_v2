@@ -81,3 +81,12 @@ span{
 .noticia h2,a{
     color:#333;
 }
+
+.textoLeitura{
+    background-color: rgba(255,255,255,0.6);
+}
+
+.textoMargem{
+    padding-left: 5%;
+    padding-right: 5%;
+}
