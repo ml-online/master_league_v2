@@ -118,6 +118,7 @@
 				echo "</table>";
 				echo "</center>";
 			?>
+			<br><br>
         </section>
       <?php
       	include("footer.php");

@@ -160,6 +160,14 @@
 				$jogadorID = $_GET["id"];
 				//echo $jogadorID;
 
+				$sql = "SELECT Ativa
+						  FROM janelatransferencia";
+								
+				$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+				$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
+				
+				$transferenciaAtiva = $row["Ativa"];
+
 				$sql = "SELECT j.JogadorID,j.NomeJogador,j.Posicao,j.EquipeOriginal,j.Preco,j.Overall,j.EquipeID,e.NomeEquipe,e.Escudo,e.UsuarioID,j.Imagem
 						  FROM jogador j
 				     LEFT JOIN equipe e
@@ -193,69 +201,73 @@
 				if($equipeJogador == null)
 				{
 					echo "<center><h3>SEM CLUBE - FREE AGENT</h3></br>";
-					echo "<button class='botao' onclick='contratarFreeAgent();'>Contratar</button></center></br></br>";
+					if($transferenciaAtiva == 1)
+					{
+						echo "<button class='botao' onclick='contratarFreeAgent();'>Contratar</button></center></br></br>";	
+					}
 				}
 				else
 				{
 					echo "<center><h3>Equipe: <img src='$Escudo' alt='' style='width:20px;'> $NomeEquipe</h3></center></br>";
 					
-					if($equipeUsuarioLogado != $equipeJogador)
+					if($transferenciaAtiva == 1)
 					{
-						echo "<center>
-								<button class='botao' onclick='fazerProposta();'>Fazer Proposta</button></br></br>
-								<div id='divTrans' style='display:none;'>
-								<form id='formTransf' name='transfer' method='post' action='submitTransfer.php'>
-									<table>
-										<tr>
-											<td>Tipo: </td>
-											<td>
-												<select id='slTipoProposta' onchange='trocaTipoProposta();'>
-													<option value='Transferência'>Transferência</option>
-													<option value='Troca'>Troca</option>
-												</select>
-											</td>
-										</tr>
-										<tr id='trJogadorTroca' style='display:none'>
-											<td>Jogador: </td>
-											<td>
-												<select id='jogadorTrocaSelecionado'>
-													";
-						
-						$sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`
-								  FROM `jogador` 
-								 WHERE EquipeID = '$equipeUsuarioLogado'";
-							 
-						$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
-						
-						// Listando os jogadores buscados da tabela
-						while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+						if($equipeUsuarioLogado != $equipeJogador)
 						{
-							echo "<option id='jogador_" . $row["JogadorID"] . "' name='" . $row["NomeJogador"] . "'>" . $row["NomeJogador"] . "</option>";
+							echo "<center>
+									<button class='botao' onclick='fazerProposta();'>Fazer Proposta</button></br></br>
+									<div id='divTrans' style='display:none;'>
+									<form id='formTransf' name='transfer' method='post' action='submitTransfer.php'>
+										<table>
+											<tr>
+												<td>Tipo: </td>
+												<td>
+													<select id='slTipoProposta' onchange='trocaTipoProposta();'>
+														<option value='Transferência'>Transferência</option>
+														<option value='Troca'>Troca</option>
+													</select>
+												</td>
+											</tr>
+											<tr id='trJogadorTroca' style='display:none'>
+												<td>Jogador: </td>
+												<td>
+													<select id='jogadorTrocaSelecionado'>
+														";
+							
+							$sql = "SELECT `JogadorID`, `NomeJogador`, `Overall`, `EquipeOriginal`, `EquipeID`, `Posicao`
+									  FROM `jogador` 
+									 WHERE EquipeID = '$equipeUsuarioLogado'";
+								 
+							$query = mysqli_query($con,$sql) or trigger_error("Query Failed! SQL: $query - Error: ". mysqli_error($con), E_USER_ERROR);
+							
+							// Listando os jogadores buscados da tabela
+							while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+							{
+								echo "<option id='jogador_" . $row["JogadorID"] . "' name='" . $row["NomeJogador"] . "'>" . $row["NomeJogador"] . "</option>";
+							}
+							
+							echo "					</select>
+												</td>
+											</tr>
+											<tr>
+												<td>Valor: </td>
+												<td>D$ <input id='tdValor' type='text' onkeyup='moeda(this)'></td>
+											</tr>
+										</table>
+									</form>
+									<button class='botao' onclick='enviarProposta();'>Enviar</button>
+									</div>
+								  </center>";
 						}
-						
-						echo "					</select>
-											</td>
-										</tr>
-										<tr>
-											<td>Valor: </td>
-											<td>D$ <input id='tdValor' type='text' onkeyup='moeda(this)'></td>
-										</tr>
-									</table>
-								</form>
-								<button class='botao' onclick='enviarProposta();'>Enviar</button>
-								</div>
-							  </center>";
-					}
-					else
-					{
+						else
+						{
 
-						//o jogador que está sendo visualizado é da própria equipe do usuário logado
-						$multa = $preco * 0.9;
-						//echo "<center><h3>Equipe Original: $equipeOriginal</h3></center></br>";
-						echo "<center><h3>Valor de venda ao mercado: D$ " . number_format($multa,2,",",".") . "</h3></br>";
-						echo "<button class='botao' onclick='dispensarJogador();'>Vender ao mercado</button></center></br></br>";
-
-						
+							//o jogador que está sendo visualizado é da própria equipe do usuário logado
+							$multa = $preco * 0.9;
+							//echo "<center><h3>Equipe Original: $equipeOriginal</h3></center></br>";
+							echo "<center><h3>Valor de venda ao mercado: D$ " . number_format($multa,2,",",".") . "</h3></br>";
+							echo "<button class='botao' onclick='dispensarJogador();'>Vender ao mercado</button></center></br></br>";
+						}
 					}
 				}
 				//variáveis a serem passadas para a próxima tela de confirmação

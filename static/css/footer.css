@@ -9,10 +9,6 @@
     text-decoration: none
 }
 
-#footer .footer-nav {
-    margin: .75em 0 1.5em
-}
-
 #footer .footer-nav li {
     list-style: none;
     display: inline
