@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	session_start("login_ml");
 	include("conexao.php");
 ?>
